@@ -34,9 +34,19 @@ public class trangchu extends HttpServlet {
             response.setContentType("text/html;charset=UTF-8");
             
             request.setCharacterEncoding("UTF-8");
+            
             List<Product> plist = new ProductDAO().getAll();
+            List<Product> listNew = new ProductDAO().getByCategory("new");
+            List<Product> listHot = new ProductDAO().getByCategory("hot");
+            List<Product> listSale = new ProductDAO().getByCategory("sale");
+            
             request.setAttribute("plist", plist);
-            request.getRequestDispatcher("trangchu.jsp").forward(request, response);
+            request.setAttribute("lNew", listNew);
+            request.setAttribute("lHot", listHot);
+            request.setAttribute("lSale", listSale);
+            
+            
+            request.getRequestDispatcher("/trangchu.jsp").forward(request, response);
             
             try (PrintWriter out = response.getWriter()) {
                 /* TODO output your page here. You may use following sample code. */
@@ -67,7 +77,15 @@ public class trangchu extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+            request.setCharacterEncoding("UTF-8");
+            List<Product> plist = new ProductDAO().getAll();
+            request.setAttribute("plist", plist);
+            request.getRequestDispatcher("trangchu.jsp").forward(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(trangchu.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

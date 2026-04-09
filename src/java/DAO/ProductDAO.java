@@ -31,11 +31,12 @@ public class ProductDAO {
         return pList;
     }
     
-    public Product getById(int id) throws SQLException{
+    public List<Product> getByCategory(String category) throws SQLException{
         if(con == null) con = new dbConnect().getConnect();
-        String sql = "Select * from product where id = ?";
+        String sql = "Select * from product where category = ?";
         ps = con.prepareStatement(sql);
-        ps.setInt(1, id);
+        List<Product> pList = new ArrayList<>();
+        ps.setString(1, category);
         ResultSet rs = ps.executeQuery();
         while(rs.next()){
             Product p = new Product();
@@ -45,9 +46,9 @@ public class ProductDAO {
             p.setImage(rs.getString(4));
             p.setDesc(rs.getString(5));
             p.setCategory(rs.getString(6));
-            return p;
+            pList.add(p);
         }
-        return null;
+        return pList;
     }
     
     public boolean Add(Product p) throws SQLException{

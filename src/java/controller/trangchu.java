@@ -47,19 +47,19 @@ public class trangchu extends HttpServlet {
             
             
             request.getRequestDispatcher("/trangchu.jsp").forward(request, response);
-            
-            try (PrintWriter out = response.getWriter()) {
-                /* TODO output your page here. You may use following sample code. */
-                out.println("<!DOCTYPE html>");
-                out.println("<html>");
-                out.println("<head>");
-                out.println("<title>Servlet trangchu</title>");
-                out.println("</head>");
-                out.println("<body>");
-                out.println("<h1>Servlet trangchu at " + request.getContextPath() + "</h1>");
-                out.println("</body>");
-                out.println("</html>");
-            }
+            return;
+//            try (PrintWriter out = response.getWriter()) {
+//                /* TODO output your page here. You may use following sample code. */
+//                out.println("<!DOCTYPE html>");
+//                out.println("<html>");
+//                out.println("<head>");
+//                out.println("<title>Servlet trangchu</title>");
+//                out.println("</head>");
+//                out.println("<body>");
+//                out.println("<h1>Servlet trangchu at " + request.getContextPath() + "</h1>");
+//                out.println("</body>");
+//                out.println("</html>");
+//            }
         }   catch (SQLException ex) {
             Logger.getLogger(trangchu.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -77,15 +77,15 @@ public class trangchu extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-            request.setCharacterEncoding("UTF-8");
-            List<Product> plist = new ProductDAO().getAll();
-            request.setAttribute("plist", plist);
-            request.getRequestDispatcher("trangchu.jsp").forward(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(trangchu.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+              processRequest(request, response);
+//            request.setCharacterEncoding("UTF-8");
+//            List<Product> plist = new ProductDAO().getAll();
+//            request.setAttribute("plist", plist);
+//            request.getRequestDispatcher("trangchu.jsp").forward(request, response);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(trangchu.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     /**

@@ -7,144 +7,210 @@
 <%@page import="java.util.List"%>
 <%@page import="model.Product"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Shop thời trang nam</title>
-        <link href="css/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <meta charset="UTF-8">
+        <title>NTN Shop - Thời trang nam</title>
+        <link href="css/css/bootstrap.min.css" rel="stylesheet">
+        <link href="trangchu.css" rel="stylesheet">
+        
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&display=swap" rel="stylesheet">
+ 
     </head>
-    <body>
-    <body>
 
+    <body>
         <!-- 🔵 BANNER -->
-        <div class="bg-dark text-white text-center p-4">
-            <h1>SHOP THỜI TRANG NAM</h1>
-            <p>Phong cách - Trẻ trung - Hiện đại</p>
+        <div class="banner">
+            <div class="banner-overlay">
+                <h1 class="logo">NTN SHOP</h1>
+                <p>Phong cách - Trẻ trung - Hiện đại</p>
+            </div>
         </div>
 
-        <!-- 🔵 TOP MENU -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <!-- 🔵 MENU -->
+        <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">Trang chủ</a>
 
-                <div class="collapse navbar-collapse">
+                <div class="collapse navbar-collapse" id="mainNav">
                     <ul class="navbar-nav me-auto">
-                        <li class="nav-item"><a class="nav-link" href="#">Áo</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Quần</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Phụ kiện</a></li>
+
+                        <!-- ÁO -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button">
+                                Áo
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Áo thun</a></li>
+                                <li><a class="dropdown-item" href="#">Áo sơ mi</a></li>
+                                <li><a class="dropdown-item" href="#">Áo khoác</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- QUẦN -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button">
+                                Quần
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Quần jean</a></li>
+                                <li><a class="dropdown-item" href="#">Quần short</a></li>
+                                <li><a class="dropdown-item" href="#">Quần tây</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- PHỤ KIỆN -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button">
+                                Phụ kiện
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Đồng hồ</a></li>
+                                <li><a class="dropdown-item" href="#">Thắt lưng</a></li>
+                            </ul>
+                        </li>
+
                         <li class="nav-item"><a class="nav-link" href="#">Liên hệ</a></li>
                     </ul>
 
-                    <a href="login.jsp" class="btn btn-light">Đăng nhập</a>
+                    <div class="d-flex align-items-center">
+                        <form class="d-flex me-3">
+                            <input class="form-control me-2" type="search">
+                            <button class="btn btn-outline-light">Tìm</button>
+                        </form>
+                        <a href="dangnhap.jsp" class="btn btn-light">Đăng nhập</a>
+                    </div>
                 </div>
             </div>
         </nav>
 
         <!-- 🔵 MAIN -->
-        <div class="container-fluid mt-3">
-            <%
-                List<Product> list = (List<Product>) request.getAttribute("plist");
-            %>
-            <div class="row">
+            <div class="container-fluid mt-4">
+                <div class="row">
 
-                <!-- 🟡 LEFT MENU -->
-                <div class="col-md-3">
-                    <div class="list-group">
-                        <a href="#" class="list-group-item active">Danh mục</a>
-                        <a href="#" class="list-group-item">Áo</a>
-                        <a href="#" class="list-group-item">Quần</a>
-                        <a href="#" class="list-group-item">Giày</a>
-                        <a href="#" class="list-group-item">Phụ kiện</a>
+                    <!-- 🟡 LEFT MENU -->
+                    <div class="col-md-3">
+                        <div class="left-menu-box">
+                            <div class="list-group">
+                                <a href="#" class="list-group-item active">Danh mục</a>
+                                <a href="#" class="list-group-item">Áo</a>
+                                <a href="#" class="list-group-item">Quần</a>
+                                <a href="#" class="list-group-item">Giày</a>
+                                <a href="#" class="list-group-item">Phụ kiện</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 🟢 CONTENT -->
+                    <div class="col-md-9">
+
+                        <!-- 🔥 HÀNG MỚI -->
+                        <h3 class="mb-3">Hàng mới</h3>
+                        <div class="row">
+                            <%
+                                List<Product> listNew = (List<Product>) request.getAttribute("lNew");
+                                if (listNew != null) {
+                                    for (Product p : listNew) {
+                            %>
+
+                            <div class="col-md-4 mb-4">
+                                <div class="card product-card">
+
+                                    <img src="<%= p.getImage() != null ? p.getImage() : "https://images.unsplash.com/photo-1521572267360-ee0c2909d518" %>" 
+                                         class="card-img-top product-img">
+
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title"><%= p.getName()%></h5>
+                                        <p class="price"><%= p.getPrice()%> VNĐ</p>
+
+                                        <a href="detail?id=<%= p.getId()%>" class="btn btn-detail">
+                                            Xem chi tiết
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <%
+                                    }
+                                }
+                            %>
+                        </div>
+
+                        <!-- 🔥 HÀNG BÁN CHẠY -->
+                        <h3 class="mb-3 mt-4">Hàng bán chạy</h3>
+                        <div class="row">
+                            <%
+                                List<Product> listHot = (List<Product>) request.getAttribute("lHot");
+                                if (listHot != null) {
+                                    for (Product p : listHot) {
+                            %>
+
+                            <div class="col-md-4 mb-4">
+                                <div class="card product-card">
+
+                                    <img src="<%= p.getImage()%>" class="card-img-top product-img">
+
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title"><%= p.getName()%></h5>
+                                        <p class="price"><%= p.getPrice()%> VNĐ</p>
+
+                                        <a href="detail?id=<%= p.getId()%>" class="btn btn-detail">
+                                            Xem chi tiết
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <%
+                                    }
+                                }
+                            %>
+                        </div>
+
+                        <!-- 🔥 HÀNG GIẢM GIÁ -->
+                        <h3 class="mb-3 mt-4">Hàng giảm giá</h3>
+                        <div class="row">
+                            <%
+                                List<Product> listSale = (List<Product>) request.getAttribute("lSale");
+                                if (listSale != null) {
+                                    for (Product p : listSale) {
+                            %>
+
+                            <div class="col-md-4 mb-4">
+                                <div class="card product-card">
+
+                                    <img src="<%= p.getImage()%>" class="card-img-top product-img">
+
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title"><%= p.getName()%></h5>
+                                        <p class="price"><%= p.getPrice()%> VNĐ</p>
+
+                                        <a href="detail?id=<%= p.getId()%>" class="btn btn-detail">
+                                            Xem chi tiết
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <%
+                                    }
+                                }
+                            %>
+                        </div>
+
                     </div>
                 </div>
-
-                <!-- 🟢 CONTENT -->
-                <div class="col-md-9">
-                    <h3>Hàng mới</h3>
-                    <div class="row">
-                        <%
-                            List<Product> listNew = (List<Product>) request.getAttribute("lNew");
-                            if (listNew != null) {
-                                for (Product p : listNew) {
-                        %>
-
-                        <div class="col-md-4 mb-3">
-                            <div class="card">
-                                <img src="<%= p.getImage()%>" class="card-img-top" height="200">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title"><%= p.getName()%></h5>
-                                    <p class="text-danger"><%= p.getPrice()%> VNĐ</p>
-                                    <a href="detail?id=<%= p.getId()%>" class="btn btn-primary">Xem chi tiết</a>
-                                </div>
-                            </div>
-                        </div>
-                        <%
-                                }
-                            }
-                        %>
-                    </div>
-                    
-                    <h3>Hàng bán chạy</h3>
-                    <div class="row">
-                        <%
-                            List<Product> listHot = (List<Product>) request.getAttribute("lHot");
-                            if (listHot != null) {
-                                for (Product p : listHot) {
-                        %>
-
-                        <div class="col-md-4 mb-3">
-                            <div class="card">
-                                <img src="<%= p.getImage()%>" class="card-img-top" height="200">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title"><%= p.getName()%></h5>
-                                    <p class="text-danger"><%= p.getPrice()%> VNĐ</p>
-                                    <a href="detail?id=<%= p.getId()%>" class="btn btn-primary">Xem chi tiết</a>
-                                </div>
-                            </div>
-                        </div>
-                        <%
-                                }
-                            }
-                        %>
-                    </div>
-                    
-                    <h3>Hàng giảm giá</h3>
-                    <div class="row">
-                        <%
-                            List<Product> listSale = (List<Product>) request.getAttribute("lSale");
-                            if (listSale != null) {
-                                for (Product p : listSale) {
-                        %>
-
-                        <div class="col-md-4 mb-3">
-                            <div class="card">
-                                <img src="<%= p.getImage()%>" class="card-img-top" height="200">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title"><%= p.getName()%></h5>
-                                    <p class="text-danger"><%= p.getPrice()%> VNĐ</p>
-                                    <a href="detail?id=<%= p.getId()%>" class="btn btn-primary">Xem chi tiết</a>
-                                </div>
-                            </div>
-                        </div>
-                        <%
-                                }
-                            }
-                        %>
-                    </div>
-
-                    
-                </div>
-
             </div>
-        </div>
 
         <!-- 🔵 FOOTER -->
-        <div class="bg-dark text-white text-center p-3 mt-4">
-            <p>SV: Nguyễn Văn A - 2000xxxx</p>
-            <p>Hà Nội - 2026</p>
-        </div>
+            <div class="bg-dark text-white text-center p-3 mt-4">
+                <p>Đàm Thu Trang - 11/11/2005</p>
+                <p>Nguyễn Tiến Nam - 2005</p>
+                <p>Phạm Doãn Nguyên - 2005</p>
+            </div>
 
-        <script src="css/js/bootstrap.bundle.min.js" type="text/javascript"></script>
-    </body>
+            <script src="css/css/js/bootstrap.bundle.min.js"></script>
+        </body>
 </html>

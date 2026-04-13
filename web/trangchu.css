@@ -1,0 +1,209 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Apr 11, 2026, 12:46:50 PM
+    Author     : ADMIN
+*/
+/* RESET */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f5f5f5;
+}
+/* BANNER */
+.banner {
+    height: 500px;
+    width: 100%;
+    position: relative;
+    background-image: url('/BTLShopThoiTrangNam/images/banner1.png');
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    transition: transform 0.5s ease;
+}
+/* hover nhẹ cho banner */
+.banner:hover {
+    transform: scale(1.02);
+}
+/* LỚP PHỦ (overlay) */
+.banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    text-align: center;
+}
+/* LOGO NTN SHOP */
+.banner-overlay h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 90px;
+    font-weight: 800;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+
+    color: #ffffff;
+
+    text-shadow:
+        0 0 10px rgba(255,255,255,0.4),
+        0 0 25px rgba(0,150,255,0.5);
+
+    margin: 0;
+    transition: 0.3s ease;
+}
+/* hover chữ */
+.banner-overlay h1:hover {
+    transform: scale(1.05);
+    color: #ffd700;
+
+    text-shadow:
+        0 0 15px rgba(255,215,0,0.8),
+        0 0 35px rgba(255,215,0,0.6);
+}
+/* slogan */
+.banner-overlay p {
+    margin-top: 10px;
+    font-size: 20px;
+    letter-spacing: 2px;
+
+    color: #f5d7a1;
+    opacity: 0.95;
+}
+/* MENU */
+.navbar {
+    background-color: #1a1a1a !important;
+}
+.navbar .nav-link {
+    color: #ffffff !important;
+    font-weight: 500;
+    transition: 0.3s;
+}
+.navbar .nav-link:hover {
+    color: #c49b63 !important; /* nâu vàng */
+}
+.navbar .dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+}
+.dropdown-menu {
+    display: none;
+}
+/* LEFT MENU */
+.list-group-item.active {
+    background-color: #3b2f2f;
+    border: none;
+    color: white;
+}
+.list-group-item {
+    transition: 0.3s;
+}
+.list-group-item:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+/* LEFT MENU WRAPPER */
+.col-md-3 {
+    padding-right: 20px; /* tạo khoảng cách với content */
+}
+/* BOX LEFT MENU */
+.list-group {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+/* TITLE DANH MỤC */
+.list-group-item.active {
+    background: #3b2f2f;
+    border: none;
+    font-weight: bold;
+    font-size: 16px;
+}
+/* ITEM */
+.list-group-item {
+    border: none;
+    border-bottom: 1px solid #eee;
+    padding: 12px 15px;
+}
+/* hover */
+.list-group-item:hover {
+    background-color: #f8f8f8;
+    color: #8b4513;
+}
+/* bỏ border cuối */
+.list-group-item:last-child {
+    border-bottom: none;
+}
+/* PRODUCT CARD */
+.product-card {
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #ffffff;
+    transition: 0.4s;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+    position: relative;
+}
+/* hover nâng card */
+.product-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+}
+.list-group-item:active {
+    background: #ddd;
+}
+/* IMAGE */
+.product-img {
+    height: 230px;
+    object-fit: cover;
+    transition: 0.4s;
+}
+/* zoom ảnh khi hover */
+.product-card:hover .product-img {
+    transform: scale(1.1);
+}
+/* TEXT */
+.card-title {
+    font-weight: bold;
+    color: #333;
+    font-size: 16px;
+}
+.price {
+    color: #8b4513; /* nâu */
+    font-size: 18px;
+    font-weight: bold;
+}
+/* BUTTON */
+.btn-detail {
+    background-color: #000;
+    color: white;
+    border-radius: 25px;
+    padding: 6px 18px;
+    border: none;
+    transition: 0.3s;
+}
+.btn-detail:hover {
+    background-color: #8b4513;
+    color: white;
+}
+/* FOOTER */
+.bg-dark.text-white {
+    background-color: #000 !important;
+}
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .product-img {
+        height: 180px;
+    }
+    .card-title {
+        font-size: 14px;
+    }
+    .price {
+        font-size: 16px;
+    }
+}

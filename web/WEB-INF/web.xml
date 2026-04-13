@@ -8,6 +8,10 @@
         <servlet-name>trangchu</servlet-name>
         <servlet-class>controller.trangchu</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>dangnhap</servlet-name>
+        <servlet-class>controller.dangnhap</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dangki</servlet-name>
         <url-pattern>/dangki</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>trangchu</servlet-name>
         <url-pattern>/trangchu</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>dangnhap</servlet-name>
+        <url-pattern>/dangnhap</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

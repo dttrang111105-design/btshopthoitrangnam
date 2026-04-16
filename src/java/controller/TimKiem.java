@@ -39,6 +39,7 @@ public class TimKiem extends HttpServlet {
         String name = request.getParameter("name");
         List<Product> list = new ProductDAO().getByName(name);
         request.setAttribute("list", list);
+        request.setAttribute("name", name);
         request.getRequestDispatcher("trangchu.jsp").forward(request, response);
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */

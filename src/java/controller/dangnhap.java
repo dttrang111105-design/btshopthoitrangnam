@@ -43,8 +43,8 @@ public class dangnhap extends HttpServlet {
                 boolean found = false;
                 User userLogin = null;
                 for (User u : list) {
-                    // check username/email/sdt + password
-                    if ((u.getUserName().equals(userInput)|| u.getEmail().equals(userInput)|| String.valueOf(u.getPhone()).equals(userInput))&& u.getPassWord().equals(passInput)) {
+                    // check username/email + password
+                    if ((u.getUserName().equals(userInput)|| u.getEmail().equals(userInput))&& u.getPassWord().equals(passInput)) {
                         found = true;
                         userLogin = u;
                         break;

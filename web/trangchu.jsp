@@ -92,14 +92,12 @@
                             <a href="cart.jsp" class="btn btn-light me-2">
                                 <i class="fa fa-shopping-cart"></i>
                             </a>
-
                             <!-- ICON CHAT -->
                             <a href="chat.jsp" class="btn btn-light me-2">
                                 <i class="fa fa-comment"></i>
                             </a>
-
                             <!-- USER -->
-                            <a href="logout" class="btn btn-danger">Đăng xuất</a>
+                            <a href="dangxuat" class="btn btn-danger">Đăng xuất</a>
                         <%
                             }
                         %>
@@ -129,9 +127,10 @@
                     <div class="col-md-9">
                         <%
                             List<Product> list = (List<Product>) request.getAttribute("list");
+                            String name = (String) request.getAttribute("name");
                             if(list!=null && !list.isEmpty()){
                         %>
-                        <h3>Kết quả tìm kiếm</h3>
+                        <h3>Kết quả tìm kiếm của "<%=name%>"</h3>
                         <div class="row row-col-5">
                             <%
                                 for(Product p : list){

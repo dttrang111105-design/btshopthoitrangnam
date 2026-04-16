@@ -34,6 +34,7 @@ public class dangky extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String user = request.getParameter("user");
         String pass = request.getParameter("pass");
+        String repass = request.getParameter("repass");
         String email = request.getParameter("email");
         int phone = Integer.parseInt(request.getParameter("phone"));
         String address = request.getParameter("address");
@@ -44,6 +45,11 @@ public class dangky extends HttpServlet {
                 request.getRequestDispatcher("dangky.jsp").forward(request, response);
                 return;
             }
+            if (!pass.equals(repass)) {
+                request.setAttribute("error", "password_mismatch");
+                request.getRequestDispatcher("dangky.jsp").forward(request, response);
+                return;
+            }
             User u = new User();
             u.setUserName(user);
             u.setPassWord(pass);
@@ -51,7 +57,7 @@ public class dangky extends HttpServlet {
             u.setPhone(phone);
             u.setAddress(address);
             dao.Add(u);
-            //đăng ký xòn -> quay lại đăng nhập
+            //đăng ký xong -> quay lại đăng nhập
             request.setAttribute("success", "1");
             request.getRequestDispatcher("dangnhap.jsp").forward(request, response);
         } catch (Exception e) {

@@ -131,9 +131,9 @@
             %>
                 <div class="error-msg">Tài khoản hoặc email đã tồn tại!</div>
             <%
-                } else if ("phone_invalid".equals(error)) {
+                } else if("password_mismatch".equals(error)) {
             %>
-                <div class="error-msg">Số điện thoại không hợp lệ!</div>
+                <div class="error-msg">Mật khẩu nhập lại không khớp!</div>
             <%
                 } else if ("db".equals(error)) {
             %>
@@ -149,6 +149,10 @@
                 <div class="mb-3">
                     <label>Mật khẩu</label>
                     <input type="password" name="pass" class="form-control" placeholder="Nhập mật khẩu" required>
+                </div>
+                <div class="mb-3">
+                    <label>Nhập lại mật khẩu</label>
+                    <input type="password" name="repass" class="form-control" placeholder="Nhập lại mật khẩu" required>
                 </div>
                 <div class="mb-3">
                     <label>Email</label>

@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
     <servlet>
-        <servlet-name>dangki</servlet-name>
-        <servlet-class>controller.dangki</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>trangchu</servlet-name>
         <servlet-class>controller.trangchu</servlet-class>
     </servlet>
@@ -20,10 +16,10 @@
         <servlet-name>TimKiem</servlet-name>
         <servlet-class>controller.TimKiem</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>dangki</servlet-name>
-        <url-pattern>/dangki</url-pattern>
-    </servlet-mapping>
+    <servlet>
+        <servlet-name>dangxuat</servlet-name>
+        <servlet-class>controller.dangxuat</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>trangchu</servlet-name>
         <url-pattern>/trangchu</url-pattern>
@@ -39,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>TimKiem</servlet-name>
         <url-pattern>/TimKiem</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>dangxuat</servlet-name>
+        <url-pattern>/dangxuat</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

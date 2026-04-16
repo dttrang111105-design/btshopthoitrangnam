@@ -87,4 +87,14 @@ public class UserDAO {
         
         return ps.executeUpdate() > 0;
     }
+    
+    public boolean checkExist(String user, String email) throws SQLException{
+        if(con == null) con = new dbConnect().getConnect();
+        String sql = "Select * from user where username=? or email=?";
+        ps = con.prepareStatement(sql);
+        ps.setString(1, user);
+        ps.setString(2, email);
+        ResultSet rs = ps.executeQuery();
+        return rs.next();
+    }
 }

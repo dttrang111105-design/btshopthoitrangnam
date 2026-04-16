@@ -17,7 +17,7 @@
         <link href="trangchu.css" rel="stylesheet">
         
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&display=swap" rel="stylesheet">
- 
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
     </head>
 
     <body>
@@ -71,7 +71,6 @@
                                 <li><a class="dropdown-item" href="#">Thắt lưng</a></li>
                             </ul>
                         </li>
-
                         <li class="nav-item"><a class="nav-link" href="#">Liên hệ</a></li>
                     </ul>
 
@@ -80,7 +79,30 @@
                             <input class="form-control me-2" type="search">
                             <button class="btn btn-outline-light">Tìm</button>
                         </form>
-                        <a href="dangnhap.jsp" class="btn btn-light">Đăng nhập</a>
+                        <!-- nút đăng nhập sau khi login sẽ chuyển thành giỏ hàng và ô chat -->
+                        <%
+                            Object user = session.getAttribute("user");
+                            if (user == null) {
+                        %>
+                            <a href="dangnhap.jsp" class="btn btn-light">Đăng nhập</a>
+                        <%
+                            } else {
+                        %>
+                            <!-- ICON GIỎ HÀNG -->
+                            <a href="cart.jsp" class="btn btn-light me-2">
+                                <i class="fa fa-shopping-cart"></i>
+                            </a>
+
+                            <!-- ICON CHAT -->
+                            <a href="chat.jsp" class="btn btn-light me-2">
+                                <i class="fa fa-comment"></i>
+                            </a>
+
+                            <!-- USER -->
+                            <a href="logout" class="btn btn-danger">Đăng xuất</a>
+                        <%
+                            }
+                        %>
                     </div>
                 </div>
             </div>
@@ -105,7 +127,6 @@
 
                     <!-- 🟢 CONTENT -->
                     <div class="col-md-9">
-
                         <!-- 🔥 HÀNG MỚI -->
                         <h3 class="mb-3">Hàng mới</h3>
                         <div class="row">
@@ -114,30 +135,24 @@
                                 if (listNew != null) {
                                     for (Product p : listNew) {
                             %>
-
                             <div class="col-md-4 mb-4">
                                 <div class="card product-card">
-
-                                    <img src="<%= p.getImage() != null ? p.getImage() : "https://images.unsplash.com/photo-1521572267360-ee0c2909d518" %>" 
-                                         class="card-img-top product-img">
-
+                                    <img src="<%=request.getContextPath()%>/<%= p.getImage() %>" class="card-img-top product-img">
                                     <div class="card-body text-center">
                                         <h5 class="card-title"><%= p.getName()%></h5>
                                         <p class="price"><%= p.getPrice()%> VNĐ</p>
-
                                         <a href="detail?id=<%= p.getId()%>" class="btn btn-detail">
                                             Xem chi tiết
                                         </a>
                                     </div>
                                 </div>
                             </div>
-
                             <%
                                     }
                                 }
                             %>
                         </div>
-
+                        
                         <!-- 🔥 HÀNG BÁN CHẠY -->
                         <h3 class="mb-3 mt-4">Hàng bán chạy</h3>
                         <div class="row">
@@ -146,23 +161,18 @@
                                 if (listHot != null) {
                                     for (Product p : listHot) {
                             %>
-
                             <div class="col-md-4 mb-4">
                                 <div class="card product-card">
-
-                                    <img src="<%= p.getImage()%>" class="card-img-top product-img">
-
+                                    <img src="<%=request.getContextPath()%>/<%= p.getImage() %>" class="card-img-top product-img">
                                     <div class="card-body text-center">
                                         <h5 class="card-title"><%= p.getName()%></h5>
                                         <p class="price"><%= p.getPrice()%> VNĐ</p>
-
                                         <a href="detail?id=<%= p.getId()%>" class="btn btn-detail">
                                             Xem chi tiết
                                         </a>
                                     </div>
                                 </div>
                             </div>
-
                             <%
                                     }
                                 }
@@ -177,12 +187,9 @@
                                 if (listSale != null) {
                                     for (Product p : listSale) {
                             %>
-
                             <div class="col-md-4 mb-4">
                                 <div class="card product-card">
-
-                                    <img src="<%= p.getImage()%>" class="card-img-top product-img">
-
+                                    <img src="<%=request.getContextPath()%>/<%= p.getImage() %>" class="card-img-top product-img">
                                     <div class="card-body text-center">
                                         <h5 class="card-title"><%= p.getName()%></h5>
                                         <p class="price"><%= p.getPrice()%> VNĐ</p>
@@ -193,7 +200,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <%
                                     }
                                 }
@@ -207,8 +213,8 @@
         <!-- 🔵 FOOTER -->
             <div class="bg-dark text-white text-center p-3 mt-4">
                 <p>Đàm Thu Trang - 11/11/2005</p>
-                <p>Nguyễn Tiến Nam - 2005</p>
-                <p>Phạm Doãn Nguyên - 2005</p>
+                <p>Nguyễn Tiến Nam - 21/12/2005</p>
+                <p>Phạm Doãn Nguyên - 25/04/2005</p>
             </div>
 
             <script src="css/css/js/bootstrap.bundle.min.js"></script>

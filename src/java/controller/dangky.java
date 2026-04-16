@@ -7,19 +7,17 @@ package controller;
 import DAO.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import model.User;
 
 /**
  *
  * @author ADMIN
  */
-public class dangnhap extends HttpServlet {
+public class dangky extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,55 +30,45 @@ public class dangnhap extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        String user = request.getParameter("user");
+        String pass = request.getParameter("pass");
+        String email = request.getParameter("email");
+        int phone = Integer.parseInt(request.getParameter("phone"));
+        String address = request.getParameter("address");
+        UserDAO dao = new UserDAO();
         try {
-            response.setContentType("text/html;charset=UTF-8");
-            request.setCharacterEncoding("UTF-8");
-            String userInput = request.getParameter("user");
-            String passInput = request.getParameter("pass");
-            UserDAO dao = new UserDAO();
-            try {
-                List<User> list = dao.getAll();
-                boolean found = false;
-                User userLogin = null;
-                for (User u : list) {
-                    // check username/email/sdt + password
-                    if ((u.getUserName().equals(userInput)|| u.getEmail().equals(userInput)|| String.valueOf(u.getPhone()).equals(userInput))&& u.getPassWord().equals(passInput)) {
-                        found = true;
-                        userLogin = u;
-                        break;
-                    }
-                }
-                if (found) {
-                    // tạo session đăng nhập
-                    HttpSession session = request.getSession();
-                    session.setAttribute("user", userLogin);
-                    response.sendRedirect("trangchu");
-                } else {
-                    // sai login
-                    request.setAttribute("error", "1");
-                    request.setAttribute("user", userInput);
-                    request.getRequestDispatcher("dangnhap.jsp").forward(request, response);
-                }             
-            } catch (Exception e) {
-                e.printStackTrace();
-                request.setAttribute("error", "LOGIN_FAIL");
-                request.getRequestDispatcher("dangnhap.jsp").forward(request, response);
+            if(dao.checkExist(user, email)){
+                request.setAttribute("error", "exist");
+                request.getRequestDispatcher("dangky.jsp").forward(request, response);
+                return;
             }
+            User u = new User();
+            u.setUserName(user);
+            u.setPassWord(pass);
+            u.setEmail(email);
+            u.setPhone(phone);
+            u.setAddress(address);
+            dao.Add(u);
+            //đăng ký xòn -> quay lại đăng nhập
+            request.setAttribute("success", "1");
+            request.getRequestDispatcher("dangnhap.jsp").forward(request, response);
         } catch (Exception e) {
+            e.printStackTrace();
         }
-        
-//        try (PrintWriter out = response.getWriter()) {
-//            /* TODO output your page here. You may use following sample code. */
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet dangnhap</title>");
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Servlet dangnhap at " + request.getContextPath() + "</h1>");
-//            out.println("</body>");
-//            out.println("</html>");
-//        }
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet dangky</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet dangky at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

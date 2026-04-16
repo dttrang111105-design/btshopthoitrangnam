@@ -31,6 +31,26 @@ public class ProductDAO {
         return pList;
     }
     
+    public List<Product> getByName(String ten) throws SQLException{
+        if(con == null) con = new dbConnect().getConnect();
+        String sql = "Select * from product where name like ?";        
+        ps = con.prepareStatement(sql);
+        ps.setString(1, "%" + ten + "%");
+        ResultSet rs = ps.executeQuery();
+        List<Product> list = new ArrayList<>();
+        while (rs.next()) {
+            Product p = new Product();
+            p.setId(rs.getInt(1));
+            p.setName(rs.getString(2));
+            p.setPrice(rs.getDouble(3));
+            p.setImage(rs.getString(4));
+            p.setDesc(rs.getString(5));
+            p.setCategory(rs.getString(6));
+            list.add(p);
+        }
+        return list;
+    }
+    
     public List<Product> getByCategory(String category) throws SQLException{
         if(con == null) con = new dbConnect().getConnect();
         String sql = "Select * from product where category = ?";

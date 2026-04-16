@@ -16,6 +16,10 @@
         <servlet-name>dangky</servlet-name>
         <servlet-class>controller.dangky</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TimKiem</servlet-name>
+        <servlet-class>controller.TimKiem</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dangki</servlet-name>
         <url-pattern>/dangki</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>dangky</servlet-name>
         <url-pattern>/dangky</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TimKiem</servlet-name>
+        <url-pattern>/TimKiem</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

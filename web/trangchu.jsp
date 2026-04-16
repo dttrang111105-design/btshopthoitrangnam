@@ -75,8 +75,8 @@
                     </ul>
 
                     <div class="d-flex align-items-center">
-                        <form class="d-flex me-3">
-                            <input class="form-control me-2" type="search">
+                        <form class="d-flex me-3" action="TimKiem" method="get">
+                            <input class="form-control me-2" type="search" name="name" placeholder="Nhập tên sản phẩm">
                             <button class="btn btn-outline-light">Tìm</button>
                         </form>
                         <!-- nút đăng nhập sau khi login sẽ chuyển thành giỏ hàng và ô chat -->
@@ -127,85 +127,118 @@
 
                     <!-- 🟢 CONTENT -->
                     <div class="col-md-9">
-                        <!-- 🔥 HÀNG MỚI -->
-                        <h3 class="mb-3">Hàng mới</h3>
+                        <%
+                            List<Product> list = (List<Product>) request.getAttribute("list");
+                            if(list!=null && !list.isEmpty()){
+                        %>
+                        <h3>Kết quả tìm kiếm</h3>
                         <div class="row">
                             <%
-                                List<Product> listNew = (List<Product>) request.getAttribute("lNew");
-                                if (listNew != null) {
-                                    for (Product p : listNew) {
+                                for(Product p : list){
                             %>
                             <div class="col-md-4 mb-4">
                                 <div class="card product-card">
                                     <img src="<%=request.getContextPath()%>/<%= p.getImage() %>" class="card-img-top product-img">
                                     <div class="card-body text-center">
-                                        <h5 class="card-title"><%= p.getName()%></h5>
-                                        <p class="price"><%= p.getPrice()%> VNĐ</p>
-                                        <a href="detail?id=<%= p.getId()%>" class="btn btn-detail">
+                                        <h5><%=p.getName()%></h5>
+                                        <p><%=p.getPrice()%> VNĐ</p>
+                                        <a href="detail?id=<%= p.getId() %>" class="btn btn-detail">
                                             Xem chi tiết
                                         </a>
                                     </div>
                                 </div>
                             </div>
                             <%
-                                    }
                                 }
                             %>
                         </div>
-                        
-                        <!-- 🔥 HÀNG BÁN CHẠY -->
-                        <h3 class="mb-3 mt-4">Hàng bán chạy</h3>
-                        <div class="row">
-                            <%
-                                List<Product> listHot = (List<Product>) request.getAttribute("lHot");
-                                if (listHot != null) {
-                                    for (Product p : listHot) {
-                            %>
-                            <div class="col-md-4 mb-4">
-                                <div class="card product-card">
-                                    <img src="<%=request.getContextPath()%>/<%= p.getImage() %>" class="card-img-top product-img">
-                                    <div class="card-body text-center">
-                                        <h5 class="card-title"><%= p.getName()%></h5>
-                                        <p class="price"><%= p.getPrice()%> VNĐ</p>
-                                        <a href="detail?id=<%= p.getId()%>" class="btn btn-detail">
-                                            Xem chi tiết
-                                        </a>
+                        <%
+                            }
+                        %>
+                        <%
+                            if(list == null || list.isEmpty()){
+                        %>
+                            <!-- 🔥 HÀNG MỚI -->
+                            <h3 class="mb-3">Hàng mới</h3>
+                            <div class="row">
+                                <%
+                                    List<Product> listNew = (List<Product>) request.getAttribute("lNew");
+                                    if (listNew != null) {
+                                        for (Product p : listNew) {
+                                %>
+                                <div class="col-md-4 mb-4">
+                                    <div class="card product-card">
+                                        <img src="<%=request.getContextPath()%>/<%= p.getImage() %>" class="card-img-top product-img">
+                                        <div class="card-body text-center">
+                                            <h5 class="card-title"><%= p.getName()%></h5>
+                                            <p class="price"><%= p.getPrice()%> VNĐ</p>
+                                            <a href="detail?id=<%= p.getId()%>" class="btn btn-detail">
+                                                Xem chi tiết
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <%
+                                <%
+                                        }
                                     }
-                                }
-                            %>
-                        </div>
+                                %>
+                            </div>
 
-                        <!-- 🔥 HÀNG GIẢM GIÁ -->
-                        <h3 class="mb-3 mt-4">Hàng giảm giá</h3>
-                        <div class="row">
-                            <%
-                                List<Product> listSale = (List<Product>) request.getAttribute("lSale");
-                                if (listSale != null) {
-                                    for (Product p : listSale) {
-                            %>
-                            <div class="col-md-4 mb-4">
-                                <div class="card product-card">
-                                    <img src="<%=request.getContextPath()%>/<%= p.getImage() %>" class="card-img-top product-img">
-                                    <div class="card-body text-center">
-                                        <h5 class="card-title"><%= p.getName()%></h5>
-                                        <p class="price"><%= p.getPrice()%> VNĐ</p>
-
-                                        <a href="detail?id=<%= p.getId()%>" class="btn btn-detail">
-                                            Xem chi tiết
-                                        </a>
+                            <!-- 🔥 HÀNG BÁN CHẠY -->
+                            <h3 class="mb-3 mt-4">Hàng bán chạy</h3>
+                            <div class="row">
+                                <%
+                                    List<Product> listHot = (List<Product>) request.getAttribute("lHot");
+                                    if (listHot != null) {
+                                        for (Product p : listHot) {
+                                %>
+                                <div class="col-md-4 mb-4">
+                                    <div class="card product-card">
+                                        <img src="<%=request.getContextPath()%>/<%= p.getImage() %>" class="card-img-top product-img">
+                                        <div class="card-body text-center">
+                                            <h5 class="card-title"><%= p.getName()%></h5>
+                                            <p class="price"><%= p.getPrice()%> VNĐ</p>
+                                            <a href="detail?id=<%= p.getId()%>" class="btn btn-detail">
+                                                Xem chi tiết
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <%
+                                <%
+                                        }
                                     }
-                                }
-                            %>
-                        </div>
+                                %>
+                            </div>
 
+                            <!-- 🔥 HÀNG GIẢM GIÁ -->
+                            <h3 class="mb-3 mt-4">Hàng giảm giá</h3>
+                            <div class="row">
+                                <%
+                                    List<Product> listSale = (List<Product>) request.getAttribute("lSale");
+                                    if (listSale != null) {
+                                        for (Product p : listSale) {
+                                %>
+                                <div class="col-md-4 mb-4">
+                                    <div class="card product-card">
+                                        <img src="<%=request.getContextPath()%>/<%= p.getImage() %>" class="card-img-top product-img">
+                                        <div class="card-body text-center">
+                                            <h5 class="card-title"><%= p.getName()%></h5>
+                                            <p class="price"><%= p.getPrice()%> VNĐ</p>
+
+                                            <a href="detail?id=<%= p.getId()%>" class="btn btn-detail">
+                                                Xem chi tiết
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <%
+                                        }
+                                    }
+                                %>
+                            </div>
+                        <%
+                            }
+                        %>
                     </div>
                 </div>
             </div>

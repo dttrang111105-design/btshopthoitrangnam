@@ -20,6 +20,10 @@
         <servlet-name>dangxuat</servlet-name>
         <servlet-class>controller.dangxuat</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>trangchitiet</servlet-name>
+        <servlet-class>controller.trangchitiet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>trangchu</servlet-name>
         <url-pattern>/trangchu</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>dangxuat</servlet-name>
         <url-pattern>/dangxuat</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>trangchitiet</servlet-name>
+        <url-pattern>/trangchitiet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

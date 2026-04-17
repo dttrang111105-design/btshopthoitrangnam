@@ -4,6 +4,8 @@
     Author     : XPS
 --%>
 
+<%@page import="java.util.Locale"%>
+<%@page import="java.text.NumberFormat"%>
 <%@page import="java.util.List"%>
 <%@page import="model.Product"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -43,7 +45,7 @@
                                 Áo
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Áo thun</a></li>
+                                <li><a class="dropdown-item" href="#">Áo polo</a></li>
                                 <li><a class="dropdown-item" href="#">Áo sơ mi</a></li>
                                 <li><a class="dropdown-item" href="#">Áo khoác</a></li>
                             </ul>
@@ -56,8 +58,18 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#">Quần jean</a></li>
-                                <li><a class="dropdown-item" href="#">Quần short</a></li>
-                                <li><a class="dropdown-item" href="#">Quần tây</a></li>
+                                <li><a class="dropdown-item" href="#">Quần âu</a></li>
+                            </ul>
+                        </li>
+                        
+                        <!-- GIÀY -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button">
+                                Giày
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Giày sneaker</a></li>
+                                <li><a class="dropdown-item" href="#">Giày da</a></li>
                             </ul>
                         </li>
 
@@ -131,7 +143,7 @@
                             if(list!=null && !list.isEmpty()){
                         %>
                         <h3>Kết quả tìm kiếm của "<%=name%>"</h3>
-                        <div class="row row-col-5">
+                        <div class="row row-cols-5">
                             <%
                                 for(Product p : list){
                             %>
@@ -140,7 +152,7 @@
                                     <img src="<%=request.getContextPath()%>/<%= p.getImage() %>" class="card-img-top product-img">
                                     <div class="card-body text-center">
                                         <h5><%=p.getName()%></h5>
-                                        <p><%=p.getPrice()%> VNĐ</p>
+                                        <p><%=p.getFormattedPrice()%> VNĐ</p>
                                         <a href="detail?id=<%= p.getId() %>" class="btn btn-detail">
                                             Xem chi tiết
                                         </a>
@@ -170,7 +182,7 @@
                                         <img src="<%=request.getContextPath()%>/<%= p.getImage() %>" class="card-img-top product-img">
                                         <div class="card-body text-center">
                                             <h5 class="card-title"><%= p.getName()%></h5>
-                                            <p class="price"><%= p.getPrice()%> VNĐ</p>
+                                            <p class="price"><%= p.getFormattedPrice()%> VNĐ</p>
                                             <a href="detail?id=<%= p.getId()%>" class="btn btn-detail">
                                                 Xem chi tiết
                                             </a>
@@ -196,7 +208,7 @@
                                         <img src="<%=request.getContextPath()%>/<%= p.getImage() %>" class="card-img-top product-img">
                                         <div class="card-body text-center">
                                             <h5 class="card-title"><%= p.getName()%></h5>
-                                            <p class="price"><%= p.getPrice()%> VNĐ</p>
+                                            <p class="price"><%= p.getFormattedPrice()%> VNĐ</p>
                                             <a href="detail?id=<%= p.getId()%>" class="btn btn-detail">
                                                 Xem chi tiết
                                             </a>
@@ -213,6 +225,7 @@
                             <h3 class="mb-3 mt-4">Hàng giảm giá</h3>
                             <div class="row row-cols-5">
                                 <%
+                                    NumberFormat formatter = NumberFormat.getInstance(new Locale("vi", "VN"));
                                     List<Product> listSale = (List<Product>) request.getAttribute("lSale");
                                     if (listSale != null) {
                                         for (Product p : listSale) {
@@ -222,8 +235,10 @@
                                         <img src="<%=request.getContextPath()%>/<%= p.getImage() %>" class="card-img-top product-img">
                                         <div class="card-body text-center">
                                             <h5 class="card-title"><%= p.getName()%></h5>
-                                            <p class="price"><%= p.getPrice()%> VNĐ</p>
-
+                                            <p class="price">
+                                                <del><%= formatter.format(p.getPrice() / 0.8) %> VNĐ</del><br>
+                                                <b style="color:red"><%= p.getFormattedPrice()%> VNĐ</b>
+                                            </p>
                                             <a href="detail?id=<%= p.getId()%>" class="btn btn-detail">
                                                 Xem chi tiết
                                             </a>

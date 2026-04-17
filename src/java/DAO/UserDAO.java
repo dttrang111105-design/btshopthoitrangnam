@@ -24,7 +24,7 @@ public class UserDAO {
             u.setUserName(rs.getString(2));
             u.setPassWord(rs.getString(3));
             u.setEmail(rs.getString(4));
-            u.setPhone(rs.getInt(5));
+            u.setPhone(rs.getString(5));
             u.setAddress(rs.getString(6));
             uList.add(u);
         }
@@ -43,7 +43,7 @@ public class UserDAO {
             u.setUserName(rs.getString(2));
             u.setPassWord(rs.getString(3));
             u.setEmail(rs.getString(4));
-            u.setPhone(rs.getInt(5));
+            u.setPhone(rs.getString(5));
             u.setAddress(rs.getString(6));
             return u;
         }
@@ -58,7 +58,7 @@ public class UserDAO {
         ps.setString(1, u.getUserName());
         ps.setString(2, u.getPassWord());
         ps.setString(3, u.getEmail());
-        ps.setInt(4, u.getPhone());
+        ps.setString(4, u.getPhone());
         ps.setString(5, u.getAddress());
         
         return ps.executeUpdate() > 0;
@@ -73,7 +73,7 @@ public class UserDAO {
         ps.setString(1, u.getUserName());
         ps.setString(2, u.getPassWord());
         ps.setString(3, u.getEmail());
-        ps.setInt(4, u.getPhone());
+        ps.setString(4, u.getPhone());
         ps.setString(5, u.getAddress());
         
         return ps.executeUpdate() > 0;

@@ -36,7 +36,7 @@ public class dangky extends HttpServlet {
         String pass = request.getParameter("pass");
         String repass = request.getParameter("repass");
         String email = request.getParameter("email");
-        int phone = Integer.parseInt(request.getParameter("phone"));
+        String phone = request.getParameter("phone");
         String address = request.getParameter("address");
         UserDAO dao = new UserDAO();
         try {

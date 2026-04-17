@@ -36,9 +36,9 @@ public class trangchu extends HttpServlet {
             request.setCharacterEncoding("UTF-8");
             
             List<Product> plist = new ProductDAO().getAll();
-            List<Product> listNew = new ProductDAO().getByCategory("new");
-            List<Product> listHot = new ProductDAO().getByCategory("hot");
-            List<Product> listSale = new ProductDAO().getByCategory("sale");
+            List<Product> listNew = new ProductDAO().getByType("new");
+            List<Product> listHot = new ProductDAO().getByType("hot");
+            List<Product> listSale = new ProductDAO().getByType("sale");
             
             request.setAttribute("plist", plist);
             request.setAttribute("lNew", listNew);

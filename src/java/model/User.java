@@ -4,13 +4,13 @@ package model;
 
 
 public class User {
-    private int id, phone;
-    private String userName, passWord, email, address;
+    private int id;
+    private String phone, userName, passWord, email, address;
 
     public User() {
     }
 
-    public User(int id, int phone, String userName, String passWord, String email, String address) {
+    public User(int id, String phone, String userName, String passWord, String email, String address) {
         this.id = id;
         this.phone = phone;
         this.userName = userName;
@@ -43,11 +43,11 @@ public class User {
         this.passWord = passWord;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

@@ -26,6 +26,7 @@ public class ProductDAO {
             p.setImage(rs.getString(4));
             p.setDesc(rs.getString(5));
             p.setCategory(rs.getString(6));
+            p.setType(rs.getString(7));
             pList.add(p);
         }
         return pList;
@@ -37,7 +38,7 @@ public class ProductDAO {
         ps = con.prepareStatement(sql);
         ps.setString(1, "%" + ten + "%");
         ResultSet rs = ps.executeQuery();
-        List<Product> list = new ArrayList<>();
+        List<Product> pList = new ArrayList<>();
         while (rs.next()) {
             Product p = new Product();
             p.setId(rs.getInt(1));
@@ -46,17 +47,18 @@ public class ProductDAO {
             p.setImage(rs.getString(4));
             p.setDesc(rs.getString(5));
             p.setCategory(rs.getString(6));
-            list.add(p);
+            p.setType(rs.getString(7));
+            pList.add(p);
         }
-        return list;
+        return pList;
     }
     
-    public List<Product> getByCategory(String category) throws SQLException{
+    public List<Product> getByType(String type) throws SQLException{
         if(con == null) con = new dbConnect().getConnect();
-        String sql = "Select * from product where category = ?";
+        String sql = "Select * from product where type = ?";
         ps = con.prepareStatement(sql);
         List<Product> pList = new ArrayList<>();
-        ps.setString(1, category);
+        ps.setString(1, type);
         ResultSet rs = ps.executeQuery();
         while(rs.next()){
             Product p = new Product();
@@ -66,6 +68,7 @@ public class ProductDAO {
             p.setImage(rs.getString(4));
             p.setDesc(rs.getString(5));
             p.setCategory(rs.getString(6));
+            p.setType(rs.getString(7));
             pList.add(p);
         }
         return pList;
@@ -73,7 +76,7 @@ public class ProductDAO {
     
     public boolean Add(Product p) throws SQLException{
         if(con == null) con = new dbConnect().getConnect();
-        String sql = "Insert into product(name, price, image, descr, category) values(?, ?, ?, ?, ?)";
+        String sql = "Insert into product(name, price, image, descr, category, type) values(?,?,?,?,?,?)";
         ps = con.prepareStatement(sql);
         
         ps.setString(1, p.getName());
@@ -81,22 +84,22 @@ public class ProductDAO {
         ps.setString(3, p.getImage());
         ps.setString(4, p.getDesc());
         ps.setString(5, p.getCategory());
-        
+        ps.setString(6, p.getType());
         return ps.executeUpdate() > 0;
     }
     
     public boolean Update(Product p) throws SQLException{
         if(con == null) con = new dbConnect().getConnect();
-        String sql = "Update product set name = ?, price = ?, image = ?, descr = ?, category = ? where id = ?";
+        String sql = "Update product set name=?, price=?, image=?, descr=?, category=?, type=? where id=?";
         ps = con.prepareStatement(sql);
-        
-        ps.setInt(6, p.getId());
+
         ps.setString(1, p.getName());
         ps.setDouble(2, p.getPrice());
         ps.setString(3, p.getImage());
         ps.setString(4, p.getDesc());
         ps.setString(5, p.getCategory());
-        
+        ps.setString(6, p.getType());
+        ps.setInt(7, p.getId());
         return ps.executeUpdate() > 0;
     }
     
@@ -108,6 +111,8 @@ public class ProductDAO {
         
         return ps.executeUpdate() > 0;
     }
+
+=======
     public Product getProductByID(int id) throws SQLException {
     if(con == null) con = new dbConnect().getConnect();
     String sql = "Select * from product where id = ?";
@@ -126,5 +131,6 @@ public class ProductDAO {
     }
     return null;
 }
+
     
 }

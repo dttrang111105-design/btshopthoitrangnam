@@ -140,36 +140,50 @@
                         <%
                             List<Product> list = (List<Product>) request.getAttribute("list");
                             String name = (String) request.getAttribute("name");
-                            if(list!=null && !list.isEmpty()){
+                            String category = (String) request.getAttribute("category");
                         %>
-                        <h3>Kết quả tìm kiếm của "<%=name%>"</h3>
-                        <div class="row row-cols-5">
-                            <%
-                                for(Product p : list){
+                        <% if(list != null && !list.isEmpty()){ %>
+
+                            <!-- 🔥 TITLE -->
+                            <% 
+                                if(name != null){ 
                             %>
-                            <div class="col mb-4">
-                                <div class="card product-card">
-                                    <img src="<%=request.getContextPath()%>/<%= p.getImage() %>" class="card-img-top product-img">
-                                    <div class="card-body text-center">
-                                        <h5><%=p.getName()%></h5>
-                                        <p><%=p.getFormattedPrice()%> VNĐ</p>
-                                        <a href="detail?id=<%= p.getId() %>" class="btn btn-detail">
-                                            Xem chi tiết
-                                        </a>
+                                <h3>Kết quả tìm kiếm của "<%=name%>"</h3>
+                            <% 
+                                } else if(category != null){ 
+                            %>
+                                <h3>Sản phẩm thuộc danh mục "<%=category%>"</h3>
+                            <% 
+                                } else { 
+                            %>
+                                <h3>Tất cả sản phẩm</h3>
+                            <% 
+                                } 
+                            %>                     
+                            <!-- 🔥 LIST -->
+                            <div class="row row-cols-5">
+                                <% for(Product p : list){ %>
+                                    <div class="col mb-4">
+                                        <div class="card product-card">
+                                            <img src="<%=request.getContextPath()%>/<%= p.getImage() %>" class="card-img-top product-img">
+                                            <div class="card-body text-center">
+                                                <h5><%=p.getName()%></h5>
+                                                <p><%=p.getFormattedPrice()%> VNĐ</p>
+                                                <a href="trangchitiet?id=<%= p.getId() %>" 
+                                                   class="btn btn-detail">
+                                                    Xem chi tiết
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                <%
+                                    } 
+                                %>
                             </div>
-                            <%
-                                }
-                            %>
-                        </div>
-                        <%
-                            }
+                        <% 
+                            } else { 
                         %>
-                        <%
-                            if(list == null || list.isEmpty()){
-                        %>
-                            <!-- 🔥 HÀNG MỚI -->
+                            <!-- HÀNG MỚI -->
                             <h3 class="mb-3">Hàng mới</h3>
                             <div class="row row-cols-5">
                                 <%
@@ -181,9 +195,9 @@
                                     <div class="card product-card">
                                         <img src="<%=request.getContextPath()%>/<%= p.getImage() %>" class="card-img-top product-img">
                                         <div class="card-body text-center">
-                                            <h5 class="card-title"><%= p.getName()%></h5>
-                                            <p class="price"><%= p.getFormattedPrice()%> VNĐ</p>
-                                            <a href="detail?id=<%= p.getId()%>" class="btn btn-detail">
+                                            <h5><%= p.getName()%></h5>
+                                            <p><%= p.getFormattedPrice()%> VNĐ</p>
+                                            <a href="trangchitiet?id=<%= p.getId()%>" class="btn btn-detail">
                                                 Xem chi tiết
                                             </a>
                                         </div>
@@ -194,8 +208,7 @@
                                     }
                                 %>
                             </div>
-
-                            <!-- 🔥 HÀNG BÁN CHẠY -->
+                            <!-- HÀNG BÁN CHẠY -->
                             <h3 class="mb-3 mt-4">Hàng bán chạy</h3>
                             <div class="row row-cols-5">
                                 <%
@@ -207,9 +220,9 @@
                                     <div class="card product-card">
                                         <img src="<%=request.getContextPath()%>/<%= p.getImage() %>" class="card-img-top product-img">
                                         <div class="card-body text-center">
-                                            <h5 class="card-title"><%= p.getName()%></h5>
-                                            <p class="price"><%= p.getFormattedPrice()%> VNĐ</p>
-                                            <a href="detail?id=<%= p.getId()%>" class="btn btn-detail">
+                                            <h5><%= p.getName()%></h5>
+                                            <p><%= p.getFormattedPrice()%> VNĐ</p>
+                                            <a href="trangchitiet?id=<%= p.getId()%>" class="btn btn-detail">
                                                 Xem chi tiết
                                             </a>
                                         </div>
@@ -220,8 +233,7 @@
                                     }
                                 %>
                             </div>
-
-                            <!-- 🔥 HÀNG GIẢM GIÁ -->
+                            <!-- HÀNG GIẢM GIÁ -->
                             <h3 class="mb-3 mt-4">Hàng giảm giá</h3>
                             <div class="row row-cols-5">
                                 <%
@@ -234,12 +246,12 @@
                                     <div class="card product-card">
                                         <img src="<%=request.getContextPath()%>/<%= p.getImage() %>" class="card-img-top product-img">
                                         <div class="card-body text-center">
-                                            <h5 class="card-title"><%= p.getName()%></h5>
-                                            <p class="price">
+                                            <h5><%= p.getName()%></h5>
+                                            <p>
                                                 <del><%= formatter.format(p.getPrice() / 0.8) %> VNĐ</del><br>
                                                 <b style="color:red"><%= p.getFormattedPrice()%> VNĐ</b>
                                             </p>
-                                            <a href="detail?id=<%= p.getId()%>" class="btn btn-detail">
+                                            <a href="trangchitiet?id=<%= p.getId()%>" class="btn btn-detail">
                                                 Xem chi tiết
                                             </a>
                                         </div>
@@ -251,19 +263,19 @@
                                 %>
                             </div>
                         <%
-                            }
+                            } 
                         %>
                     </div>
                 </div>
             </div>
 
         <!-- 🔵 FOOTER -->
-            <div class="bg-dark text-white text-center p-3 mt-4">
-                <p>Đàm Thu Trang - 11/11/2005</p>
-                <p>Nguyễn Tiến Nam - 21/12/2005</p>
-                <p>Phạm Doãn Nguyên - 25/04/2005</p>
-            </div>
+        <div class="bg-dark text-white text-center p-3 mt-4">
+            <p>Đàm Thu Trang - 11/11/2005</p>
+            <p>Nguyễn Tiến Nam - 21/12/2005</p>
+            <p>Phạm Doãn Nguyên - 25/04/2005</p>
+        </div>
 
-            <script src="css/css/js/bootstrap.bundle.min.js"></script>
-        </body>
+        <script src="css/css/js/bootstrap.bundle.min.js"></script>
+    </body>
 </html>

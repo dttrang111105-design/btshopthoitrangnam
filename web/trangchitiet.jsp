@@ -9,204 +9,277 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-<%
-    int id = Integer.parseInt(request.getParameter("id"));
-    Product d = new ProductDAO().getProductByID(id);
-%>
-
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="UTF-8">
         <title>Chi tiết sản phẩm</title>
-        <style>
-            body {
-                background-color: #f0f2f5;
-                font-family: 'Segoe UI', Arial, sans-serif;
-                color: #333;
-            }
 
-            /* Container chính */
+        <link href="css/css/bootstrap.min.css" rel="stylesheet">
+        <link href="trangchu.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+
+        <style>
+            body { background:#f5f5f5; }
+            /* CARD */
             .product-card {
                 background: #fff;
-                margin-top: 20px;
                 padding: 30px;
-                border-radius: 8px;
-                box-shadow: 0 2px 10px rgba(0,0,0,0.08); /* Đổ bóng nhẹ nhàng */
+                border-radius: 12px;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+                display: flex;
+                align-items: center;
             }
-
-            /* Hiệu ứng ảnh */
-            .img-wrapper {
+            .product-card .col-md-5 {
+                padding-right: 30px;
+            }
+            .product-card .col-md-7 {
+                padding-left: 30px;
+            }
+            /* ẢNH */
+            .img-box {
+                height: 450px;
+                position: relative;
                 overflow: hidden;
-                border-radius: 4px;
-                border: 1px solid #eaeaea;
+                border: 1px solid #eee;
+                background: #fff;
+            }
+            /* hover zoom */
+            .img-box:hover .product-img {
+                transform: scale(1.1);
             }
             .product-img {
+                position: absolute;
                 width: 100%;
-                transition: 0.5s;
+                height: 100%;
+                object-fit: cover;
+                transition: 0.4s;
+                display: block; 
             }
-            .img-wrapper:hover .product-img {
-                transform: scale(1.05);
-            }
-
-            /* Tên sản phẩm */
+            /* NAME */
             .product-name {
-                font-size: 28px;
-                font-weight: 600;
-                margin-bottom: 15px;
-                color: #1a1a1a;
+                font-size:28px;
+                font-weight:bold;
             }
-
-            /* Khung giá: ĐỔI SANG MÀU XANH */
-            .price-container {
-                background: #f8faff;
-                padding: 20px;
-                border-radius: 4px;
-                margin: 20px 0;
-                border: 1px solid #e1e8f5;
+            /* PRICE */
+            .price-old {
+                text-decoration: line-through;
+                color:#999;
             }
-            .current-price {
-                color: #0056b3; /* Màu xanh dương đẳng cấp */
-                font-size: 40px;
+            .price-new {
+                color:#d0021b;
+                font-size:32px;
+                font-weight:bold;
+            }
+            .price-box {
+                background:#fff5f5;
+                padding:15px;
+                border-radius:10px;
+                margin:15px 0;
+            }
+            /* BUTTON */
+            .btn-cart {
+                border:2px solid #8b4513;
+                color:#8b4513;
+                border-radius:25px;
+                padding:10px 20px;
+            }
+            .btn-cart:hover {
+                background:#8b4513;
+                color:white;
+            }
+            .btn-buy {
+                background:black;
+                color:white;
+                border-radius:25px;
+                padding:10px 25px;
+            }
+            .btn-buy:hover {
+                background:#8b4513;
+            }
+            /* DESC */
+            .desc-box {
+                background:white;
+                padding:25px;
+                border-radius:10px;
+                margin-top:20px;
+            }
+            .section-title {
+                font-weight:bold;
+                border-left:5px solid #8b4513;
+                padding-left:10px;
+                margin-bottom:15px;
+            }
+            .category-link {
+                color: #8b4513;
                 font-weight: bold;
+                text-decoration: none;
             }
-
-            /* Nút bấm: ĐỔI SANG TÔNG XANH */
-            .btn-custom {
-                height: 50px;
-                font-weight: 500;
-                border-radius: 4px;
-                transition: 0.2s;
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                min-width: 200px;
+            .category-link:hover {
+                text-decoration: underline;
+                color: #5a2e0d;
             }
-
-            .btn-add-to-cart {
-                background: rgba(0, 86, 179, 0.05); /* Xanh nhạt */
-                color: #0056b3;
-                border: 1px solid #0056b3;
+            /*Xuống dòng ở mô tả sp*/
+            .desc-box p {
+                white-space: pre-line;
             }
-            .btn-add-to-cart:hover {
-                background: rgba(0, 86, 179, 0.1);
-                transform: translateY(-2px);
-            }
-
-            .btn-buy-now {
-                background: linear-gradient(180deg, #007bff, #0056b3); /* Xanh gradient */
-                color: #fff;
-                border: none;
-                box-shadow: 0 2px 5px rgba(0, 86, 179, 0.3);
-            }
-            .btn-buy-now:hover {
-                opacity: 0.9;
-                transform: translateY(-2px);
-                color: #fff;
-            }
-
-            /* Các phần bổ sung cho trang dài ra */
-            .info-section {
-                background: #fff;
-                margin-top: 25px;
-                padding: 30px;
-                border-radius: 8px;
-                box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            }
-            .section-header {
-                background: #fdfdfd;
-                padding: 15px;
-                font-weight: bold;
-                border-left: 5px solid #0056b3; /* Vạch xanh bên trái */
-                margin-bottom: 25px;
-                font-size: 20px;
-                text-transform: uppercase;
-                color: #1a1a1a;
-            }
-
-            /* Phần chi tiết thông số */
-            .spec-table {
-                width: 100%;
-            }
-            .spec-table td {
-                padding: 12px 15px;
-                border-bottom: 1px solid #eee;
-            }
-            .spec-label {
-                color: #757575;
-                width: 30%;
-            }
-            .spec-value {
-                color: #333;
-                font-weight: 500;
+            /* FOOTER */
+            .bg-dark.text-white {
+                background-color: #000 !important;
             }
         </style>
     </head>
     <body>
-    <body>
-        <div class="container pb-5">
-            <div class="row product-card shadow-sm">
+        <%
+            Product d = (Product) request.getAttribute("detail");
+            if(d == null){
+        %>
+            <h3>Lỗi: Không tìm thấy sản phẩm</h3>
+        <%
+            return;
+            }
+        %>
+        <!-- 🔵 MENU -->
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Trang chủ</a>
+                <div class="collapse navbar-collapse" id="mainNav">
+                    <ul class="navbar-nav me-auto">
+                        <!-- ÁO -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button">
+                                Áo
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Áo polo</a></li>
+                                <li><a class="dropdown-item" href="#">Áo sơ mi</a></li>
+                                <li><a class="dropdown-item" href="#">Áo khoác</a></li>
+                            </ul>
+                        </li>
+                        <!-- QUẦN -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button">
+                                Quần
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Quần jean</a></li>
+                                <li><a class="dropdown-item" href="#">Quần âu</a></li>
+                            </ul>
+                        </li>
+                        <!-- GIÀY -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button">
+                                Giày
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Giày sneaker</a></li>
+                                <li><a class="dropdown-item" href="#">Giày da</a></li>
+                            </ul>
+                        </li>
+                        <!-- PHỤ KIỆN -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button">
+                                Phụ kiện
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Đồng hồ</a></li>
+                                <li><a class="dropdown-item" href="#">Thắt lưng</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="#">Liên hệ</a></li>
+                    </ul>
+                    <div class="d-flex align-items-center">
+                        <form class="d-flex me-3" action="TimKiem" method="get">
+                            <input class="form-control me-2" type="search" name="name" placeholder="Nhập tên sản phẩm">
+                            <button class="btn btn-outline-light">Tìm</button>
+                        </form>
+                        <!-- nút đăng nhập sau khi login sẽ chuyển thành giỏ hàng và ô chat -->
+                        <!-- ICON GIỎ HÀNG -->
+                            <a href="cart.jsp" class="btn btn-light me-2">
+                                <i class="fa fa-shopping-cart"></i>
+                            </a>
+                            <!-- ICON CHAT -->
+                            <a href="chat.jsp" class="btn btn-light me-2">
+                                <i class="fa fa-comment"></i>
+                            </a>
+                            <!-- USER -->
+                            <a href="dangxuat" class="btn btn-danger">Đăng xuất</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- 🔵 CONTENT -->
+        <div class="container mt-4">
+            <div class="row product-card">
+                <!-- 🖼️ ẢNH -->
                 <div class="col-md-5">
-                    <div class="img-wrapper">
-                        <img src="images/<%=d.getImage()%>" class="product-img" onerror="this.src='<%=d.getImage()%>';">
+                    <div class="img-box">
+                        <img src="<%=request.getContextPath()%>/<%=d.getImage()%>" class="product-img">
                     </div>
                 </div>
-
+                <!-- 📦 INFO -->
                 <div class="col-md-7">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb" style="background: none; padding: 0;">
-                            <li class="breadcrumb-item"><a href="trangchu" style="color: #0056b3;">Trang chủ</a></li>
-                            <li class="breadcrumb-item active" aria-current="page"><%=d.getName()%></li>
-                        </ol>
-                    </nav>
-
-                    <h1 class="product-name"><%=d.getName()%></h1>
-                    <div class="price-container">
-                        <span class="current-price">₫<%=d.getPrice()%></span>
+                    <!-- CATEGORY -->
+                    <p>
+                        Danh mục: 
+                        <a href="trangchu?category=<%=d.getCategory()%>" class="category-link">
+                            <%=d.getCategory()%>
+                        </a>
+                    </p>
+                    <h2 class="product-name"><%=d.getName()%></h2>
+                    <!-- ⭐ fake -->
+                    ⭐⭐⭐⭐⭐ <span class="text-muted">(120 đánh giá)</span>
+                    <!-- 💰 PRICE -->
+                    <div class="price-box">
+                        <%
+                            if("sale".equalsIgnoreCase(d.getType())){
+                        %>
+                            <div class="price-old">
+                                <%= (int)(d.getPrice()/0.8) %> VNĐ
+                            </div>
+                        <%
+                            }
+                        %>
+                        <div class="price-new">
+                            <%=d.getFormattedPrice()%> VNĐ
+                        </div>
                     </div>
-
-                    <div style="color: #666; margin-bottom: 20px;">
-                        <p><i class="fas fa-truck mr-2"></i> Giao hàng nhanh toàn quốc</p>
-                        <p><i class="fas fa-check-circle mr-2"></i> Cam kết hàng chính hãng 100%</p>
+                    <!-- INFO -->
+                    <div>
+                        <p>🚚 Giao hàng toàn quốc</p>
+                        <p>✔ Hàng chính hãng 100%</p>
+                        <p>✔ Đổi trả trong 7 ngày</p>
                     </div>
-
+                    <!-- SỐ LƯỢNG -->
+                    <div class="mt-3">
+                        <label>Số lượng:</label>
+                        <input type="number" value="1" min="1" style="width:80px">
+                    </div>
+                    <!-- BUTTON -->
                     <div class="mt-4">
-                        <button class="btn btn-custom btn-add-to-cart">
-                            <i class="fas fa-cart-plus mr-2"></i> Thêm Vào Giỏ Hàng
-                        </button>
-                        <button class="btn btn-custom btn-buy-now ml-3">Mua Ngay</button>
+                        <a href="#" class="btn btn-cart">
+                            <i class="fa fa-cart-plus"></i> Thêm vào giỏ
+                        </a>
+                        <a href="#" class="btn btn-buy">Mua ngay</a>
                     </div>
                 </div>
             </div>
-
-            <div class="info-section">
-                <div class="section-header">Chi tiết sản phẩm</div>
-                <table class="spec-table">
-                    <tr>
-                        <td class="spec-label">Danh mục</td>
-                        <td class="spec-value text-primary">Thời Trang Nam > Áo > Áo Nỉ</td>
-                    </tr>
-                    <tr>
-                        <td class="spec-label">Thương hiệu</td>
-                        <td class="spec-value">Hàng VNXK</td>
-                    </tr>
-                    <tr>
-                        <td class="spec-label">Chất liệu</td>
-                        <td class="spec-value">Nỉ tăm cao cấp, co giãn nhẹ</td>
-                    </tr>
-                    <tr>
-                        <td class="spec-label">Gửi từ</td>
-                        <td class="spec-value">Hà Nội</td>
-                    </tr>
-                </table>
+            <!-- 📄 MÔ TẢ -->
+            <div class="desc-box">
+                <div class="section-title">Mô tả sản phẩm</div>
+                <p><%=d.getDesc()%></p>
             </div>
-
-            <div class="info-section">
-                <div class="section-header">Mô tả sản phẩm</div>
-                <div style="white-space: pre-line; line-height: 1.8; color: #555; padding: 0 10px;">
-                    <%=d.getDesc()%>
-                </div>
+            <!-- 📦 THÔNG TIN -->
+            <div class="desc-box">
+                <div class="section-title">Thông tin chi tiết</div>
+                <p>Danh mục: <%=d.getCategory()%></p>
+                <p>Loại: <%=d.getType()%></p>
+            </div>
+            <!-- 🔵 FOOTER -->
+            <div class="bg-dark text-white text-center p-3 mt-4">
+                <p>Đàm Thu Trang - 11/11/2005</p>
+                <p>Nguyễn Tiến Nam - 21/12/2005</p>
+                <p>Phạm Doãn Nguyên - 25/04/2005</p>
             </div>
         </div>
     </body>
-</body>
 </html>

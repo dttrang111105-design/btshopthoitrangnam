@@ -112,25 +112,44 @@ public class ProductDAO {
         return ps.executeUpdate() > 0;
     }
 
-=======
-    public Product getProductByID(int id) throws SQLException {
-    if(con == null) con = new dbConnect().getConnect();
-    String sql = "Select * from product where id = ?";
-    ps = con.prepareStatement(sql);
-    ps.setInt(1, id);
-    ResultSet rs = ps.executeQuery();
-    if (rs.next()) {
-        Product p = new Product();
-        p.setId(rs.getInt(1));
-        p.setName(rs.getString(2));
-        p.setPrice(rs.getDouble(3));
-        p.setImage(rs.getString(4));
-        p.setDesc(rs.getString(5));
-        p.setCategory(rs.getString(6));
-        return p;
+    public Product getByID(int id) throws SQLException {
+        if(con == null) con = new dbConnect().getConnect();
+        String sql = "Select * from product where id = ?";
+        ps = con.prepareStatement(sql);
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            Product p = new Product();
+            p.setId(rs.getInt(1));
+            p.setName(rs.getString(2));
+            p.setPrice(rs.getDouble(3));
+            p.setImage(rs.getString(4));
+            p.setDesc(rs.getString(5));
+            p.setCategory(rs.getString(6));
+            p.setType(rs.getString(7));
+            return p;
+        }
+        return null;
     }
-    return null;
-}
-
+    public List<Product> getByCategory(String category) throws SQLException{
+        if(con == null) con = new dbConnect().getConnect();
+        String sql = "Select * from product where category = ?";
+        ps = con.prepareStatement(sql);
+        List<Product> pList = new ArrayList<>();
+        ps.setString(1, category);
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()){
+            Product p = new Product();
+            p.setId(rs.getInt(1));
+            p.setName(rs.getString(2));
+            p.setPrice(rs.getDouble(3));
+            p.setImage(rs.getString(4));
+            p.setDesc(rs.getString(5));
+            p.setCategory(rs.getString(6));
+            p.setType(rs.getString(7));
+            pList.add(p);
+        }
+        return pList;
+    }
     
 }

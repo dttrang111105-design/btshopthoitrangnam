@@ -1,5 +1,4 @@
 
-
 package model;
 
 
@@ -39,6 +38,5 @@ public class Contact {
     public void setMsg(String msg) {
         this.msg = msg;
     }
-    
     
 }

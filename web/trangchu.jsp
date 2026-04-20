@@ -101,7 +101,7 @@
                             } else {
                         %>
                             <!-- ICON GIỎ HÀNG -->
-                            <a href="cart.jsp" class="btn btn-light me-2">
+                            <a href="giohang" class="btn btn-light me-2">
                                 <i class="fa fa-shopping-cart"></i>
                             </a>
                             <!-- ICON CHAT -->

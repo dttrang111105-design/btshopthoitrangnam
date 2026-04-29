@@ -143,7 +143,7 @@
         <!-- 🔵 MENU -->
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Trang chủ</a>
+                <a class="navbar-brand" href="trangchu">Trang chủ</a>
                 <div class="collapse navbar-collapse" id="mainNav">
                     <ul class="navbar-nav me-auto">
                         <!-- ÁO -->
@@ -187,7 +187,7 @@
                                 <li><a class="dropdown-item" href="#">Thắt lưng</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="#">Liên hệ</a></li>
+                        <li class="nav-item"><a class="nav-link" href="lienhe">Liên hệ</a></li>
                     </ul>
                     <div class="d-flex align-items-center">
                         <form class="d-flex me-3" action="TimKiem" method="get">
@@ -195,16 +195,27 @@
                             <button class="btn btn-outline-light">Tìm</button>
                         </form>
                         <!-- nút đăng nhập sau khi login sẽ chuyển thành giỏ hàng và ô chat -->
-                        <!-- ICON GIỎ HÀNG -->
-                        <a href="giohang" class="btn btn-light me-2">
-                            <i class="fa fa-shopping-cart"></i>
-                        </a>
-                        <!-- ICON CHAT -->
-                        <a href="chat.jsp" class="btn btn-light me-2">
-                            <i class="fa fa-comment"></i>
-                        </a>
-                        <!-- USER -->
-                        <a href="dangxuat" class="btn btn-danger">Đăng xuất</a>
+                        <%
+                            Object user = session.getAttribute("user");
+                            if (user == null) {
+                            %>
+                                <a href="dangnhap.jsp" class="btn btn-light">Đăng nhập</a>
+                            <%
+                            } else {
+                            %>
+                                <!-- ICON GIỎ HÀNG -->
+                                <a href="giohang" class="btn btn-light me-2">
+                                    <i class="fa fa-shopping-cart"></i>
+                                </a>
+                                <!-- ICON CHAT -->
+                                <a href="chat.jsp" class="btn btn-light me-2">
+                                    <i class="fa fa-comment"></i>
+                                </a>
+                                <!-- USER -->
+                                <a href="dangxuat" class="btn btn-danger">Đăng xuất</a>
+                            <%
+                            }
+                        %>
                     </div>
                 </div>
             </div>

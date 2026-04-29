@@ -4,14 +4,13 @@ package model;
 
 public class Contact {
     private int id;
-    private String name, msg;
+    private String userName, msg;
 
     public Contact() {
     }
 
-    public Contact(int id, String name, String msg) {
-        this.id = id;
-        this.name = name;
+    public Contact(String username, String msg) {
+        this.userName = username;
         this.msg = msg;
     }
 
@@ -24,11 +23,11 @@ public class Contact {
     }
 
     public String getName() {
-        return name;
+        return userName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.userName = name;
     }
 
     public String getMsg() {

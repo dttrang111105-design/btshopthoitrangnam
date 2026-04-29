@@ -40,6 +40,10 @@
         <servlet-name>xoagiohang</servlet-name>
         <servlet-class>controller.giohang.xoagiohang</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>lienhe</servlet-name>
+        <servlet-class>controller.lienhe</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>trangchu</servlet-name>
         <url-pattern>/trangchu</url-pattern>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>xoagiohang</servlet-name>
         <url-pattern>/xoagiohang</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>lienhe</servlet-name>
+        <url-pattern>/lienhe</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

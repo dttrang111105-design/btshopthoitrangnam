@@ -34,7 +34,7 @@
         <!-- 🔵 MENU -->
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Trang chủ</a>
+                <a class="navbar-brand" href="trangchu">Trang chủ</a>
 
                 <div class="collapse navbar-collapse" id="mainNav">
                     <ul class="navbar-nav me-auto">
@@ -83,7 +83,7 @@
                                 <li><a class="dropdown-item" href="#">Thắt lưng</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="#">Liên hệ</a></li>
+                        <li class="nav-item"><a class="nav-link" href="lienhe.jsp">Liên hệ</a></li>
                     </ul>
 
                     <div class="d-flex align-items-center">

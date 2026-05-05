@@ -19,7 +19,9 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
 
         <style>
-            body { background:#f5f5f5; }
+            body {
+                background:#f5f5f5;
+            }
             /* CARD */
             .product-card {
                 background: #fff;
@@ -53,7 +55,7 @@
                 height: 100%;
                 object-fit: cover;
                 transition: 0.4s;
-                display: block; 
+                display: block;
             }
             /* NAME */
             .product-name {
@@ -131,17 +133,17 @@
     <body>
         <%
             Product d = (Product) request.getAttribute("detail");
-            if(d == null){
+            if (d == null) {
         %>
-            <h3>Lỗi: Không tìm thấy sản phẩm</h3>
+        <h3>Lỗi: Không tìm thấy sản phẩm</h3>
         <%
-            return;
+                return;
             }
         %>
         <!-- 🔵 MENU -->
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Trang chủ</a>
+                <a class="navbar-brand" href="trangchu">Trang chủ</a>
                 <div class="collapse navbar-collapse" id="mainNav">
                     <ul class="navbar-nav me-auto">
                         <!-- ÁO -->
@@ -185,7 +187,7 @@
                                 <li><a class="dropdown-item" href="#">Thắt lưng</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="#">Liên hệ</a></li>
+                        <li class="nav-item"><a class="nav-link" href="lienhe">Liên hệ</a></li>
                     </ul>
                     <div class="d-flex align-items-center">
                         <form class="d-flex me-3" action="TimKiem" method="get">
@@ -193,93 +195,107 @@
                             <button class="btn btn-outline-light">Tìm</button>
                         </form>
                         <!-- nút đăng nhập sau khi login sẽ chuyển thành giỏ hàng và ô chat -->
-                        <!-- ICON GIỎ HÀNG -->
-                            <a href="cart.jsp" class="btn btn-light me-2">
-                                <i class="fa fa-shopping-cart"></i>
-                            </a>
-                            <!-- ICON CHAT -->
-                            <a href="chat.jsp" class="btn btn-light me-2">
-                                <i class="fa fa-comment"></i>
-                            </a>
-                            <!-- USER -->
-                            <a href="dangxuat" class="btn btn-danger">Đăng xuất</a>
+                        <%
+                            Object user = session.getAttribute("user");
+                            if (user == null) {
+                            %>
+                                <a href="dangnhap.jsp" class="btn btn-light">Đăng nhập</a>
+                            <%
+                            } else {
+                            %>
+                                <!-- ICON GIỎ HÀNG -->
+                                <a href="giohang" class="btn btn-light me-2">
+                                    <i class="fa fa-shopping-cart"></i>
+                                </a>
+                                <!-- ICON CHAT -->
+                                <a href="chat.jsp" class="btn btn-light me-2">
+                                    <i class="fa fa-comment"></i>
+                                </a>
+                                <!-- USER -->
+                                <a href="dangxuat" class="btn btn-danger">Đăng xuất</a>
+                            <%
+                            }
+                        %>
                     </div>
                 </div>
             </div>
         </nav>
-        <!-- 🔵 CONTENT -->
-        <div class="container mt-4">
-            <div class="row product-card">
-                <!-- 🖼️ ẢNH -->
-                <div class="col-md-5">
-                    <div class="img-box">
-                        <img src="<%=request.getContextPath()%>/<%=d.getImage()%>" class="product-img">
-                    </div>
-                </div>
-                <!-- 📦 INFO -->
-                <div class="col-md-7">
-                    <!-- CATEGORY -->
-                    <p>
-                        Danh mục: 
-                        <a href="trangchu?category=<%=d.getCategory()%>" class="category-link">
-                            <%=d.getCategory()%>
-                        </a>
-                    </p>
-                    <h2 class="product-name"><%=d.getName()%></h2>
-                    <!-- ⭐ fake -->
-                    ⭐⭐⭐⭐⭐ <span class="text-muted">(120 đánh giá)</span>
-                    <!-- 💰 PRICE -->
-                    <div class="price-box">
-                        <%
-                            if("sale".equalsIgnoreCase(d.getType())){
-                        %>
-                            <div class="price-old">
-                                <%= (int)(d.getPrice()/0.8) %> VNĐ
-                            </div>
-                        <%
-                            }
-                        %>
-                        <div class="price-new">
-                            <%=d.getFormattedPrice()%> VNĐ
+        <form action="themvaogiohang" method="get">
+            <!-- 🔵 CONTENT -->
+            <div class="container mt-4">
+                <div class="row product-card">
+                    <!-- 🖼️ ẢNH -->
+                    <div class="col-md-5">
+                        <div class="img-box">
+                            <img src="<%=request.getContextPath()%>/<%=d.getImage()%>" class="product-img">
                         </div>
                     </div>
-                    <!-- INFO -->
-                    <div>
-                        <p>🚚 Giao hàng toàn quốc</p>
-                        <p>✔ Hàng chính hãng 100%</p>
-                        <p>✔ Đổi trả trong 7 ngày</p>
-                    </div>
-                    <!-- SỐ LƯỢNG -->
-                    <div class="mt-3">
-                        <label>Số lượng:</label>
-                        <input type="number" value="1" min="1" style="width:80px">
-                    </div>
-                    <!-- BUTTON -->
-                    <div class="mt-4">
-                        <a href="#" class="btn btn-cart">
-                            <i class="fa fa-cart-plus"></i> Thêm vào giỏ
-                        </a>
-                        <a href="#" class="btn btn-buy">Mua ngay</a>
+                    <!-- 📦 INFO -->
+                    <div class="col-md-7">
+                        <!-- CATEGORY -->
+                        <p>
+                            Danh mục: 
+                            <a href="trangchu?category=<%=d.getCategory()%>" class="category-link">
+                                <%=d.getCategory()%>
+                            </a>
+                        </p>
+                        <h2 class="product-name"><%=d.getName()%></h2>
+                        <!-- ⭐ fake -->
+                        ⭐⭐⭐⭐⭐ <span class="text-muted">(120 đánh giá)</span>
+                        <!-- 💰 PRICE -->
+                        <div class="price-box">
+                            <%
+                                if ("sale".equalsIgnoreCase(d.getType())) {
+                            %>
+                            <div class="price-old">
+                                <%= (int) (d.getPrice() / 0.8)%> VNĐ
+                            </div>
+                            <%
+                                }
+                            %>
+                            <div class="price-new">
+                                <%=d.getFormattedPrice()%> VNĐ
+                            </div>
+                        </div>
+                        <!-- INFO -->
+                        <div>
+                            <p>🚚 Giao hàng toàn quốc</p>
+                            <p>✔ Hàng chính hãng 100%</p>
+                            <p>✔ Đổi trả trong 7 ngày</p>
+                        </div>
+                        <input type="hidden" name="id" value="<%=d.getId()%>">
+                        <!-- SỐ LƯỢNG -->
+                        <div class="mt-3">
+                            <label>Số lượng:</label>
+                            <input type="number" name="quantity" value="1" min="1" style="width:80px">
+                        </div>
+                        <!-- BUTTON -->
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-cart">
+                                <i class="fa fa-cart-plus"></i> Thêm vào giỏ
+                            </button>
+                            <a href="#" class="btn btn-buy">Mua ngay</a>
+                        </div>
                     </div>
                 </div>
+                <!-- 📄 MÔ TẢ -->
+                <div class="desc-box">
+                    <div class="section-title">Mô tả sản phẩm</div>
+                    <p><%=d.getDesc()%></p>
+                </div>
+                <!-- 📦 THÔNG TIN -->
+                <div class="desc-box">
+                    <div class="section-title">Thông tin chi tiết</div>
+                    <p>Danh mục: <%=d.getCategory()%></p>
+                    <p>Loại: <%=d.getType()%></p>
+                </div>
+                <!-- 🔵 FOOTER -->
+                <div class="bg-dark text-white text-center p-3 mt-4">
+                    <p>Đàm Thu Trang - 11/11/2005</p>
+                    <p>Nguyễn Tiến Nam - 21/12/2005</p>
+                    <p>Phạm Doãn Nguyên - 25/04/2005</p>
+                </div>
             </div>
-            <!-- 📄 MÔ TẢ -->
-            <div class="desc-box">
-                <div class="section-title">Mô tả sản phẩm</div>
-                <p><%=d.getDesc()%></p>
-            </div>
-            <!-- 📦 THÔNG TIN -->
-            <div class="desc-box">
-                <div class="section-title">Thông tin chi tiết</div>
-                <p>Danh mục: <%=d.getCategory()%></p>
-                <p>Loại: <%=d.getType()%></p>
-            </div>
-            <!-- 🔵 FOOTER -->
-            <div class="bg-dark text-white text-center p-3 mt-4">
-                <p>Đàm Thu Trang - 11/11/2005</p>
-                <p>Nguyễn Tiến Nam - 21/12/2005</p>
-                <p>Phạm Doãn Nguyên - 25/04/2005</p>
-            </div>
-        </div>
+        </form>
     </body>
 </html>

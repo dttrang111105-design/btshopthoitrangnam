@@ -46,13 +46,10 @@ body {
     font-weight: 800;
     letter-spacing: 6px;
     text-transform: uppercase;
-
     color: #ffffff;
-
     text-shadow:
         0 0 10px rgba(255,255,255,0.4),
         0 0 25px rgba(0,150,255,0.5);
-
     margin: 0;
     transition: 0.3s ease;
 }
@@ -94,17 +91,8 @@ body {
     display: none;
 }
 /* LEFT MENU */
-.list-group-item.active {
-    background-color: #3b2f2f;
-    border: none;
-    color: white;
-}
 .list-group-item {
     transition: 0.3s;
-}
-.list-group-item:hover {
-    background-color: #f0f0f0;
-    cursor: pointer;
 }
 /* LEFT MENU WRAPPER */
 .col-md-3 {
@@ -147,7 +135,11 @@ body {
     background: #ffffff;
     transition: 0.4s;
     box-shadow: 0 3px 12px rgba(0,0,0,0.1);
-    position: relative;
+    position: relative;    
+    /*cân bằng lại các ảnh*/
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 /* hover nâng card */
 .product-card:hover {
@@ -207,4 +199,5 @@ body {
     .price {
         font-size: 16px;
     }
+
 }

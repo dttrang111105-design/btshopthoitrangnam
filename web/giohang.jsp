@@ -21,6 +21,24 @@
         <link rel="stylesheet" href="css/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="trangchu.css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<<<<<<< HEAD
+=======
+        <style>
+            /* ảnh sản phẩm */
+            .cart-img {
+                width: 70px;
+                height: 70px;
+                object-fit: cover;
+                border-radius: 10px;
+                border: 1px solid #eee;
+                transition: 0.3s;
+            }
+
+            .cart-img:hover {
+                transform: scale(1.1);
+            }
+        </style>
+>>>>>>> ntnam
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark">
@@ -67,15 +85,33 @@
                                     total += subtotal;
                             %>
                             <tr>
+<<<<<<< HEAD
                                 <td class="fw-bold"><%=p.getName()%></td>
                                 <td class="text-primary"><%=p.getFormattedPrice()%></td>
+=======
+                                <!-- Sản phẩm (ảnh+tên) -->
+                                <td>
+                                    <div class="d-flex align-items-center gap-3">
+                                        <img src="<%=request.getContextPath()%>/<%=p.getImage()%>" class="cart-img"/>
+                                        <div class="text-start">
+                                            <div class="fw-bold"><%=p.getName()%></div>
+                                            <small class="text-muted">Sản phẩm thời trang</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-primary"><%=p.getFormattedPrice()%> VNĐ</td>
+>>>>>>> ntnam
                                 <!--Update-->
                                 <td>
                                     <form action="capnhatgiohang" method="post" class="d-flex justify-content-center">
                                         <input type="hidden" name="id" value="<%=item.getId()%>">
                                         <input type="number" name="quantity" value="<%=quantity%>" min="1" class="form-control w-50 me-2">
                                         <button class="btn btn-dark btn-sm">
+<<<<<<< HEAD
                                             <i class="fa fa-shopping-cart"></i>
+=======
+                                            <i class="fa-solid fa-rotate"></i>
+>>>>>>> ntnam
                                         </button>
                                     </form>
                                 </td>
@@ -83,7 +119,11 @@
                                 <!--Delete-->
                                 <td>
                                     <a href="xoagiohang?id=<%=item.getId()%>" class="btn btn-danger btn-sm">
+<<<<<<< HEAD
                                         <i class="fa fa-cart-plus"></i>
+=======
+                                        <i class="fa-solid fa-trash"></i>
+>>>>>>> ntnam
                                     </a>
                                 </td>
                             </tr>

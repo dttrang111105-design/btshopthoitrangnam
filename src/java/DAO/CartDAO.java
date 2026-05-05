@@ -31,14 +31,28 @@ public class CartDAO {
             con = dbConnect.getConnect();
         }
         String sql = "INSERT INTO carts(user_id) VALUES(?)";
+<<<<<<< HEAD
         ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         ps.setInt(1, userId);
         ps.executeUpdate();
         ResultSet rs = ps.getGeneratedKeys();
+=======
+
+        ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        ps.setInt(1, userId);
+        ps.executeUpdate();
+
+        ResultSet rs = ps.getGeneratedKeys();
+
+>>>>>>> ntnam
         if (rs.next()) {
             int cartId = rs.getInt(1);
             return new Cart(cartId, userId);
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> ntnam
         return null;
     }
 
@@ -47,12 +61,25 @@ public class CartDAO {
             con = dbConnect.getConnect();
         }
         String sql = "SELECT id FROM carts WHERE user_id = ?";
+<<<<<<< HEAD
         ps = con.prepareStatement(sql);
         ps.setInt(1, userId);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
             return rs.getInt("id");
         }
+=======
+
+        ps = con.prepareStatement(sql);
+
+        ps.setInt(1, userId);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            return rs.getInt("id");
+        }
+
+>>>>>>> ntnam
         return -1;
     }
 }

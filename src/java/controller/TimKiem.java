@@ -37,9 +37,18 @@ public class TimKiem extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         String name = request.getParameter("name");
-        List<Product> list = new ProductDAO().getByName(name);
-        request.setAttribute("list", list);
-        request.setAttribute("name", name);
+        String category = request.getParameter("category");
+        ProductDAO dao = new ProductDAO();
+        List<Product> list = null;
+        if(name != null && !name.isEmpty()){
+            list = dao.getByName(name);
+            request.setAttribute("name", name);
+        } else if(category != null && !category.isEmpty()){
+            list = dao.getByName(category);
+            request.setAttribute("category", category);
+        }
+        
+        request.setAttribute("list", list);       
         request.getRequestDispatcher("trangchu.jsp").forward(request, response);
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */

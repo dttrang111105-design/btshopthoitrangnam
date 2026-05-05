@@ -18,78 +18,117 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Giỏ hàng</title>
+        <link rel="stylesheet" href="css/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="trangchu.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <style>
+            /* ảnh sản phẩm */
+            .cart-img {
+                width: 70px;
+                height: 70px;
+                object-fit: cover;
+                border-radius: 10px;
+                border: 1px solid #eee;
+                transition: 0.3s;
+            }
+
+            .cart-img:hover {
+                transform: scale(1.1);
+            }
+        </style>
     </head>
     <body>
-        <h2>🛒 Giỏ hàng của bạn</h2>
-
-        <%
-            if (items == null || items.isEmpty()) {
-        %>
-        <p>Giỏ hàng trống</p>
-        <%
-        } else {
-            //Tổng tiền
-            double total = 0;
-        %>
-
-        <table border="1" cellpadding="10">
-            <tr>
-                <th>Tên sản phẩm</th>
-                <th>Giá</th>
-                <th>Số lượng</th>
-                <th>Thành tiền</th>
-                <th>Hành động</th>
-            </tr>
-
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="trangchu">Trang chủ</a>
+                <div class="d-flex">
+                    <a href="trangchu" class="btn btn-light me-2"><- Mua tiếp</a>
+                    <a href="dangxuat" class="btn btn-danger">Đăng xuất</a>
+                </div>
+            </div>
+        </nav>
+        <div class="container mt-5">
+            <h2 class="mb-4">🛒 Giỏ hàng của bạn</h2>
             <%
-                for (CartItem item : items) {
-                //Ví dụ: productMap.get(1) -> Quần bò
-                    Product p = productMap.get(item.getProductId());
-
-                    if (p == null) {
-                        continue;
-                    }
-
-                    double price = p.getPrice();
-                    int quantity = item.getQuantity();
-                    double subtotal = price * quantity;
-                    total += subtotal;
-            %>
-
-            <tr>
-                <td><%= p.getName()%></td>
-                <td><%= p.getPrice()%></td>
-
-                //Cập nhật số lượng
-                <td>
-                    <form action="capnhatgiohang" method="post">
-                        <input type="hidden" name="id" value="<%= item.getId()%>">
-                        <input type="number" name="quantity" value="<%=item.getQuantity()%>" min="1">
-                        <button type="submit">Cập nhật</button>
-                    </form>
-                </td>
-
-                <td><%=subtotal%></td>
-
-                //Xóa sản phẩm khỏi giỏ hàng
-                <td>
-                    <a href="xoagiohang?id=<%= item.getId()%>">Xóa</a>
-                </td>
-            </tr>
-
-            <%
+                if(items==null || items.isEmpty()){
+                %>
+                <div class="alert alert-warning text-center">
+                    Giỏ hàng của bạn đang trống 😢
+                </div>
+                <% 
+                } else {
+                    double total = 0;
+                %>
+                <!--Card box-->
+                <div class="card shadow-lg p-3">
+                    <table class="table table-hover align-middle text-center">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Sản phẩm</th>
+                                <th>Giá</th>
+                                <th>Số lượng</th>
+                                <th>Thành tiền</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                                for(CartItem item : items){
+                                    Product p = productMap.get(item.getProductId());
+                                    if(p==null) continue;
+                                    double price = p.getPrice();
+                                    int quantity = item.getQuantity();
+                                    double subtotal = price * quantity;
+                                    total += subtotal;
+                            %>
+                            <tr>
+                                <!-- Sản phẩm (ảnh+tên) -->
+                                <td>
+                                    <div class="d-flex align-items-center gap-3">
+                                        <img src="<%=request.getContextPath()%>/<%=p.getImage()%>" class="cart-img"/>
+                                        <div class="text-start">
+                                            <div class="fw-bold"><%=p.getName()%></div>
+                                            <small class="text-muted">Sản phẩm thời trang</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-primary"><%=p.getFormattedPrice()%> VNĐ</td>
+                                <!--Update-->
+                                <td>
+                                    <form action="capnhatgiohang" method="post" class="d-flex justify-content-center">
+                                        <input type="hidden" name="id" value="<%=item.getId()%>">
+                                        <input type="number" name="quantity" value="<%=quantity%>" min="1" class="form-control w-50 me-2">
+                                        <button class="btn btn-dark btn-sm">
+                                            <i class="fa-solid fa-rotate"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                                <td class="text-danger fw-bold"><%=Product.formatPrice(subtotal)%> VNĐ</td>
+                                <!--Delete-->
+                                <td>
+                                    <a href="xoagiohang?id=<%=item.getId()%>" class="btn btn-danger btn-sm">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <%
+                                }
+                            %>
+                        </tbody>
+                    </table>
+                    <!--Total-->
+                    <div class="text-end mt-3">
+                        <h4>
+                            Tổng tiền:
+                            <span class="text-danger fw-bold">
+                                <%=Product.formatPrice(total)%> VNĐ
+                            </span>
+                        </h4>
+                    </div>
+                </div>
+                <%
                 }
-            %>
-
-        </table>
-
-        <h3>💰 Tổng tiền: <%= total%></h3>
-
-        <%
-            }
-        %>
-
-        <br>
-        <a href="trangchu">← Tiếp tục mua hàng</a>
+                %>
+        </div>
     </body>
 </html>

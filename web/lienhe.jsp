@@ -18,7 +18,7 @@
 
         <style>
             body {
-                background:#f5f5f5;
+                background:white;
             }
             /* CARD */
             .product-card {
@@ -229,7 +229,7 @@
 
                 <!-- 🔵 SECTION LIÊN HỆ -->
                 <div class="container-fluid mt-4 px-5">
-                    <div class="row" style="background:#111; color:white; padding:50px 30px; border-radius:8px;">
+                    <div class="row" style="background:white; color:#000; padding:50px 30px; border-radius:8px;">
 
                         <!-- LEFT: FORM -->
                         <div class="col-md-7">
@@ -295,7 +295,7 @@
                                     <input 
                                         type="text"
                                         name="username"
-                                        class="form-control bg-dark text-white border-secondary p-3"
+                                        class="form-control bg-white text-dark border p-3"
                                         placeholder="Tên của bạn"
                                         required
                                         >
@@ -307,7 +307,7 @@
                                         <input 
                                             type="email"
                                             name="email"
-                                            class="form-control bg-dark text-white border-secondary p-3"
+                                            class="form-control bg-white text-dark border p-3"
                                             placeholder="Email của bạn"
                                             required
                                             >
@@ -317,7 +317,7 @@
                                         <input 
                                             type="text"
                                             name="phone"
-                                            class="form-control bg-dark text-white border-secondary p-3"
+                                            class="form-control bg-white text-dark border p-3"
                                             placeholder="Số điện thoại của bạn"
                                             required
                                             >
@@ -333,7 +333,7 @@
                                 <div class="mb-3">
                                     <input 
                                         type="text"
-                                        class="form-control bg-dark text-white border-secondary p-3"
+                                        class="form-control bg-white text-dark border p-3"
                                         value="<%= u.getUserName()%>"
                                         readonly>
 
@@ -349,7 +349,7 @@
                                     <div class="col-md-6">
                                         <input 
                                             type="text"
-                                            class="form-control bg-dark text-white border-secondary p-3"
+                                            class="form-control bg-white text-dark border p-3"
                                             value="<%= u.getEmail()%>"
                                             readonly>
                                     </div>
@@ -357,7 +357,7 @@
                                     <div class="col-md-6">
                                         <input 
                                             type="text"
-                                            class="form-control bg-dark text-white border-secondary p-3"
+                                            class="form-control bg-white text-dark border p-3"
                                             value="<%= u.getPhone()%>"
                                             readonly>
                                     </div>
@@ -369,7 +369,7 @@
                                 <div class="mb-3">
                                     <textarea 
                                         name="msg"
-                                        class="form-control bg-dark text-white border-secondary p-3"
+                                        class="form-control bg-white text-dark border p-3"
                                         rows="6"
                                         placeholder="Nội dung"
                                         required></textarea>
@@ -379,7 +379,7 @@
                                 <button 
                                     type="submit"
                                     class="btn btn-danger px-5 py-3 fw-bold mt-2"
-                                    style="background:#2b2b2b; border:none; color:#ff4d4d;">
+                                    style="background:#8b4513; border:none; color:#fff;">
                                     GỬI CHO CHÚNG TÔI
                                 </button>
 
@@ -387,7 +387,7 @@
                         </div>
 
                         <!-- RIGHT: THÔNG TIN -->
-                        <div class="col-md-5" style="border-left:8px solid #666; padding-left:40px;">
+                        <div class="col-md-5" style="border-left:4px solid #000; padding-left:40px;">
                             <h2 class="fw-bold mb-4">Thông tin liên hệ</h2>
 
                             <div class="mb-4 d-flex">

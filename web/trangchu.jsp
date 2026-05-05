@@ -45,9 +45,9 @@
                                 Áo
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Áo polo</a></li>
-                                <li><a class="dropdown-item" href="#">Áo sơ mi</a></li>
-                                <li><a class="dropdown-item" href="#">Áo khoác</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=áo polo">Áo polo</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=áo sơ mi">Áo sơ mi</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=áo khoác">Áo khoác</a></li>
                             </ul>
                         </li>
 
@@ -57,8 +57,8 @@
                                 Quần
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Quần jean</a></li>
-                                <li><a class="dropdown-item" href="#">Quần âu</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=quần jean">Quần jean</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=quần âu">Quần âu</a></li>
                             </ul>
                         </li>
                         
@@ -68,8 +68,8 @@
                                 Giày
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Giày sneaker</a></li>
-                                <li><a class="dropdown-item" href="#">Giày da</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=giày sneaker">Giày sneaker</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=giày da">Giày da</a></li>
                             </ul>
                         </li>
 
@@ -79,8 +79,8 @@
                                 Phụ kiện
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Đồng hồ</a></li>
-                                <li><a class="dropdown-item" href="#">Thắt lưng</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=đồng hồ">Đồng hồ</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=thắt lưng">Thắt lưng</a></li>
                             </ul>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="lienhe.jsp">Liên hệ</a></li>
@@ -161,24 +161,34 @@
                                 } 
                             %>                     
                             <!-- 🔥 LIST -->
-                            <div class="row row-cols-5">
-                                <% for(Product p : list){ %>
-                                    <div class="col mb-4">
+                            <div class="product-slider">
+                                <button class="btn-slide left" onclick="slide(this, -1)">❮</button>
+
+                                <div class="product-list">
+                                    <%
+                                        List<Product> listNew = (List<Product>) request.getAttribute("lNew");
+                                        if (listNew != null) {
+                                            for (Product p : listNew) {
+                                    %>
+                                    <div class="product-item">
                                         <div class="card product-card">
-                                            <img src="<%=request.getContextPath()%>/<%= p.getImage() %>" class="card-img-top product-img">
+                                            <img src="<%=request.getContextPath()%>/<%= p.getImage() %>" class="product-img">
                                             <div class="card-body text-center">
-                                                <h5><%=p.getName()%></h5>
-                                                <p><%=p.getFormattedPrice()%> VNĐ</p>
-                                                <a href="trangchitiet?id=<%= p.getId() %>" 
-                                                   class="btn btn-detail">
+                                                <h5><%= p.getName()%></h5>
+                                                <p><%= p.getFormattedPrice()%> VNĐ</p>
+                                                <a href="trangchitiet?id=<%= p.getId()%>" class="btn btn-detail">
                                                     Xem chi tiết
                                                 </a>
                                             </div>
                                         </div>
                                     </div>
-                                <%
-                                    } 
-                                %>
+                                    <%
+                                            }
+                                        }
+                                    %>
+                                </div>
+
+                                <button class="btn-slide right" onclick="slide(this, 1)">❯</button>
                             </div>
                         <% 
                             } else { 

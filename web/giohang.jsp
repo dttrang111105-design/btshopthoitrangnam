@@ -21,8 +21,7 @@
         <link rel="stylesheet" href="css/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="trangchu.css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<<<<<<< HEAD
-=======
+
         <style>
             /* ảnh sản phẩm */
             .cart-img {
@@ -38,7 +37,7 @@
                 transform: scale(1.1);
             }
         </style>
->>>>>>> ntnam
+
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark">

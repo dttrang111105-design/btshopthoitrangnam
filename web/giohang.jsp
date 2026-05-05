@@ -84,10 +84,9 @@
                                     total += subtotal;
                             %>
                             <tr>
-<<<<<<< HEAD
                                 <td class="fw-bold"><%=p.getName()%></td>
                                 <td class="text-primary"><%=p.getFormattedPrice()%></td>
-=======
+                                
                                 <!-- Sản phẩm (ảnh+tên) -->
                                 <td>
                                     <div class="d-flex align-items-center gap-3">
@@ -99,18 +98,14 @@
                                     </div>
                                 </td>
                                 <td class="text-primary"><%=p.getFormattedPrice()%> VNĐ</td>
->>>>>>> ntnam
+
                                 <!--Update-->
                                 <td>
                                     <form action="capnhatgiohang" method="post" class="d-flex justify-content-center">
                                         <input type="hidden" name="id" value="<%=item.getId()%>">
                                         <input type="number" name="quantity" value="<%=quantity%>" min="1" class="form-control w-50 me-2">
                                         <button class="btn btn-dark btn-sm">
-<<<<<<< HEAD
-                                            <i class="fa fa-shopping-cart"></i>
-=======
                                             <i class="fa-solid fa-rotate"></i>
->>>>>>> ntnam
                                         </button>
                                     </form>
                                 </td>
@@ -118,11 +113,7 @@
                                 <!--Delete-->
                                 <td>
                                     <a href="xoagiohang?id=<%=item.getId()%>" class="btn btn-danger btn-sm">
-<<<<<<< HEAD
-                                        <i class="fa fa-cart-plus"></i>
-=======
                                         <i class="fa-solid fa-trash"></i>
->>>>>>> ntnam
                                     </a>
                                 </td>
                             </tr>

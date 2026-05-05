@@ -39,7 +39,6 @@ public class giohang extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-<<<<<<< HEAD
             response.setContentType("text/html;charset=UTF-8");            
             //Session để lưu thông tin người dùng đăng nhập
             HttpSession session = request.getSession();
@@ -52,37 +51,12 @@ public class giohang extends HttpServlet {
             //Lấy id người dùng
             int userId = user.getId();           
             Cart cart = new CartDAO().getCartByUserId(userId);           
-=======
-            response.setContentType("text/html;charset=UTF-8");
-            
-            //Session để lưu thông tin người dùng đăng nhập
-            HttpSession session = request.getSession();
-            User user = (User) session.getAttribute("user");
-
-            //Kiểm tra người dùng đã đăng nhập chưa, null là chưa và chuyển hướng đến trang đăng nhập
-            if (user == null) {
-                
-                response.sendRedirect("dangnhap");
-                return;
-            }
-            
-            //Lấy id người dùng
-            int userId = user.getId();
-            
-            Cart cart = new CartDAO().getCartByUserId(userId);
-            
->>>>>>> ntnam
             //Kiểm tra giỏ hàng đang trống hay đã có sản phẩm
             if (cart == null) {
                 request.setAttribute("items", null);
                 request.getRequestDispatcher("giohang.jsp").forward(request, response);
                 return;
-<<<<<<< HEAD
             }            
-=======
-            }
-            
->>>>>>> ntnam
             //Lấy danh sách sản phẩm trong giỏ hàng
             List<CartItem> items = new CartItemDAO().getItemsByCartId(cart.getId());
             //Dùng map lưu key:productId và value:Product
@@ -92,15 +66,8 @@ public class giohang extends HttpServlet {
                 Product p = new ProductDAO().getByID(item.getProductId());
                 productMap.put(item.getProductId(), p);
             }
-<<<<<<< HEAD
             request.setAttribute("items", items);
             request.setAttribute("productMap", productMap);
-=======
-
-            request.setAttribute("items", items);
-            request.setAttribute("productMap", productMap);
-
->>>>>>> ntnam
             request.getRequestDispatcher("giohang.jsp").forward(request, response);
 
             try (PrintWriter out = response.getWriter()) {

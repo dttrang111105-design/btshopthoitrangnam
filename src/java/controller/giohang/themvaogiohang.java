@@ -35,25 +35,15 @@ public class themvaogiohang extends HttpServlet {
             throws ServletException, IOException {
 
         try {
-<<<<<<< HEAD
             response.setContentType("text/html;charset=UTF-8");           
             //Session để lưu thông tin người dùng đăng nhập
             HttpSession session = request.getSession();
             User user = (User) session.getAttribute("user");
-=======
-            response.setContentType("text/html;charset=UTF-8");
-            
-            //Session để lưu thông tin người dùng đăng nhập
-            HttpSession session = request.getSession();
-            User user = (User) session.getAttribute("user");
-
->>>>>>> ntnam
             //Kiểm tra người dùng đã đăng nhập chưa, null là chưa và chuyển hướng đến trang đăng nhập
             if (user == null) {
                 response.sendRedirect("dangnhap");
                 return;
             }
-<<<<<<< HEAD
             //Lấy id người dùng
             int userId = user.getId();
             int quantity = Integer.parseInt(request.getParameter("quantity"));            
@@ -61,32 +51,12 @@ public class themvaogiohang extends HttpServlet {
             int productId = Integer.parseInt(request.getParameter("id"));
             // Lấy thông tin giỏ hàng của người dùng
             Cart cart = new CartDAO().getCartByUserId(userId);
-=======
-
-            //Lấy id người dùng
-            int userId = user.getId();
-            int quantity = Integer.parseInt(request.getParameter("quantity"));
-            
-            //Lấy id sản phẩm
-            int productId = Integer.parseInt(request.getParameter("id"));
-
-            // Lấy thông tin giỏ hàng của người dùng
-            Cart cart = new CartDAO().getCartByUserId(userId);
-
->>>>>>> ntnam
             //Nếu user chưa có cart thì tạo cart mới
             if (cart == null) {
                 cart = new CartDAO().createCart(userId);
             }
-<<<<<<< HEAD
             //Kiểm tra xem sản phẩm đã có trong giỏ hàng hay chưa
             CartItem item = new CartItemDAO().getItem(cart.getId(), productId);
-=======
-
-            //Kiểm tra xem sản phẩm đã có trong giỏ hàng hay chưa
-            CartItem item = new CartItemDAO().getItem(cart.getId(), productId);
-
->>>>>>> ntnam
             //Nếu đã có sản phẩm thì tăng số lượng, nếu chưa có thì thêm sản phẩm vào giỏ hàng
             if (item != null) {
                 int newQuantity = item.getQuantity() + quantity;
@@ -94,15 +64,8 @@ public class themvaogiohang extends HttpServlet {
             } else {
                 new CartItemDAO().Add(cart.getId(), productId, quantity);
             }
-<<<<<<< HEAD
             //chuyển đến trang giỏ hàng
             response.sendRedirect("giohang"); // hoặc trang bạn muốn
-=======
-
-            //chuyển đến trang giỏ hàng
-            response.sendRedirect("giohang"); // hoặc trang bạn muốn
-
->>>>>>> ntnam
             try (PrintWriter out = response.getWriter()) {
                 /* TODO output your page here. You may use following sample code. */
                 out.println("<!DOCTYPE html>");

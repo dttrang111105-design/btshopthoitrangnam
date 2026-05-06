@@ -40,12 +40,83 @@
 
     </head>
     <body>
+        <!-- 🔵 MENU -->
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="trangchu">Trang chủ</a>
-                <div class="d-flex">
-                    <a href="trangchu" class="btn btn-light me-2"><- Mua tiếp</a>
-                    <a href="dangxuat" class="btn btn-danger">Đăng xuất</a>
+                <div class="collapse navbar-collapse" id="mainNav">
+                    <ul class="navbar-nav me-auto">
+                        <!-- ÁO -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button">
+                                Áo
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="trangchu?category=áo polo">Áo polo</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=áo sơ mi">Áo sơ mi</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=áo khoác">Áo khoác</a></li>
+                            </ul>
+                        </li>
+                        <!-- QUẦN -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button">
+                                Quần
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="trangchu?category=quần jean">Quần jean</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=quần âu">Quần âu</a></li>
+                            </ul>
+                        </li>
+                        <!-- GIÀY -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button">
+                                Giày
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="trangchu?category=giày sneaker">Giày sneaker</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=giày da">Giày da</a></li>
+                            </ul>
+                        </li>
+                        <!-- PHỤ KIỆN -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button">
+                                Phụ kiện
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="trangchu?category=đồng hồ">Đồng hồ</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=thắt lưng">Thắt lưng</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="lienhe.jsp">Liên hệ</a></li>
+                    </ul>
+                    <div class="d-flex align-items-center">
+                        <form class="d-flex me-3" action="TimKiem" method="get">
+                            <input class="form-control me-2" type="search" name="name" placeholder="Nhập tên sản phẩm">
+                            <button class="btn btn-outline-light">Tìm</button>
+                        </form>
+                        <!-- nút đăng nhập sau khi login sẽ chuyển thành giỏ hàng và ô chat -->
+                        <%
+                            Object user = session.getAttribute("user");
+                            if (user == null) {
+                            %>
+                                <a href="dangnhap.jsp" class="btn btn-light">Đăng nhập</a>
+                            <%
+                            } else {
+                            %>
+                                <!-- ICON GIỎ HÀNG -->
+                                <a href="giohang" class="btn btn-light me-2">
+                                    <i class="fa fa-shopping-cart"></i>
+                                </a>
+                                <!-- ICON CHAT -->
+                                <a href="chat.jsp" class="btn btn-light me-2">
+                                    <i class="fa fa-comment"></i>
+                                </a>
+                                <!-- USER -->
+                                <a href="dangxuat" class="btn btn-danger">Đăng xuất</a>
+                            <%
+                            }
+                        %>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -84,9 +155,6 @@
                                     total += subtotal;
                             %>
                             <tr>
-                                <td class="fw-bold"><%=p.getName()%></td>
-                                <td class="text-primary"><%=p.getFormattedPrice()%></td>
-                                
                                 <!-- Sản phẩm (ảnh+tên) -->
                                 <td>
                                     <div class="d-flex align-items-center gap-3">

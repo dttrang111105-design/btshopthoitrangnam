@@ -37,6 +37,10 @@
             .product-card .col-md-7 {
                 padding-left: 30px;
             }
+            .row.product-card {
+                display: flex;
+                flex-direction: row !important;
+            }
             /* ẢNH */
             .img-box {
                 height: 450px;
@@ -152,9 +156,9 @@
                                 Áo
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Áo polo</a></li>
-                                <li><a class="dropdown-item" href="#">Áo sơ mi</a></li>
-                                <li><a class="dropdown-item" href="#">Áo khoác</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=áo polo">Áo polo</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=áo sơ mi">Áo sơ mi</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=áo khoác">Áo khoác</a></li>
                             </ul>
                         </li>
                         <!-- QUẦN -->
@@ -163,8 +167,8 @@
                                 Quần
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Quần jean</a></li>
-                                <li><a class="dropdown-item" href="#">Quần âu</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=quần jean">Quần jean</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=quần âu">Quần âu</a></li>
                             </ul>
                         </li>
                         <!-- GIÀY -->
@@ -173,8 +177,8 @@
                                 Giày
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Giày sneaker</a></li>
-                                <li><a class="dropdown-item" href="#">Giày da</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=giày sneaker">Giày sneaker</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=giày da">Giày da</a></li>
                             </ul>
                         </li>
                         <!-- PHỤ KIỆN -->
@@ -183,8 +187,8 @@
                                 Phụ kiện
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Đồng hồ</a></li>
-                                <li><a class="dropdown-item" href="#">Thắt lưng</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=đồng hồ">Đồng hồ</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=thắt lưng">Thắt lưng</a></li>
                             </ul>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="lienhe">Liên hệ</a></li>
@@ -224,13 +228,13 @@
             <!-- 🔵 CONTENT -->
             <div class="container mt-4">
                 <div class="row product-card">
-                    <!-- 🖼️ ẢNH -->
+                    <!-- ️ ẢNH -->
                     <div class="col-md-5">
                         <div class="img-box">
                             <img src="<%=request.getContextPath()%>/<%=d.getImage()%>" class="product-img">
                         </div>
                     </div>
-                    <!-- 📦 INFO -->
+                    <!--  INFO -->
                     <div class="col-md-7">
                         <!-- CATEGORY -->
                         <p>
@@ -240,9 +244,9 @@
                             </a>
                         </p>
                         <h2 class="product-name"><%=d.getName()%></h2>
-                        <!-- ⭐ fake -->
+                        <!--  fake -->
                         ⭐⭐⭐⭐⭐ <span class="text-muted">(120 đánh giá)</span>
-                        <!-- 💰 PRICE -->
+                        <!--  PRICE -->
                         <div class="price-box">
                             <%
                                 if ("sale".equalsIgnoreCase(d.getType())) {
@@ -278,18 +282,18 @@
                         </div>
                     </div>
                 </div>
-                <!-- 📄 MÔ TẢ -->
+                <!--  MÔ TẢ -->
                 <div class="desc-box">
                     <div class="section-title">Mô tả sản phẩm</div>
                     <p><%=d.getDesc()%></p>
                 </div>
-                <!-- 📦 THÔNG TIN -->
+                <!--  THÔNG TIN -->
                 <div class="desc-box">
                     <div class="section-title">Thông tin chi tiết</div>
                     <p>Danh mục: <%=d.getCategory()%></p>
                     <p>Loại: <%=d.getType()%></p>
                 </div>
-                <!-- 🔵 FOOTER -->
+                <!--  FOOTER -->
                 <div class="bg-dark text-white text-center p-3 mt-4">
                     <p>Đàm Thu Trang - 11/11/2005</p>
                     <p>Nguyễn Tiến Nam - 21/12/2005</p>

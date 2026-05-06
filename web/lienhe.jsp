@@ -140,57 +140,51 @@
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="trangchu">Trang chủ</a>
-
                 <div class="collapse navbar-collapse" id="mainNav">
                     <ul class="navbar-nav me-auto">
-
                         <!-- ÁO -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button">
                                 Áo
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Áo polo</a></li>
-                                <li><a class="dropdown-item" href="#">Áo sơ mi</a></li>
-                                <li><a class="dropdown-item" href="#">Áo khoác</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=áo polo">Áo polo</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=áo sơ mi">Áo sơ mi</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=áo khoác">Áo khoác</a></li>
                             </ul>
                         </li>
-
                         <!-- QUẦN -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button">
                                 Quần
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Quần jean</a></li>
-                                <li><a class="dropdown-item" href="#">Quần âu</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=quần jean">Quần jean</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=quần âu">Quần âu</a></li>
                             </ul>
                         </li>
-
                         <!-- GIÀY -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button">
                                 Giày
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Giày sneaker</a></li>
-                                <li><a class="dropdown-item" href="#">Giày da</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=giày sneaker">Giày sneaker</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=giày da">Giày da</a></li>
                             </ul>
                         </li>
-
                         <!-- PHỤ KIỆN -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button">
                                 Phụ kiện
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Đồng hồ</a></li>
-                                <li><a class="dropdown-item" href="#">Thắt lưng</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=đồng hồ">Đồng hồ</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=thắt lưng">Thắt lưng</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="lienhe.jsp">Liên hệ</a></li>
+                        <li class="nav-item"><a class="nav-link" href="lienhe">Liên hệ</a></li>
                     </ul>
-
                     <div class="d-flex align-items-center">
                         <form class="d-flex me-3" action="TimKiem" method="get">
                             <input class="form-control me-2" type="search" name="name" placeholder="Nhập tên sản phẩm">
@@ -200,22 +194,22 @@
                         <%
                             Object user = session.getAttribute("user");
                             if (user == null) {
-                        %>
-                        <a href="dangnhap.jsp" class="btn btn-light">Đăng nhập</a>
-                        <%
-                        } else {
-                        %>
-                        <!-- ICON GIỎ HÀNG -->
-                        <a href="giohang" class="btn btn-light me-2">
-                            <i class="fa fa-shopping-cart"></i>
-                        </a>
-                        <!-- ICON CHAT -->
-                        <a href="chat.jsp" class="btn btn-light me-2">
-                            <i class="fa fa-comment"></i>
-                        </a>
-                        <!-- USER -->
-                        <a href="dangxuat" class="btn btn-danger">Đăng xuất</a>
-                        <%
+                            %>
+                                <a href="dangnhap.jsp" class="btn btn-light">Đăng nhập</a>
+                            <%
+                            } else {
+                            %>
+                                <!-- ICON GIỎ HÀNG -->
+                                <a href="giohang" class="btn btn-light me-2">
+                                    <i class="fa fa-shopping-cart"></i>
+                                </a>
+                                <!-- ICON CHAT -->
+                                <a href="chat.jsp" class="btn btn-light me-2">
+                                    <i class="fa fa-comment"></i>
+                                </a>
+                                <!-- USER -->
+                                <a href="dangxuat" class="btn btn-danger">Đăng xuất</a>
+                            <%
                             }
                         %>
                     </div>
@@ -238,36 +232,6 @@
                                 Nếu bạn có thắc mắc gì, có thể gửi yêu cầu cho chúng tôi,
                                 và chúng tôi sẽ liên lạc lại với bạn sớm nhất có thể.
                             </p>
-
-                            <!--                            <form>
-                                                             Tên 
-                                                            <div class="mb-3">
-                                                                <input type="text" name="username" class="form-control bg-dark text-white border-secondary p-3"
-                                                                       placeholder="Tên của bạn">
-                                                            </div>
-                            
-                                                             Email + SĐT 
-                                                            <div class="row mb-3">
-                                                                <div class="col-md-6">
-                                                                    <input type="email" name="email" class="form-control bg-dark text-white border-secondary p-3"
-                                                                           placeholder="Email của bạn">
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <input type="text" name="phone" class="form-control bg-dark text-white border-secondary p-3"
-                                                                           placeholder="Số điện thoại của bạn">
-                                                                </div>
-                                                            </div>
-                            
-                                                             Nội dung 
-                                                            <div class="mb-3">
-                                                                <textarea name="msg" class="form-control bg-dark text-white border-secondary p-3"
-                                                                          rows="6" placeholder="Nội dung"></textarea>
-                                                            </div>
-                                                            <button type="submit" class="btn btn-danger px-5 py-3 fw-bold mt-2"
-                                                                    style="background:#2b2b2b; border:none; color:#ff4d4d;">
-                                                                GỬI CHO CHÚNG TÔI
-                                                            </button>
-                                                        </form>-->
                             <form action="lienhe" method="post">
 
                                 <!-- thông báo sau khi gửi -->

@@ -34,12 +34,21 @@ public class trangchu extends HttpServlet {
             response.setContentType("text/html;charset=UTF-8");
             
             request.setCharacterEncoding("UTF-8");
+            String type = request.getParameter("type");
             String category = request.getParameter("category");
-            if(category != null){
-                List<Product> list = new ProductDAO().getByCategory(category);
-                request.setAttribute("list", list);
-                request.setAttribute("category", category);
+            
+            List<Product> list = null;
+            if((category != null && !category.isEmpty()) || (type != null && !type.isEmpty())){
+                if(category != null){
+                    list = new ProductDAO().getByCategory(category);
+                } else if(type != null){
+                    list = new ProductDAO().getByType(type);
             }
+                request.setAttribute("list", list);
+            }
+            request.setAttribute("type", type);
+            request.setAttribute("category", category);
+                
             List<Product> plist = new ProductDAO().getAll();
             List<Product> listNew = new ProductDAO().getByType("new");
             List<Product> listHot = new ProductDAO().getByType("hot");

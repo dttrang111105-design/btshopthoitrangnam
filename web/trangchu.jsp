@@ -127,10 +127,9 @@
                         <div class="left-menu-box">
                             <div class="list-group">
                                 <a href="#" class="list-group-item active">Danh mục</a>
-                                <a href="#" class="list-group-item">Áo</a>
-                                <a href="#" class="list-group-item">Quần</a>
-                                <a href="#" class="list-group-item">Giày</a>
-                                <a href="#" class="list-group-item">Phụ kiện</a>
+                                <a href="trangchu?type=new" class="list-group-item">Hàng mới</a>
+                                <a href="trangchu?type=hot" class="list-group-item">Hàng bán chạy</a>
+                                <a href="trangchu?type=sale" class="list-group-item">Hàng giảm giá</a>
                             </div>
                         </div>
                     </div>
@@ -141,8 +140,9 @@
                             List<Product> list = (List<Product>) request.getAttribute("list");
                             String name = (String) request.getAttribute("name");
                             String category = (String) request.getAttribute("category");
+                            String type = (String) request.getAttribute("type");
                         %>
-                        <% if(list != null && !list.isEmpty()){ %>
+                        <% if(list != null){ %>
 
                             <!-- 🔥 TITLE -->
                             <% 
@@ -153,46 +153,51 @@
                                 } else if(category != null){ 
                             %>
                                 <h3>Sản phẩm thuộc danh mục "<%=category%>"</h3>
+                            <%
+                                } else if(type != null){
+                                    if(type.equals("new")){ 
+                            %>
+                                <h3>Hàng mới</h3>
                             <% 
-                                } else { 
+                                }   else if(type.equals("hot")){ 
+                            %>
+                                <h3>Hàng bán chạy</h3>
+                            <% 
+                                }   else if(type.equals("sale")){
+                            %>
+                                <h3>Hàng giảm giá</h3>
+                            <% 
+                                    }
+                                }
+                                else { 
                             %>
                                 <h3>Tất cả sản phẩm</h3>
                             <% 
                                 } 
-                            %>                     
+                            %>                  
                             <!-- 🔥 LIST -->
-                            <div class="product-slider">
-                                <button class="btn-slide left" onclick="slide(this, -1)">❮</button>
-
-                                <div class="product-list">
-                                    <%
-                                        List<Product> listNew = (List<Product>) request.getAttribute("lNew");
-                                        if (listNew != null) {
-                                            for (Product p : listNew) {
-                                    %>
-                                    <div class="product-item">
-                                        <div class="card product-card">
-                                            <img src="<%=request.getContextPath()%>/<%= p.getImage() %>" class="product-img">
-                                            <div class="card-body text-center">
-                                                <h5><%= p.getName()%></h5>
-                                                <p><%= p.getFormattedPrice()%> VNĐ</p>
-                                                <a href="trangchitiet?id=<%= p.getId()%>" class="btn btn-detail">
-                                                    Xem chi tiết
-                                                </a>
+                                <div class="row row-cols-5">
+                                    <% for(Product p : list){ %>
+                                        <div class="col mb-4">
+                                            <div class="card product-card">
+                                                <img src="<%=request.getContextPath()%>/<%= p.getImage() %>" class="card-img-top product-img">
+                                                <div class="card-body text-center">
+                                                    <h5><%=p.getName()%></h5>
+                                                    <p><%=p.getFormattedPrice()%> VNĐ</p>
+                                                    <a href="trangchitiet?id=<%= p.getId() %>" 
+                                                       class="btn btn-detail">
+                                                        Xem chi tiết
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
                                     <%
-                                            }
-                                        }
+                                        } 
                                     %>
                                 </div>
-
-                                <button class="btn-slide right" onclick="slide(this, 1)">❯</button>
-                            </div>
-                        <% 
-                            } else { 
-                        %>
+                            <% 
+                                } else { 
+                            %>
                             <!-- HÀNG MỚI -->
                             <h3 class="mb-3">Hàng mới</h3>
                             <div class="row row-cols-5">

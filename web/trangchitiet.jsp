@@ -275,10 +275,25 @@
                         </div>
                         <!-- BUTTON -->
                         <div class="mt-4">
-                            <button type="submit" class="btn btn-cart">
-                                <i class="fa fa-cart-plus"></i> Thêm vào giỏ
-                            </button>
-                            <a href="#" class="btn btn-buy">Mua ngay</a>
+                            <%
+                                if(user != null){
+                            %>
+                                <button type="submit" class="btn btn-cart">
+                                    <i class="fa fa-cart-plus"></i>
+                                    Thêm vào giỏ
+                                </button>
+                                <button type="submit" formaction="ThanhToan" class="btn btn-buy">
+                                    Mua ngay
+                                </button>
+                            <%
+                                } else {
+                            %>
+                                <a href="dangnhap.jsp" class="btn btn-buy">
+                                    Đăng nhập để mua hàng
+                                </a>
+                            <%
+                                }
+                            %>
                         </div>
                     </div>
                 </div>

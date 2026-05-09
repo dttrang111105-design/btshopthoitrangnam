@@ -20,6 +20,67 @@
         
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&display=swap" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+        <style>
+            /* SLIDER SECTION */
+            .slider-section {
+                margin-bottom: 3rem;
+                padding: 0 30px;
+            }
+            .slider-section h3 {
+                font-weight: 700;
+                margin-bottom: 1rem;
+                color: #1a1a1a;
+                border-left: 4px solid #8b4513;
+                padding-left: 12px;
+            }
+            /* CUSTOM SLIDER */
+            .custom-slider {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                width: 100%;
+            }
+            .slider-track-wrap {
+                overflow-x: auto;
+                scroll-behavior: smooth;
+                scrollbar-width: none;
+                flex: 1;
+                min-width: 0;
+            }
+            .slider-track-wrap::-webkit-scrollbar {
+                display: none;
+            }
+            .slider-track {
+                display: flex !important;
+                flex-wrap: nowrap !important;
+                transition: transform 0.4s ease;
+                width: max-content;
+            }
+            .slider-card {
+                width: 200px;
+                flex-shrink: 0;
+                padding: 0 6px;
+                box-sizing: border-box;
+            }
+            .slider-card .card {
+                width: 100%;
+            }
+            .slider-btn {
+                background: #1a1a1a;
+                color: white;
+                border: none;
+                border-radius: 50%;
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+                cursor: pointer;
+                flex-shrink: 0;
+                transition: 0.3s;
+            }
+            .slider-btn:hover {
+                background: #8b4513;
+            }
+        </style>
     </head>
 
     <body>
@@ -199,81 +260,108 @@
                                 } else { 
                             %>
                             <!-- HÀNG MỚI -->
-                            <h3 class="mb-3">Hàng mới</h3>
-                            <div class="row row-cols-5">
+                            <div class="slider-section">
+                                <h3 class="mb-3">Hàng mới</h3>
                                 <%
                                     List<Product> listNew = (List<Product>) request.getAttribute("lNew");
-                                    if (listNew != null) {
-                                        for (Product p : listNew) {
+                                    if (listNew != null && !listNew.isEmpty()) {
                                 %>
-                                <div class="col mb-4">
-                                    <div class="card product-card">
-                                        <img src="<%=request.getContextPath()%>/<%= p.getImage() %>" class="card-img-top product-img">
-                                        <div class="card-body text-center">
-                                            <h5><%= p.getName()%></h5>
-                                            <p><%= p.getFormattedPrice()%> VNĐ</p>
-                                            <a href="trangchitiet?id=<%= p.getId()%>" class="btn btn-detail">
-                                                Xem chi tiết
-                                            </a>
+                                <div class="custom-slider">
+                                    <button class="slider-btn prev-btn" onclick="slideMove('sliderNew', -1)">&#10094;</button>
+                                    <div class="slider-track-wrap">
+                                        <div class="slider-track" id="sliderNew">
+                                            <%
+                                                for (Product p : listNew) {
+                                            %>
+                                            <div class="slider-card">
+                                                <div class="card product-card">
+                                                    <img src="<%=request.getContextPath()%>/<%=p.getImage()%>" class="card-img-top product-img">
+                                                    <div class="card-body text-center">
+                                                        <h5><%=p.getName()%></h5>
+                                                        <p><%=p.getFormattedPrice()%> VNĐ</p>
+                                                        <a href="trangchitiet?id=<%=p.getId()%>" class="btn btn-detail">Xem chi tiết</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <%
+                                                }
+                                            %>
                                         </div>
                                     </div>
+                                    <button class="slider-btn next-btn" onclick="slideMove('sliderNew', 1)">&#10095;</button>
                                 </div>
                                 <%
-                                        }
                                     }
                                 %>
                             </div>
+                                 
                             <!-- HÀNG BÁN CHẠY -->
-                            <h3 class="mb-3 mt-4">Hàng bán chạy</h3>
-                            <div class="row row-cols-5">
+                            <div class="slider-section">
+                                <h3 class="mb-3">Hàng bán chạy</h3>
                                 <%
-                                    List<Product> listHot = (List<Product>) request.getAttribute("lHot");
-                                    if (listHot != null) {
-                                        for (Product p : listHot) {
+                                    List<Product> listHot= (List<Product>) request.getAttribute("lHot");
+                                    if (listHot != null && !listHot.isEmpty()) {
                                 %>
-                                <div class="col mb-4">
-                                    <div class="card product-card">
-                                        <img src="<%=request.getContextPath()%>/<%= p.getImage() %>" class="card-img-top product-img">
-                                        <div class="card-body text-center">
-                                            <h5><%= p.getName()%></h5>
-                                            <p><%= p.getFormattedPrice()%> VNĐ</p>
-                                            <a href="trangchitiet?id=<%= p.getId()%>" class="btn btn-detail">
-                                                Xem chi tiết
-                                            </a>
+                                <div class="custom-slider">
+                                    <button class="slider-btn prev-btn" onclick="slideMove('sliderHot', -1)">&#10094;</button>
+                                    <div class="slider-track-wrap">
+                                        <div class="slider-track" id="sliderHot">
+                                            <%
+                                                for (Product p : listHot) {
+                                            %>
+                                            <div class="slider-card">
+                                                <div class="card product-card">
+                                                    <img src="<%=request.getContextPath()%>/<%=p.getImage()%>" class="card-img-top product-img">
+                                                    <div class="card-body text-center">
+                                                        <h5><%=p.getName()%></h5>
+                                                        <p><%=p.getFormattedPrice()%> VNĐ</p>
+                                                        <a href="trangchitiet?id=<%=p.getId()%>" class="btn btn-detail">Xem chi tiết</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <%
+                                                }
+                                            %>
                                         </div>
                                     </div>
+                                    <button class="slider-btn next-btn" onclick="slideMove('sliderHot', 1)">&#10095;</button>
                                 </div>
                                 <%
-                                        }
                                     }
                                 %>
                             </div>
                             <!-- HÀNG GIẢM GIÁ -->
-                            <h3 class="mb-3 mt-4">Hàng giảm giá</h3>
-                            <div class="row row-cols-5">
+                            <div class="slider-section">
+                                <h3 class="mb-3">Hàng giảm giá</h3>
                                 <%
-                                    NumberFormat formatter = NumberFormat.getInstance(new Locale("vi", "VN"));
                                     List<Product> listSale = (List<Product>) request.getAttribute("lSale");
-                                    if (listSale != null) {
-                                        for (Product p : listSale) {
+                                    if (listSale != null && !listSale.isEmpty()) {
                                 %>
-                                <div class="col mb-4">
-                                    <div class="card product-card">
-                                        <img src="<%=request.getContextPath()%>/<%= p.getImage() %>" class="card-img-top product-img">
-                                        <div class="card-body text-center">
-                                            <h5><%= p.getName()%></h5>
-                                            <p>
-                                                <del><%= formatter.format(p.getPrice() / 0.8) %> VNĐ</del><br>
-                                                <b style="color:red"><%= p.getFormattedPrice()%> VNĐ</b>
-                                            </p>
-                                            <a href="trangchitiet?id=<%= p.getId()%>" class="btn btn-detail">
-                                                Xem chi tiết
-                                            </a>
+                                <div class="custom-slider">
+                                    <button class="slider-btn prev-btn" onclick="slideMove('sliderSale', -1)">&#10094;</button>
+                                    <div class="slider-track-wrap">
+                                        <div class="slider-track" id="sliderSale">
+                                            <%
+                                                for (Product p : listSale) {
+                                            %>
+                                            <div class="slider-card">
+                                                <div class="card product-card">
+                                                    <img src="<%=request.getContextPath()%>/<%=p.getImage()%>" class="card-img-top product-img">
+                                                    <div class="card-body text-center">
+                                                        <h5><%=p.getName()%></h5>
+                                                        <p><%=p.getFormattedPrice()%> VNĐ</p>
+                                                        <a href="trangchitiet?id=<%=p.getId()%>" class="btn btn-detail">Xem chi tiết</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <%
+                                                }
+                                            %>
                                         </div>
                                     </div>
+                                    <button class="slider-btn next-btn" onclick="slideMove('sliderSale', 1)">&#10095;</button>
                                 </div>
                                 <%
-                                        }
                                     }
                                 %>
                             </div>
@@ -290,7 +378,14 @@
             <p>Nguyễn Tiến Nam - 21/12/2005</p>
             <p>Phạm Doãn Nguyên - 25/04/2005</p>
         </div>
-
-        <script src="css/css/js/bootstrap.bundle.min.js"></script>
+        <script>
+            function slideMove(id, direction) {
+                const track = document.getElementById(id);
+                if (!track) return;
+                const wrap = track.parentElement;
+                wrap.scrollLeft += direction * 212;
+            }
+        </script>
+        <script src="css/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>

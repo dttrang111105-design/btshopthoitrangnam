@@ -202,22 +202,19 @@
                         <%
                             Object user = session.getAttribute("user");
                             if (user == null) {
-                            %>
-                                <a href="dangnhap.jsp" class="btn btn-light">Đăng nhập</a>
-                            <%
-                            } else {
-                            %>
-                                <!-- ICON GIỎ HÀNG -->
-                                <a href="giohang" class="btn btn-light me-2">
-                                    <i class="fa fa-shopping-cart"></i>
-                                </a>
-                                <!-- ICON CHAT -->
-                                <a href="chat.jsp" class="btn btn-light me-2">
-                                    <i class="fa fa-comment"></i>
-                                </a>
-                                <!-- USER -->
-                                <a href="dangxuat" class="btn btn-danger">Đăng xuất</a>
-                            <%
+                        %>
+                        <a href="dangnhap.jsp" class="btn btn-light">Đăng nhập</a>
+                        <%
+                        } else {
+                        %>
+                        <!-- ICON GIỎ HÀNG -->
+                        <a href="giohang" class="btn btn-light me-2">
+                            <i class="fa fa-shopping-cart"></i>
+                        </a>
+                        
+                        <!-- USER -->
+                        <a href="dangxuat" class="btn btn-danger">Đăng xuất</a>
+                        <%
                             }
                         %>
                     </div>
@@ -276,21 +273,21 @@
                         <!-- BUTTON -->
                         <div class="mt-4">
                             <%
-                                if(user != null){
+                                if (user != null) {
                             %>
-                                <button type="submit" class="btn btn-cart">
-                                    <i class="fa fa-cart-plus"></i>
-                                    Thêm vào giỏ
-                                </button>
-                                <button type="submit" formaction="ThanhToan" class="btn btn-buy">
-                                    Mua ngay
-                                </button>
+                            <button type="submit" class="btn btn-cart">
+                                <i class="fa fa-cart-plus"></i>
+                                Thêm vào giỏ
+                            </button>
+                            <button type="submit" formaction="ThanhToan" class="btn btn-buy">
+                                Mua ngay
+                            </button>
                             <%
-                                } else {
+                            } else {
                             %>
-                                <a href="dangnhap.jsp" class="btn btn-buy">
-                                    Đăng nhập để mua hàng
-                                </a>
+                            <a href="dangnhap.jsp" class="btn btn-buy">
+                                Đăng nhập để mua hàng
+                            </a>
                             <%
                                 }
                             %>
@@ -316,5 +313,6 @@
                 </div>
             </div>
         </form>
+        <jsp:include page="chatbox.jsp"/>
     </body>
 </html>

@@ -93,7 +93,7 @@
         </div>
 
         <!-- 🔵 MENU -->
-        <nav class="navbar navbar-expand-lg navbar-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
             <div class="container-fluid">
                 <a class="navbar-brand" href="trangchu">Trang chủ</a>
 
@@ -166,9 +166,7 @@
                                 <i class="fa fa-shopping-cart"></i>
                             </a>
                             <!-- ICON CHAT -->
-                            <a href="chat.jsp" class="btn btn-light me-2">
-                                <i class="fa fa-comment"></i>
-                            </a>
+                            
                             <!-- USER -->
                             <a href="dangxuat" class="btn btn-danger">Đăng xuất</a>
                         <%
@@ -185,7 +183,7 @@
 
                     <!-- 🟡 LEFT MENU -->
                     <div class="col-md-3">
-                        <div class="left-menu-box">
+                        <div class="left-menu-box sticky-top" style="top: 60px;">
                             <div class="list-group">
                                 <a href="#" class="list-group-item active">Danh mục</a>
                                 <a href="trangchu?type=new" class="list-group-item">Hàng mới</a>
@@ -387,5 +385,6 @@
             }
         </script>
         <script src="css/js/bootstrap.bundle.min.js"></script>
+        <jsp:include page="chatbox.jsp"/>
     </body>
 </html>

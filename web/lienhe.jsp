@@ -203,10 +203,6 @@
                                 <a href="giohang" class="btn btn-light me-2">
                                     <i class="fa fa-shopping-cart"></i>
                                 </a>
-                                <!-- ICON CHAT -->
-                                <a href="chat.jsp" class="btn btn-light me-2">
-                                    <i class="fa fa-comment"></i>
-                                </a>
                                 <!-- USER -->
                                 <a href="dangxuat" class="btn btn-danger">Đăng xuất</a>
                             <%
@@ -405,5 +401,6 @@
             </div>
 
             <script src="css/css/js/bootstrap.bundle.min.js"></script>
+            <jsp:include page="chatbox.jsp"/>
     </body>
 </html>

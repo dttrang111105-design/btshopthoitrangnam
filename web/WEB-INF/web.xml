@@ -48,6 +48,10 @@
         <servlet-name>ThanhToan</servlet-name>
         <servlet-class>controller.ThanhToan</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>chatbox</servlet-name>
+        <servlet-class>controller.chatbox</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>trangchu</servlet-name>
         <url-pattern>/trangchu</url-pattern>
@@ -95,6 +99,10 @@
     <servlet-mapping>
         <servlet-name>ThanhToan</servlet-name>
         <url-pattern>/ThanhToan</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>chatbox</servlet-name>
+        <url-pattern>/chatbox</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

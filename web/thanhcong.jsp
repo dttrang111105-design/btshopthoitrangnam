@@ -30,7 +30,7 @@
         <div class="container mt-5">
             <div class="success-box">
                 <div class="success-icon"> 🎉 </div>
-                <h1 class="mt-3">Thanh toán thành công</h1>
+                <h1 class="mt-3">Mua hàng thành công</h1>
                 <p class="mt-3">Cảm ơn bạn đã mua hàng tại NTN SHOP</p>
                 <a href="trangchu" class="btn btn-danger">
                     Về trang chủ

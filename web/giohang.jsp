@@ -29,7 +29,7 @@
         <%
         } else {
             //Tổng tiền
-            double total = 0;
+            double total = 0.0;
         %>
 
         <table border="1" cellpadding="10">

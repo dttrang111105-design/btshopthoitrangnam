@@ -4,17 +4,24 @@
  */
 package controller;
 
+import DAO.CartDAO;
+import DAO.CartItemDAO;
 import DAO.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.Cart;
+import model.CartItem;
 import model.Product;
+import model.User;
 
 /**
  *
@@ -51,18 +58,6 @@ public class ThanhToan extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ThanhToan</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ThanhToan at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -96,9 +91,52 @@ public class ThanhToan extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(ThanhToan.class.getName()).log(Level.SEVERE, null, ex);
+            response.setContentType("text/html;charset=UTF-8");
+            request.setCharacterEncoding("UTF-8");
+            // Lấy thông tin sản phẩm và số lượng từ thẻ <input type="hidden">
+            int id = Integer.parseInt(request.getParameter("id"));
+            int quantity = Integer.parseInt(request.getParameter("quantity"));
+            // Lấy thông tin khách hàng từ Form người dùng vừa nhập
+            String name = request.getParameter("name");
+            String phone = request.getParameter("phone");
+            String address = request.getParameter("address");
+            // Lấy thông tin sản phẩm từ DAO để lấy giá chính xác
+            Product p = new ProductDAO().getByID(id);
+            if (p != null) {
+                // Tính tổng tiền = giá (đã giảm nếu có) * số lượng
+                double total = p.getPrice() * quantity;
+                // Đẩy TẤT CẢ dữ liệu vào request để trang thanhcong.jsp lấy ra
+                request.setAttribute("p", p);
+                request.setAttribute("quantity", quantity);
+                request.setAttribute("name", name);
+                request.setAttribute("phone", phone);
+                request.setAttribute("address", address);
+                request.setAttribute("total", total);
+
+                //Giỏ hàng
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("user");
+            int cartCount = 0;
+            if(user != null){
+                Cart cart = new CartDAO().getCartByUserId(user.getId());
+                if(cart != null){
+                    List<CartItem> cartItems = new CartItemDAO().getItemsByCartId(cart.getId());
+                    for(CartItem item : cartItems){
+                        cartCount += item.getQuantity();
+                    }
+                }
+            }
+            request.setAttribute("cartCount", cartCount);
+                // Chuyển hướng sang trang thanhcong.jsp bằng forward
+                // Dùng forward thì trang JSP mới đọc được request.getAttribute
+                request.getRequestDispatcher("thanhcong.jsp").forward(request, response);
+            } else {
+                response.getWriter().println("Lỗi: Không tìm thấy sản phẩm để thanh toán.");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.getWriter().println("Có lỗi xảy ra: " + e.getMessage());
         }
     }
 

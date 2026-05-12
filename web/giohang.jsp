@@ -40,8 +40,14 @@
 
     </head>
     <body>
+        <%
+            Integer cartCount = (Integer) request.getAttribute("cartCount");
+                if(cartCount == null){
+                    cartCount = 0;
+                }
+        %>
         <!-- 🔵 MENU -->
-        <nav class="navbar navbar-expand-lg navbar-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
             <div class="container-fluid">
                 <a class="navbar-brand" href="trangchu">Trang chủ</a>
                 <div class="collapse navbar-collapse" id="mainNav">
@@ -104,8 +110,15 @@
                             } else {
                             %>
                                 <!-- ICON GIỎ HÀNG -->
-                                <a href="giohang" class="btn btn-light me-2">
+                                <a href="giohang" class="btn btn-light me-2 position-relative">
                                     <i class="fa fa-shopping-cart"></i>
+                                    <% if(cartCount > 0){ %>
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            <%=cartCount%>
+                                        </span>
+                                    <% 
+                                        } 
+                                    %>
                                 </a>
                                 <!-- USER -->
                                 <a href="dangxuat" class="btn btn-danger">Đăng xuất</a>
@@ -137,6 +150,8 @@
                                 <th>Giá</th>
                                 <th>Số lượng</th>
                                 <th>Thành tiền</th>
+                                <th>Xóa</th>
+                                <th>Mua ngay</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -179,6 +194,16 @@
                                     <a href="xoagiohang?id=<%=item.getId()%>" class="btn btn-danger btn-sm">
                                         <i class="fa-solid fa-trash"></i>
                                     </a>
+                                </td>
+                                <!-- Mua ngay --> 
+                                <td>
+                                    <form action="ThanhToan" method="get">
+                                        <input type="hidden" name="id" value="<%=p.getId()%>">
+                                        <input type="hidden" name="quantity" value="<%=item.getQuantity()%>">
+                                        <button class="btn btn-detail btn-sm">
+                                            Mua hàng
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                             <%

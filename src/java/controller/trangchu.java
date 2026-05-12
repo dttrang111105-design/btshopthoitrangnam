@@ -1,5 +1,7 @@
 package controller;
 
+import DAO.CartDAO;
+import DAO.CartItemDAO;
 import DAO.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,7 +13,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.Cart;
+import model.CartItem;
 import model.Product;
+import model.User;
 
 /**
  *
@@ -59,7 +65,21 @@ public class trangchu extends HttpServlet {
             request.setAttribute("lHot", listHot);
             request.setAttribute("lSale", listSale);
             
-            
+            //Giỏ hàng
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("user");
+            int cartCount = 0;
+            if(user != null){
+                Cart cart = new CartDAO().getCartByUserId(user.getId());
+                if(cart != null){
+                    List<CartItem> cartItems = new CartItemDAO().getItemsByCartId(cart.getId());
+                    for(CartItem item : cartItems){
+                        cartCount += item.getQuantity();
+                    }
+                }
+            }
+            request.setAttribute("cartCount", cartCount);
+           
             request.getRequestDispatcher("/trangchu.jsp").forward(request, response);
             return;
 //            try (PrintWriter out = response.getWriter()) {

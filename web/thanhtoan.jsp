@@ -52,7 +52,7 @@
             double total = p.getPrice()*quantity;
         %>
         <!-- 🔵 MENU -->
-        <nav class="navbar navbar-expand-lg navbar-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
             <div class="container-fluid">
                 <a class="navbar-brand" href="trangchu">Trang chủ</a>
 
@@ -157,29 +157,36 @@
                         <hr>
                         <h4 class="mb-4">Thông tin nhận hàng</h4>
                         <form action="ThanhToan" method="post">
-                            <!-- hidden -->
-                            <input type="hidden" name="id" value="<%=p.getId()%>"
+                            <!-- hidden fields -->
+                            <input type="hidden" name="id" value="<%=p.getId()%>"> <!-- Đã đóng thẻ > ở đây -->
                             <input type="hidden" name="quantity" value="<%=quantity%>">
-                            
+
                             <!-- họ tên -->
                             <div class="mb-3">
                                 <label class="form-label">Họ tên</label>
-                                <input type="text" name="name" class="form-control" required>
+                                <input type="text" name="name" class="form-control" required 
+                                       oninvalid="this.setCustomValidity('Vui lòng nhập họ tên')" 
+                                       oninput="this.setCustomValidity('')">
                             </div>
-                            
+
                             <!-- sđt -->
                             <div class="mb-3">
-                                <label class="form-label">Sđt</label>
-                                <input type="text" name="phone" class="form-control" required>
+                                <label class="form-label">Số điện thoại</label>
+                                <input type="tel" name="phone" class="form-control" required 
+                                       pattern="[0-9]{10,11}"
+                                       oninvalid="this.setCustomValidity('Vui lòng nhập số điện thoại hợp lệ')" 
+                                       oninput="this.setCustomValidity('')">
                             </div>
-                            
+
                             <!-- địa chỉ -->
                             <div class="mb-3">
                                 <label class="form-label">Địa chỉ</label>
-                                <textarea type="text" name="address" class="form-control" required></textarea>
+                                <textarea name="address" class="form-control" required 
+                                          oninvalid="this.setCustomValidity('Vui lòng nhập địa chỉ')" 
+                                          oninput="this.setCustomValidity('')"></textarea>
                             </div>
-                            
-                            <a href="thanhcong.jsp" class="btn btn-danger">Xác nhận thanh toán</a>
+
+                            <button type="submit" class="btn btn-danger w-100">Xác nhận thanh toán</button>
                         </form>
                     </div>
                 </div>

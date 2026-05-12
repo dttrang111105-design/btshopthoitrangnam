@@ -39,7 +39,9 @@ public class giohang extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            response.setContentType("text/html;charset=UTF-8");            
+            response.setContentType("text/html;charset=UTF-8");  
+            // biến đếm để hiển thị ở giỏ hàng
+            int cartCount = 0;
             //Session để lưu thông tin người dùng đăng nhập
             HttpSession session = request.getSession();
             User user = (User) session.getAttribute("user");
@@ -65,9 +67,12 @@ public class giohang extends HttpServlet {
             for (CartItem item : items) {
                 Product p = new ProductDAO().getByID(item.getProductId());
                 productMap.put(item.getProductId(), p);
+                // cộng số lượng sản phẩm
+                cartCount += item.getQuantity();
             }
             request.setAttribute("items", items);
             request.setAttribute("productMap", productMap);
+            request.setAttribute("cartCount", cartCount);
             request.getRequestDispatcher("giohang.jsp").forward(request, response);
 
             try (PrintWriter out = response.getWriter()) {

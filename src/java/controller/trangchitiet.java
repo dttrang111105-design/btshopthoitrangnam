@@ -4,17 +4,24 @@
  */
 package controller;
 
+import DAO.CartDAO;
+import DAO.CartItemDAO;
 import DAO.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.Cart;
+import model.CartItem;
 import model.Product;
+import model.User;
 
 /**
  *
@@ -40,6 +47,21 @@ public class trangchitiet extends HttpServlet {
             Product p = new ProductDAO().getByID(id);
 
             request.setAttribute("detail", p);
+            
+            //Giỏ hàng
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("user");
+            int cartCount = 0;
+            if(user != null){
+                Cart cart = new CartDAO().getCartByUserId(user.getId());
+                if(cart != null){
+                    List<CartItem> cartItems = new CartItemDAO().getItemsByCartId(cart.getId());
+                    for(CartItem item : cartItems){
+                        cartCount += item.getQuantity();
+                    }
+                }
+            }
+            request.setAttribute("cartCount", cartCount);
             request.getRequestDispatcher("trangchitiet.jsp").forward(request, response);
 
             try (PrintWriter out = response.getWriter()) {

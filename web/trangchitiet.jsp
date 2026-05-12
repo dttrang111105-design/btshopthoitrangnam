@@ -136,6 +136,10 @@
     </head>
     <body>
         <%
+            Integer cartCount = (Integer) request.getAttribute("cartCount");
+                if(cartCount == null){
+                    cartCount = 0;
+                }
             Product d = (Product) request.getAttribute("detail");
             if (d == null) {
         %>
@@ -145,7 +149,7 @@
             }
         %>
         <!-- 🔵 MENU -->
-        <nav class="navbar navbar-expand-lg navbar-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
             <div class="container-fluid">
                 <a class="navbar-brand" href="trangchu">Trang chủ</a>
                 <div class="collapse navbar-collapse" id="mainNav">
@@ -208,9 +212,16 @@
                         } else {
                         %>
                         <!-- ICON GIỎ HÀNG -->
-                        <a href="giohang" class="btn btn-light me-2">
-                            <i class="fa fa-shopping-cart"></i>
-                        </a>
+                                <a href="giohang" class="btn btn-light me-2 position-relative">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    <% if(cartCount > 0){ %>
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            <%=cartCount%>
+                                        </span>
+                                    <% 
+                                        } 
+                                    %>
+                                </a>
                         
                         <!-- USER -->
                         <a href="dangxuat" class="btn btn-danger">Đăng xuất</a>

@@ -92,6 +92,12 @@
             </div>
         </div>
 
+        <%
+            Integer cartCount = (Integer) request.getAttribute("cartCount");
+                if(cartCount == null){
+                    cartCount = 0;
+                }
+        %>
         <!-- 🔵 MENU -->
         <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
             <div class="container-fluid">
@@ -162,9 +168,16 @@
                             } else {
                         %>
                             <!-- ICON GIỎ HÀNG -->
-                            <a href="giohang" class="btn btn-light me-2">
-                                <i class="fa fa-shopping-cart"></i>
-                            </a>
+                                <a href="giohang" class="btn btn-light me-2 position-relative">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    <% if(cartCount > 0){ %>
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            <%=cartCount%>
+                                        </span>
+                                    <% 
+                                        } 
+                                    %>
+                                </a>
                             <!-- ICON CHAT -->
                             
                             <!-- USER -->
@@ -275,8 +288,8 @@
                                                 <div class="card product-card">
                                                     <img src="<%=request.getContextPath()%>/<%=p.getImage()%>" class="card-img-top product-img">
                                                     <div class="card-body text-center">
-                                                        <h5><%=p.getName()%></h5>
-                                                        <p><%=p.getFormattedPrice()%> VNĐ</p>
+                                                        <h5 class="card-title"><%=p.getName()%></h5>
+                                                        <p class="price"><%=p.getFormattedPrice()%> VNĐ</p>
                                                         <a href="trangchitiet?id=<%=p.getId()%>" class="btn btn-detail">Xem chi tiết</a>
                                                     </div>
                                                 </div>
@@ -311,8 +324,8 @@
                                                 <div class="card product-card">
                                                     <img src="<%=request.getContextPath()%>/<%=p.getImage()%>" class="card-img-top product-img">
                                                     <div class="card-body text-center">
-                                                        <h5><%=p.getName()%></h5>
-                                                        <p><%=p.getFormattedPrice()%> VNĐ</p>
+                                                        <h5 class="card-title"><%=p.getName()%></h5>
+                                                        <p class="price"><%=p.getFormattedPrice()%> VNĐ</p>
                                                         <a href="trangchitiet?id=<%=p.getId()%>" class="btn btn-detail">Xem chi tiết</a>
                                                     </div>
                                                 </div>
@@ -332,6 +345,7 @@
                             <div class="slider-section">
                                 <h3 class="mb-3">Hàng giảm giá</h3>
                                 <%
+                                    NumberFormat formatter = NumberFormat.getInstance(new Locale("vi", "VN"));
                                     List<Product> listSale = (List<Product>) request.getAttribute("lSale");
                                     if (listSale != null && !listSale.isEmpty()) {
                                 %>
@@ -346,8 +360,11 @@
                                                 <div class="card product-card">
                                                     <img src="<%=request.getContextPath()%>/<%=p.getImage()%>" class="card-img-top product-img">
                                                     <div class="card-body text-center">
-                                                        <h5><%=p.getName()%></h5>
-                                                        <p><%=p.getFormattedPrice()%> VNĐ</p>
+                                                        <h5 class="card-title"><%=p.getName()%></h5>
+                                                        <p class="price">
+                                                            <del><%=formatter.format(p.getPrice()/0.8)%> VNĐ</del><br>
+                                                            <b style="color:red"><%= p.getFormattedPrice()%> VNĐ</b>
+                                                        </p>
                                                         <a href="trangchitiet?id=<%=p.getId()%>" class="btn btn-detail">Xem chi tiết</a>
                                                     </div>
                                                 </div>

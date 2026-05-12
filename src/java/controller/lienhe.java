@@ -1,10 +1,13 @@
 package controller;
 
+import DAO.CartDAO;
+import DAO.CartItemDAO;
 import DAO.ContactDAO;
 import DAO.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -12,6 +15,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Cart;
+import model.CartItem;
 import model.Contact;
 import model.User;
 
@@ -34,33 +39,37 @@ public class lienhe extends HttpServlet {
             throws ServletException, IOException {
         try {
             response.setContentType("text/html;charset=UTF-8");
-
             request.setCharacterEncoding("UTF-8");
-
             HttpSession session = request.getSession();
-
             String username = "";
             String msg = request.getParameter("msg");
-
             User user = (User) session.getAttribute("user");
-
             if (user != null) {
                 username = user.getUserName();
             } else {
                 username = request.getParameter("username");
             }
-
             Contact c = new Contact(username, msg);
-
-
             if (new ContactDAO().Add(c)) {
                 request.setAttribute("mess", "Gửi liên hệ thành công!");
             } else {
                 request.setAttribute("mess", "Gửi liên hệ thất bại!");
             }
-
-            request.getRequestDispatcher("lienhe.jsp")
-                    .forward(request, response);
+            
+            //Giỏ hàng
+            int cartCount = 0;
+            if(user != null){
+                Cart cart = new CartDAO().getCartByUserId(user.getId());
+                if(cart != null){
+                    List<CartItem> cartItems =
+                            new CartItemDAO().getItemsByCartId(cart.getId());
+                    for(CartItem item : cartItems){
+                        cartCount += item.getQuantity();
+                    }
+                }
+            }
+            request.setAttribute("cartCount", cartCount);
+            request.getRequestDispatcher("lienhe.jsp").forward(request, response);
 
 
             try (PrintWriter out = response.getWriter()) {

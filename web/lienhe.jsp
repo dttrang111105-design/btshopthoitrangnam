@@ -137,7 +137,7 @@
         </div>
 
         <!-- 🔵 MENU -->
-        <nav class="navbar navbar-expand-lg navbar-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
             <div class="container-fluid">
                 <a class="navbar-brand" href="trangchu">Trang chủ</a>
                 <div class="collapse navbar-collapse" id="mainNav">
@@ -192,6 +192,10 @@
                         </form>
                         <!-- nút đăng nhập sau khi login sẽ chuyển thành giỏ hàng và ô chat -->
                         <%
+                            Integer cartCount = (Integer) request.getAttribute("cartCount");
+                            if(cartCount == null){
+                                cartCount = 0;
+                            }
                             Object user = session.getAttribute("user");
                             if (user == null) {
                             %>
@@ -200,8 +204,15 @@
                             } else {
                             %>
                                 <!-- ICON GIỎ HÀNG -->
-                                <a href="giohang" class="btn btn-light me-2">
+                                <a href="giohang" class="btn btn-light me-2 position-relative">
                                     <i class="fa fa-shopping-cart"></i>
+                                    <% if(cartCount > 0){ %>
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            <%=cartCount%>
+                                        </span>
+                                    <% 
+                                        } 
+                                    %>
                                 </a>
                                 <!-- USER -->
                                 <a href="dangxuat" class="btn btn-danger">Đăng xuất</a>

@@ -125,6 +125,10 @@
             %>
                 <div class="error-msg">Số điện thoại không hợp lệ!</div>
             <%
+                } else if("not_admin".equals(error)){
+            %>
+                <div class="error-msg">Bạn không có quyền admin!</div>
+            <%
                 }
                 if("1".equals(success)){
             %>
@@ -141,7 +145,16 @@
                 <div class="mb-3">
                     <input type="password" name="pass" class="form-control" placeholder="Mật khẩu" required>
                 </div>
-                <button type="submit" class="btn-login-submit">ĐĂNG NHẬP NGAY</button>
+                <!-- Đăng nhập -->
+                <button type="submit" name="loginType" value="user" class="btn-login-submit">
+                    ĐĂNG NHẬP
+                </button>
+
+                <button type="submit" name="loginType" value="Admin"
+                        class="btn-login-submit mt-3"
+                        style="background: linear-gradient(135deg,#8B0000,#c0392b);">
+                    ĐĂNG NHẬP VỚI TƯ CÁCH ADMIN
+                </button>
             </form>
 
             <div class="text-center mt-3">

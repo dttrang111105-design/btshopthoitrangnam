@@ -164,6 +164,10 @@
                                     int quantity = item.getQuantity();
                                     double subtotal = price * quantity;
                                     total += subtotal;
+                                    //logic kiểm tra kho
+                                    int stock = p.getStock(); 
+                                    boolean isOutOfStock = (stock <= 0);
+                                    boolean isNotEnough = (quantity > stock);
                             %>
                             <tr>
                                 <!-- Sản phẩm (ảnh+tên) -->
@@ -172,7 +176,16 @@
                                         <img src="<%=request.getContextPath()%>/<%=p.getImage()%>" class="cart-img"/>
                                         <div class="text-start">
                                             <div class="fw-bold"><%=p.getName()%></div>
-                                            <small class="text-muted">Sản phẩm thời trang</small>
+                                            <small class="<%= (p.getStock() < 5) ? "text-danger" : "text-muted" %> fw-bold">
+                                                Kho còn: <%= p.getStock() %>
+                                            </small> <!-- Hiển thị tồn kho -->
+                                            <% 
+                                                if(quantity > p.getStock()) { 
+                                            %>
+                                                <div class="text-danger small">⚠️ Số lượng vượt quá tồn kho!</div>
+                                            <% 
+                                                } 
+                                            %>
                                         </div>
                                     </div>
                                 </td>
@@ -182,7 +195,7 @@
                                 <td>
                                     <form action="capnhatgiohang" method="post" class="d-flex justify-content-center">
                                         <input type="hidden" name="id" value="<%=item.getId()%>">
-                                        <input type="number" name="quantity" value="<%=quantity%>" min="1" class="form-control w-50 me-2">
+                                        <input type="number" name="quantity" value="<%=quantity%>" min="1" max="<%=p.getStock()%>" class="form-control w-50 me-2">
                                         <button class="btn btn-dark btn-sm">
                                             <i class="fa-solid fa-rotate"></i>
                                         </button>
@@ -200,9 +213,17 @@
                                     <form action="ThanhToan" method="get">
                                         <input type="hidden" name="id" value="<%=p.getId()%>">
                                         <input type="hidden" name="quantity" value="<%=item.getQuantity()%>">
-                                        <button class="btn btn-detail btn-sm">
-                                            Mua hàng
-                                        </button>
+
+                                        <!-- Kiểm tra để vô hiệu hóa nút ấn Mua hàng -->
+                                        <% if(isOutOfStock || isNotEnough) { %>
+                                            <button class="btn btn-secondary btn-sm" disabled style="cursor: not-allowed; opacity: 0.6;">
+                                                <%= isOutOfStock ? "Hết hàng" : "Không đủ hàng" %>
+                                            </button>
+                                        <% } else { %>
+                                            <button class="btn btn-detail btn-sm">
+                                                Mua hàng
+                                            </button>
+                                        <% } %>
                                     </form>
                                 </td>
                             </tr>

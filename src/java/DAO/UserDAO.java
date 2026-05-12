@@ -108,7 +108,7 @@ public class UserDAO {
             con = new dbConnect().getConnect();
         }
 
-        String sql = "Update user set username = ?, password = ?, email = ?, phone = ?, address = ?, role = ? where id = ?";
+        String sql = "Update `user` set username = ?, password = ?, email = ?, phone = ?, address = ?, role = ? where id = ?";
 
         ps = con.prepareStatement(sql);
 

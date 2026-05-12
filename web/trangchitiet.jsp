@@ -281,24 +281,36 @@
                             <label>Số lượng:</label>
                             <input type="number" name="quantity" value="1" min="1" style="width:80px">
                         </div>
+                        <!-- Tồn kho -->
+                        <p style="color:red;font-weight:bold;font-size:16px">
+                            Còn lại: <%=d.getStock()%> sản phẩm
+                        </p>
                         <!-- BUTTON -->
                         <div class="mt-4">
                             <%
                                 if (user != null) {
+                                    if (d.getStock() > 0) {
                             %>
-                            <button type="submit" class="btn btn-cart">
-                                <i class="fa fa-cart-plus"></i>
-                                Thêm vào giỏ
-                            </button>
-                            <button type="submit" formaction="ThanhToan" class="btn btn-buy">
-                                Mua ngay
-                            </button>
+                                <button type="submit" class="btn btn-cart">
+                                    <i class="fa fa-cart-plus"></i> Thêm vào giỏ
+                                </button>
+                                <button type="submit" formaction="ThanhToan" class="btn btn-buy"> Mua ngay
+                                </button>
                             <%
-                            } else {
+                                    } 
+                                else {
                             %>
-                            <a href="dangnhap.jsp" class="btn btn-buy">
-                                Đăng nhập để mua hàng
-                            </a>
+                                <button class="btn btn-secondary" disabled>
+                                    Hết hàng
+                                </button>
+                            <%
+                                    }
+
+                                } else {
+                            %>
+                                <a href="dangnhap.jsp" class="btn btn-buy">
+                                    Đăng nhập để mua hàng
+                                </a>
                             <%
                                 }
                             %>

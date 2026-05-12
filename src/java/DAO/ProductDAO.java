@@ -11,7 +11,6 @@ public class ProductDAO {
     Connection con = null;
     PreparedStatement ps = null;
     
-    
     public List<Product> getAll() throws SQLException{
         if(con == null) con = dbConnect.getConnect();
         String sql = "Select * from product";
@@ -27,6 +26,7 @@ public class ProductDAO {
             p.setDesc(rs.getString(5));
             p.setCategory(rs.getString(6));
             p.setType(rs.getString(7));
+            p.setStock(rs.getInt(8));
             pList.add(p);
         }
         return pList;
@@ -48,6 +48,7 @@ public class ProductDAO {
             p.setDesc(rs.getString(5));
             p.setCategory(rs.getString(6));
             p.setType(rs.getString(7));
+            p.setStock(rs.getInt(8));
             pList.add(p);
         }
         return pList;
@@ -69,6 +70,7 @@ public class ProductDAO {
             p.setDesc(rs.getString(5));
             p.setCategory(rs.getString(6));
             p.setType(rs.getString(7));
+            p.setStock(rs.getInt(8));
             pList.add(p);
         }
         return pList;
@@ -76,7 +78,7 @@ public class ProductDAO {
     
     public boolean Add(Product p) throws SQLException{
         if(con == null) con = new dbConnect().getConnect();
-        String sql = "Insert into product(name, price, image, descr, category, type) values(?,?,?,?,?,?)";
+        String sql = "Insert into product(name, price, image, descr, category, type, stock) values(?,?,?,?,?,?,?)";
         ps = con.prepareStatement(sql);
         
         ps.setString(1, p.getName());
@@ -85,12 +87,13 @@ public class ProductDAO {
         ps.setString(4, p.getDesc());
         ps.setString(5, p.getCategory());
         ps.setString(6, p.getType());
+        ps.setInt(7, p.getStock());
         return ps.executeUpdate() > 0;
     }
     
     public boolean Update(Product p) throws SQLException{
         if(con == null) con = new dbConnect().getConnect();
-        String sql = "Update product set name=?, price=?, image=?, descr=?, category=?, type=? where id=?";
+        String sql = "Update product set name=?, price=?, image=?, descr=?, category=?, type=?, stock=? where id=?";
         ps = con.prepareStatement(sql);
 
         ps.setString(1, p.getName());
@@ -99,7 +102,8 @@ public class ProductDAO {
         ps.setString(4, p.getDesc());
         ps.setString(5, p.getCategory());
         ps.setString(6, p.getType());
-        ps.setInt(7, p.getId());
+        ps.setInt(7, p.getStock());
+        ps.setInt(8, p.getId());
         return ps.executeUpdate() > 0;
     }
     
@@ -127,6 +131,7 @@ public class ProductDAO {
             p.setDesc(rs.getString(5));
             p.setCategory(rs.getString(6));
             p.setType(rs.getString(7));
+            p.setStock(rs.getInt(8));
             return p;
         }
         return null;
@@ -147,9 +152,17 @@ public class ProductDAO {
             p.setDesc(rs.getString(5));
             p.setCategory(rs.getString(6));
             p.setType(rs.getString(7));
+            p.setStock(rs.getInt(8));
             pList.add(p);
         }
         return pList;
     }
-    
+    public void updateStock(int id, int stock) throws SQLException{
+        if(con == null) con = new dbConnect().getConnect();
+        String sql = "Update product set stock=? where id=?";
+        ps = con.prepareStatement(sql);
+        ps.setInt(1, stock);
+        ps.setInt(2, id);
+        ps.executeUpdate();
+    }
 }

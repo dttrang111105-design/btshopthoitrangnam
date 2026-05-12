@@ -1,20 +1,23 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
+package controller.admin;
 
-package controller;
-
+import DAO.OrderDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import model.Orders;
 
 /**
  *
- * @author XPS
+ * @author ADMIN
  */
-
-public class admin extends HttpServlet {
+public class chitietdonhang extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -28,36 +31,30 @@ public class admin extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
+        request.setCharacterEncoding("UTF-8");
+        try {
+            int id = Integer.parseInt(request.getParameter("id"));
 
-        Object obj = session.getAttribute("user");
+            OrderDAO dao = new OrderDAO();
+            Orders order = dao.getOrderById(id);
 
-        if (obj == null) {
-            response.sendRedirect("dangnhap.jsp");
-            return;
+            request.setAttribute("order", order);
+
+            request.getRequestDispatcher("chitietdonhang.jsp")
+                   .forward(request, response);
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        model.User u = (model.User) obj;
-
-        // KHÔNG PHẢI ADMIN
-        if (!u.getRole().equals("admin")) {
-            response.sendRedirect("trangchu");
-            return;
-        }
-
-        request.getRequestDispatcher("admin.jsp")
-                .forward(request, response);
-    
-        
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet admin</title>");
+            out.println("<title>Servlet chitietdonhang</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet admin at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet chitietdonhang at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }

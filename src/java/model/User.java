@@ -5,18 +5,27 @@ package model;
 
 public class User {
     private int id;
-    private String phone, userName, passWord, email, address;
+    private String phone, userName, passWord, email, address, role;
 
     public User() {
     }
 
-    public User(int id, String phone, String userName, String passWord, String email, String address) {
+    public User(int id, String phone, String userName, String passWord, String email, String address, String role) {
         this.id = id;
         this.phone = phone;
         this.userName = userName;
         this.passWord = passWord;
         this.email = email;
         this.address = address;
+        this.role = role;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public int getId() {

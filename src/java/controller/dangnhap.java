@@ -44,7 +44,7 @@ public class dangnhap extends HttpServlet {
                 User userLogin = null;
                 for (User u : list) {
                     // check username/email + password
-                    if ((u.getUserName().equals(userInput)|| u.getEmail().equals(userInput))&& u.getPassWord().equals(passInput)) {
+                    if ((u.getUserName().equals(userInput) || u.getEmail().equals(userInput)) && u.getPassWord().equals(passInput)) {
                         found = true;
                         userLogin = u;
                         break;
@@ -54,13 +54,24 @@ public class dangnhap extends HttpServlet {
                     // tạo session đăng nhập
                     HttpSession session = request.getSession();
                     session.setAttribute("user", userLogin);
-                    response.sendRedirect("trangchu");
+
+                    // CHECK ROLE
+                    if (userLogin.getRole().equals("admin")) {
+
+                        // admin
+                        response.sendRedirect("admin");
+
+                    } else {
+
+                        // user thường
+                        response.sendRedirect("trangchu");
+                    }
                 } else {
                     // sai login
                     request.setAttribute("error", "1");
                     request.setAttribute("user", userInput);
                     request.getRequestDispatcher("dangnhap.jsp").forward(request, response);
-                }             
+                }
             } catch (Exception e) {
                 e.printStackTrace();
                 request.setAttribute("error", "LOGIN_FAIL");
@@ -68,7 +79,7 @@ public class dangnhap extends HttpServlet {
             }
         } catch (Exception e) {
         }
-        
+
 //        try (PrintWriter out = response.getWriter()) {
 //            /* TODO output your page here. You may use following sample code. */
 //            out.println("<!DOCTYPE html>");

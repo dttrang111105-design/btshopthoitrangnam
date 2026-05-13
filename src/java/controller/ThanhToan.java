@@ -12,7 +12,9 @@ import DAO.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -47,9 +49,99 @@ public class ThanhToan extends HttpServlet {
         try {
             response.setContentType("text/html;charset=UTF-8");
             request.setCharacterEncoding("UTF-8");
-            int id = Integer.parseInt(request.getParameter("id"));
+            String idParam = request.getParameter("id");
+
+            if (idParam == null || idParam.isEmpty()) {
+
+                HttpSession session = request.getSession();
+                User user = (User) session.getAttribute("user");
+
+                if (user == null) {
+                    response.sendRedirect("dangnhap.jsp");
+                    return;
+                }
+
+                CartDAO cartDAO = new CartDAO();
+                CartItemDAO cartItemDAO = new CartItemDAO();
+                ProductDAO productDAO = new ProductDAO();
+                OrderDAO orderDAO = new OrderDAO();
+                OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
+
+                Cart cart = cartDAO.getCartByUserId(user.getId());
+
+                if (cart == null) {
+                    response.getWriter().println("Không có giỏ hàng");
+                    return;
+                }
+
+                List<CartItem> items = cartItemDAO.getItemsByCartId(cart.getId());
+
+                if (items == null || items.isEmpty()) {
+                    response.getWriter().println("Giỏ hàng trống");
+                    return;
+                }
+
+                double total = 0;
+
+                Orders order = new Orders();
+                order.setUserId(user.getId());
+
+                int orderId = orderDAO.addOrders(order);
+
+                Map<Integer, Product> productMap = new HashMap<>();
+
+                for (CartItem item : items) {
+
+                    Product p = productDAO.getByID(item.getProductId());
+                    if (p == null) {
+                        continue;
+                    }
+
+                    if (p.getStock() < item.getQuantity()) {
+                        continue;
+                    }
+
+                    // trừ kho
+                    p.setStock(p.getStock() - item.getQuantity());
+                    productDAO.Update(p);
+
+                    productMap.put(p.getId(), p);
+
+                    double sub = p.getPrice() * item.getQuantity();
+                    total += sub;
+
+                    // lưu chi tiết đơn hàng
+                    OrderDetail od = new OrderDetail();
+                    od.setOrderId(orderId);
+                    od.setProductId(p.getId());
+                    od.setQuantity(item.getQuantity());
+                    od.setPrice(p.getPrice());
+
+                    orderDetailDAO.addOrderDetail(od);
+                }
+
+                // update total order
+                order.setId(orderId);
+                order.setTotalMoney(total);
+                orderDAO.updateTotal(order);
+
+                // clear cart
+                cartItemDAO.clearCart(cart.getId());
+
+                // gửi sang JSP mới
+                request.setAttribute("items", items);
+                request.setAttribute("productMap", productMap);
+                request.setAttribute("total", total);
+
+                request.getRequestDispatcher("thanhtoanall.jsp")
+                        .forward(request, response);
+
+                return;
+            }
+
+            int id = Integer.parseInt(idParam);
             int quantity = Integer.parseInt(request.getParameter("quantity"));
-            
+
             Product p = new ProductDAO().getByID(id);
             if (p.getStock() < quantity) {
                 response.getWriter().println("Không đủ hàng trong kho");
@@ -59,8 +151,8 @@ public class ThanhToan extends HttpServlet {
             // trừ stock
             p.setStock(p.getStock() - quantity);
             new ProductDAO().Update(p);
-            
-            if( p == null ){
+
+            if (p == null) {
                 response.getWriter().println("Không tìm thấy sản phẩm.");
                 return;
             }
@@ -120,7 +212,7 @@ public class ThanhToan extends HttpServlet {
                 double total = p.getPrice() * quantity;
                 HttpSession session = request.getSession();
                 User user = (User) session.getAttribute("user");
-                if(user == null){
+                if (user == null) {
                     response.sendRedirect("dangnhap.jsp");
                     return;
                 }
@@ -129,7 +221,7 @@ public class ThanhToan extends HttpServlet {
                 order.setUserId(user.getId());
                 order.setTotalMoney(total);
                 OrderDAO orderDAO = new OrderDAO();
-                
+
                 int orderId = orderDAO.addOrders(order);
                 // tạo order detail
                 OrderDetail od = new OrderDetail();
@@ -149,16 +241,16 @@ public class ThanhToan extends HttpServlet {
 
                 //Giỏ hàng
                 int cartCount = 0;
-                if(user != null){
+                if (user != null) {
                     Cart cart = new CartDAO().getCartByUserId(user.getId());
-                    if(cart != null){
+                    if (cart != null) {
                         List<CartItem> cartItems = new CartItemDAO().getItemsByCartId(cart.getId());
-                        for(CartItem item : cartItems){
+                        for (CartItem item : cartItems) {
                             cartCount += item.getQuantity();
                         }
                     }
                 }
-            request.setAttribute("cartCount", cartCount);
+                request.setAttribute("cartCount", cartCount);
                 // Chuyển hướng sang trang thanhcong.jsp bằng forward
                 // Dùng forward thì trang JSP mới đọc được request.getAttribute
                 request.getRequestDispatcher("thanhcong.jsp").forward(request, response);

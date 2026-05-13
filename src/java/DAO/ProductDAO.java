@@ -8,11 +8,11 @@ import model.Product;
 import model.dbConnect;
 
 public class ProductDAO {
-    Connection con = null;
+    Connection con = dbConnect.getConnect();
     PreparedStatement ps = null;
     
     public List<Product> getAll() throws SQLException{
-        if(con == null) con = dbConnect.getConnect();
+        if(con == null) con = new dbConnect().getConnect();
         String sql = "Select * from product";
         ps = con.prepareStatement(sql);
         List<Product> pList = new ArrayList<>();

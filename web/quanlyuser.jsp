@@ -93,11 +93,6 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="Admin">
-                                <i class="fa fa-cart-shopping"></i> Đơn hàng
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="quanlysanpham">
                                 <i class="fa fa-box"></i>  Sản phẩm
                             </a>

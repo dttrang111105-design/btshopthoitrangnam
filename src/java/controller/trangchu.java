@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +24,7 @@ import model.User;
  *
  * @author XPS
  */
+
 public class trangchu extends HttpServlet {
 
     /**
@@ -95,7 +97,8 @@ public class trangchu extends HttpServlet {
 //                out.println("</html>");
 //            }
         }   catch (SQLException ex) {
-            Logger.getLogger(trangchu.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(trangchu.class.getName()).log(Level.SEVERE, null, ex);
+ex.printStackTrace();
         }
     }
 

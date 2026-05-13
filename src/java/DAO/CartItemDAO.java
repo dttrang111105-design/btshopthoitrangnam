@@ -88,4 +88,16 @@ public class CartItemDAO {
 
     }
 
+    public void clearCart(int cartId) throws SQLException {
+        if (con == null) {
+            con = dbConnect.getConnect();
+        }
+        String sql = "DELETE FROM cart_item WHERE cart_id = ?";
+
+        ps = con.prepareStatement(sql);
+
+        ps.setInt(1, cartId);
+
+        ps.executeUpdate();
+    }
 }

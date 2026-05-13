@@ -6,6 +6,8 @@ package controller;
 
 import DAO.CartDAO;
 import DAO.CartItemDAO;
+import DAO.OrderDAO;
+import DAO.OrderDetailDAO;
 import DAO.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,6 +22,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Cart;
 import model.CartItem;
+import model.OrderDetail;
+import model.Orders;
 import model.Product;
 import model.User;
 
@@ -47,6 +51,15 @@ public class ThanhToan extends HttpServlet {
             int quantity = Integer.parseInt(request.getParameter("quantity"));
             
             Product p = new ProductDAO().getByID(id);
+            if (p.getStock() < quantity) {
+                response.getWriter().println("Không đủ hàng trong kho");
+                return;
+            }
+
+            // trừ stock
+            p.setStock(p.getStock() - quantity);
+            new ProductDAO().Update(p);
+            
             if( p == null ){
                 response.getWriter().println("Không tìm thấy sản phẩm.");
                 return;
@@ -105,6 +118,27 @@ public class ThanhToan extends HttpServlet {
             if (p != null) {
                 // Tính tổng tiền = giá (đã giảm nếu có) * số lượng
                 double total = p.getPrice() * quantity;
+                HttpSession session = request.getSession();
+                User user = (User) session.getAttribute("user");
+                if(user == null){
+                    response.sendRedirect("dangnhap.jsp");
+                    return;
+                }
+                // tạo order
+                Orders order = new Orders();
+                order.setUserId(user.getId());
+                order.setTotalMoney(total);
+                OrderDAO orderDAO = new OrderDAO();
+                
+                int orderId = orderDAO.addOrders(order);
+                // tạo order detail
+                OrderDetail od = new OrderDetail();
+                od.setOrderId(orderId);
+                od.setProductId(p.getId());
+                od.setQuantity(quantity);
+                od.setPrice(p.getPrice());
+
+                new OrderDetailDAO().addOrderDetail(od);
                 // Đẩy TẤT CẢ dữ liệu vào request để trang thanhcong.jsp lấy ra
                 request.setAttribute("p", p);
                 request.setAttribute("quantity", quantity);
@@ -114,18 +148,16 @@ public class ThanhToan extends HttpServlet {
                 request.setAttribute("total", total);
 
                 //Giỏ hàng
-            HttpSession session = request.getSession();
-            User user = (User) session.getAttribute("user");
-            int cartCount = 0;
-            if(user != null){
-                Cart cart = new CartDAO().getCartByUserId(user.getId());
-                if(cart != null){
-                    List<CartItem> cartItems = new CartItemDAO().getItemsByCartId(cart.getId());
-                    for(CartItem item : cartItems){
-                        cartCount += item.getQuantity();
+                int cartCount = 0;
+                if(user != null){
+                    Cart cart = new CartDAO().getCartByUserId(user.getId());
+                    if(cart != null){
+                        List<CartItem> cartItems = new CartItemDAO().getItemsByCartId(cart.getId());
+                        for(CartItem item : cartItems){
+                            cartCount += item.getQuantity();
+                        }
                     }
                 }
-            }
             request.setAttribute("cartCount", cartCount);
                 // Chuyển hướng sang trang thanhcong.jsp bằng forward
                 // Dùng forward thì trang JSP mới đọc được request.getAttribute

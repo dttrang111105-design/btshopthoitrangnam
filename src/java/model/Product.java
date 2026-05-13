@@ -7,15 +7,16 @@ import java.util.Locale;
 
 
 public class Product {
-    private int id;
+    private int id, stock;
     private String name, image, desc, category, type;
     private double price;
 
     public Product() {
     }
 
-    public Product(int id, String name, String image, String desc, String category, String type, double price) {
+    public Product(int id, int stock, String name, String image, String desc, String category, String type, double price) {
         this.id = id;
+        this.stock = stock;
         this.name = name;
         this.image = image;
         this.desc = desc;
@@ -32,6 +33,14 @@ public class Product {
         this.id = id;
     }
 
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+    
     public String getName() {
         return name;
     }

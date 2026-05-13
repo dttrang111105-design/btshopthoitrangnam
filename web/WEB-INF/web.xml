@@ -52,6 +52,42 @@
         <servlet-name>chatbox</servlet-name>
         <servlet-class>controller.chatbox</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Admin</servlet-name>
+        <servlet-class>controller.admin.Admin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>quanlysanpham</servlet-name>
+        <servlet-class>controller.admin.quanlysanpham</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>themsp</servlet-name>
+        <servlet-class>controller.admin.themsp</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>suasp</servlet-name>
+        <servlet-class>controller.admin.suasp</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>xoasap</servlet-name>
+        <servlet-class>controller.admin.xoasap</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>chitietdonhang</servlet-name>
+        <servlet-class>controller.admin.chitietdonhang</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>quanlyuser</servlet-name>
+        <servlet-class>controller.admin.quanlyuser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>suauser</servlet-name>
+        <servlet-class>controller.admin.suauser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>capnhatuser</servlet-name>
+        <servlet-class>controller.admin.capnhatuser</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>trangchu</servlet-name>
         <url-pattern>/trangchu</url-pattern>
@@ -103,6 +139,42 @@
     <servlet-mapping>
         <servlet-name>chatbox</servlet-name>
         <url-pattern>/chatbox</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Admin</servlet-name>
+        <url-pattern>/Admin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>quanlysanpham</servlet-name>
+        <url-pattern>/quanlysanpham</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>themsp</servlet-name>
+        <url-pattern>/themsp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>suasp</servlet-name>
+        <url-pattern>/suasp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>xoasap</servlet-name>
+        <url-pattern>/xoasap</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>chitietdonhang</servlet-name>
+        <url-pattern>/chitietdonhang</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>quanlyuser</servlet-name>
+        <url-pattern>/quanlyuser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>suauser</servlet-name>
+        <url-pattern>/suauser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>capnhatuser</servlet-name>
+        <url-pattern>/capnhatuser</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

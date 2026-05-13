@@ -32,43 +32,95 @@ public class dangnhap extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            response.setContentType("text/html;charset=UTF-8");
-            request.setCharacterEncoding("UTF-8");
+//        try {
+//            response.setContentType("text/html;charset=UTF-8");
+//            request.setCharacterEncoding("UTF-8");
+//            String userInput = request.getParameter("user");
+//            String passInput = request.getParameter("pass");
+//            UserDAO dao = new UserDAO();
+//            try {
+//                List<User> list = dao.getAll();
+//                boolean found = false;
+//                User userLogin = null;
+//                for (User u : list) {
+//                    // check username/email + password
+//                    if ((u.getUserName().equals(userInput) || u.getEmail().equals(userInput)) && u.getPassWord().equals(passInput)) {
+//                        found = true;
+//                        userLogin = u;
+//                        break;
+//                    }
+//                }
+//                if (found) {
+//                    // tạo session đăng nhập
+//                    HttpSession session = request.getSession();
+//                    session.setAttribute("user", userLogin);
+//
+//                    // CHECK ROLE
+//                    if (userLogin.getRole().equals("admin")) {
+//                        // admin
+//                        response.sendRedirect("admin");
+//
+//                    } else {
+//                        // user thường
+//                        response.sendRedirect("trangchu");
+//                    }
+//                } else {
+//                    // sai login
+//                    request.setAttribute("error", "1");
+//                    request.setAttribute("user", userInput);
+//                    request.getRequestDispatcher("dangnhap.jsp").forward(request, response);
+//                }
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//                request.setAttribute("error", "LOGIN_FAIL");
+//                request.getRequestDispatcher("dangnhap.jsp").forward(request, response);
+//            }
+//        } catch (Exception e) {
+//        }
             String userInput = request.getParameter("user");
             String passInput = request.getParameter("pass");
+            String loginType = request.getParameter("loginType");
             UserDAO dao = new UserDAO();
             try {
                 List<User> list = dao.getAll();
                 boolean found = false;
                 User userLogin = null;
                 for (User u : list) {
-                    // check username/email + password
-                    if ((u.getUserName().equals(userInput)|| u.getEmail().equals(userInput))&& u.getPassWord().equals(passInput)) {
+                    if ((u.getUserName().equals(userInput) || u.getEmail().equals(userInput)) && u.getPassWord().equals(passInput)) {
                         found = true;
                         userLogin = u;
                         break;
                     }
                 }
                 if (found) {
-                    // tạo session đăng nhập
-                    HttpSession session = request.getSession();
-                    session.setAttribute("user", userLogin);
-                    response.sendRedirect("trangchu");
+                    // LOGIN ADMIN
+                    if ("Admin".equals(loginType)) {
+                        if ("admin".equals(userLogin.getRole())) {
+                            HttpSession session = request.getSession();
+                            session.setAttribute("user", userLogin);
+                            response.sendRedirect("Admin");
+                        } else {
+                            request.setAttribute("error", "not_admin");
+                            request.getRequestDispatcher("dangnhap.jsp").forward(request, response);
+                        }
+                    }
+                    // LOGIN USER
+                    else {
+                        HttpSession session = request.getSession();
+                        session.setAttribute("user", userLogin);
+                        response.sendRedirect("trangchu");
+                    }
                 } else {
-                    // sai login
                     request.setAttribute("error", "1");
                     request.setAttribute("user", userInput);
-                    request.getRequestDispatcher("dangnhap.jsp").forward(request, response);
-                }             
+                    request.getRequestDispatcher("dangnhap.jsp")
+                            .forward(request, response);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
-                request.setAttribute("error", "LOGIN_FAIL");
+                request.setAttribute("error", "db");
                 request.getRequestDispatcher("dangnhap.jsp").forward(request, response);
             }
-        } catch (Exception e) {
-        }
-        
 //        try (PrintWriter out = response.getWriter()) {
 //            /* TODO output your page here. You may use following sample code. */
 //            out.println("<!DOCTYPE html>");

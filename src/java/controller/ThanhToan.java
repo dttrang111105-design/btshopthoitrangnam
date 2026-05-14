@@ -78,6 +78,18 @@ public class ThanhToan extends HttpServlet {
                         }
                     }
 
+                    //Giỏ hàng
+                    int cartCount = 0;
+                    if (user != null) {
+                        Cart c = new CartDAO().getCartByUserId(user.getId());
+                        if (c != null) {
+                            List<CartItem> cartItems = new CartItemDAO().getItemsByCartId(c.getId());
+                            for (CartItem item : cartItems) {
+                                cartCount += item.getQuantity();
+                            }
+                        }
+                    }
+                    request.setAttribute("cartCount", cartCount);
                     request.setAttribute("items", items);
                     request.setAttribute("productMap", productMap);
                     request.setAttribute("total", total);
@@ -97,6 +109,20 @@ public class ThanhToan extends HttpServlet {
                     response.getWriter().println("Không tìm thấy sản phẩm");
                     return;
                 }
+                //Giỏ hàng
+                HttpSession session = request.getSession();
+                User user = (User) session.getAttribute("user");
+                int cartCount = 0;
+                if (user != null) {
+                    Cart c = new CartDAO().getCartByUserId(user.getId());
+                    if (c != null) {
+                        List<CartItem> cartItems = new CartItemDAO().getItemsByCartId(c.getId());
+                        for (CartItem item : cartItems) {
+                            cartCount += item.getQuantity();
+                        }
+                    }
+                }
+                request.setAttribute("cartCount", cartCount);
                 request.setAttribute("p", p);
                 request.setAttribute("quantity", quantity);
                 request.getRequestDispatcher("thanhtoan.jsp").forward(request, response);
@@ -171,6 +197,7 @@ public class ThanhToan extends HttpServlet {
 
                 // XÓA GIỎ HÀNG
                 cartItemDAO.clearCart(cart.getId());
+                
                 response.sendRedirect("thanhcongall.jsp");
                 return;
             }
@@ -230,6 +257,7 @@ public class ThanhToan extends HttpServlet {
             request.setAttribute("phone", phone);
             request.setAttribute("address", address);
             request.setAttribute("total", total);
+            
             request.getRequestDispatcher("thanhcong.jsp").forward(request, response);
 
         } catch (Exception e) {

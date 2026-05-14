@@ -50,11 +50,19 @@ public class Admin extends HttpServlet {
             response.sendRedirect("trangchu");
             return;
         }
-        //Lấy đơn hàng
-        List<Orders> list = new OrderDAO().getAll();
+        // SEARCH
+        String keyword = request.getParameter("keyword");
+        List<Orders> list;
+        if(keyword != null && !keyword.trim().isEmpty()){
+            keyword = keyword.trim();
+            list = new OrderDAO().search(keyword);
+        }else{
+            list = new OrderDAO().getAll();
+        }
+        request.setAttribute("keyword", keyword);
         request.setAttribute("list", list);
-        request.getRequestDispatcher("admin.jsp").forward(request, response);
 
+        request.getRequestDispatcher("admin.jsp").forward(request, response);
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");

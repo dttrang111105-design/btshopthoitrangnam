@@ -17,115 +17,117 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
 
         <style>
-            body {
-                background:white;
+        body{
+            background:#f5f6fa;
+        }
+        /* CONTACT */
+        .contact-wrapper{
+            background:white;
+            border-radius:28px;
+            overflow:hidden;
+            box-shadow:0 10px 30px rgba(0,0,0,.08);
+        }
+        /* LEFT */
+        .contact-left{
+            padding:50px;
+        }
+        .contact-title{
+            font-size:38px;
+            font-weight:800;
+            color:#111827;
+            margin-bottom:20px;
+        }
+        .contact-desc{
+            color:#6b7280;
+            line-height:1.8;
+            font-size:17px;
+            margin-bottom:30px;
+        }
+        /* FORM */
+        .form-control{
+            border:none;
+            border-radius:16px;
+            padding:14px 16px;
+            background:#f9fafb !important;
+            transition:.3s;
+        }
+        .form-control:focus{
+            box-shadow:none;
+            border:2px solid #8b4513;
+            background:white !important;
+        }
+        /* BUTTON */
+        .btn-send{
+            background:#111827;
+            color:white;
+            border:none;
+            border-radius:16px;
+            padding:14px 28px;
+            font-weight:700;
+            transition:.3s;
+        }
+        .btn-send:hover{
+            background:#8b4513;
+            color:white;
+            transform:translateY(-2px);
+        }
+        /* RIGHT */
+        .contact-right{
+            background:#111827;
+            color:white;
+            padding:50px;
+            height:100%;
+        }
+        .contact-info-title{
+            font-size:34px;
+            font-weight:800;
+            margin-bottom:35px;
+        }
+        .contact-item{
+            display:flex;
+            gap:18px;
+            margin-bottom:35px;
+        }
+        .contact-icon{
+            width:52px;
+            height:52px;
+            border-radius:16px;
+            background:rgba(255,255,255,.08);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            flex-shrink:0;
+        }
+        .contact-icon i{
+            font-size:20px;
+            color:#f3d19c;
+        }
+        .contact-item h5{
+            font-weight:700;
+            margin-bottom:8px;
+        }
+        .contact-item p{
+            color:#d1d5db;
+            margin:0;
+            line-height:1.7;
+        }
+        /* ALERT */
+        .alert{
+            border-radius:16px;
+        }
+        /* MOBILE */
+        @media(max-width:991px){
+            .contact-left,
+            .contact-right{
+                padding:32px;
             }
-            /* CARD */
-            .product-card {
-                background: #fff;
-                padding: 30px;
-                border-radius: 12px;
-                box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-                display: flex;
-                align-items: center;
+            .contact-title{
+                font-size:30px;
             }
-            .product-card .col-md-5 {
-                padding-right: 30px;
-            }
-            .product-card .col-md-7 {
-                padding-left: 30px;
-            }
-            /* ẢNH */
-            .img-box {
-                height: 450px;
-                position: relative;
-                overflow: hidden;
-                border: 1px solid #eee;
-                background: #fff;
-            }
-            /* hover zoom */
-            .img-box:hover .product-img {
-                transform: scale(1.1);
-            }
-            .product-img {
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                transition: 0.4s;
-                display: block;
-            }
-            /* NAME */
-            .product-name {
+            .contact-info-title{
                 font-size:28px;
-                font-weight:bold;
             }
-            /* PRICE */
-            .price-old {
-                text-decoration: line-through;
-                color:#999;
-            }
-            .price-new {
-                color:#d0021b;
-                font-size:32px;
-                font-weight:bold;
-            }
-            .price-box {
-                background:#fff5f5;
-                padding:15px;
-                border-radius:10px;
-                margin:15px 0;
-            }
-            /* BUTTON */
-            .btn-cart {
-                border:2px solid #8b4513;
-                color:#8b4513;
-                border-radius:25px;
-                padding:10px 20px;
-            }
-            .btn-cart:hover {
-                background:#8b4513;
-                color:white;
-            }
-            .btn-buy {
-                background:black;
-                color:white;
-                border-radius:25px;
-                padding:10px 25px;
-            }
-            .btn-buy:hover {
-                background:#8b4513;
-            }
-            /* DESC */
-            .desc-box {
-                background:white;
-                padding:25px;
-                border-radius:10px;
-                margin-top:20px;
-            }
-            .section-title {
-                font-weight:bold;
-                border-left:5px solid #8b4513;
-                padding-left:10px;
-                margin-bottom:15px;
-            }
-            .category-link {
-                color: #8b4513;
-                font-weight: bold;
-                text-decoration: none;
-            }
-            .category-link:hover {
-                text-decoration: underline;
-                color: #5a2e0d;
-            }
-            /*Xuống dòng ở mô tả sp*/
-            .desc-box p {
-                white-space: pre-line;
-            }
-            /* FOOTER */
-            .bg-dark.text-white {
-                background-color: #000 !important;
-            }
+        }
         </style>
     </head>
     <body>
@@ -139,7 +141,12 @@
         <!-- 🔵 MENU -->
         <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
             <div class="container-fluid">
-                <a class="navbar-brand" href="trangchu">Trang chủ</a>
+                <a class="navbar-brand fw-bold" href="trangchu">
+                     NTN SHOP
+                 </a>
+                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                     <span class="navbar-toggler-icon"></span>
+                 </button>
                 <div class="collapse navbar-collapse" id="mainNav">
                     <ul class="navbar-nav me-auto">
                         <!-- ÁO -->
@@ -183,12 +190,12 @@
                                 <li><a class="dropdown-item" href="trangchu?category=thắt lưng">Thắt lưng</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="lienhe">Liên hệ</a></li>
+                        <li class="nav-item"><a class="nav-link" href="lienhe.jsp">Liên hệ</a></li>
                     </ul>
                     <div class="d-flex align-items-center">
                         <form class="d-flex me-3" action="TimKiem" method="get">
                             <input class="form-control me-2" type="search" name="name" placeholder="Nhập tên sản phẩm">
-                            <button class="btn btn-outline-light">Tìm</button>
+                            <button class="btn btn-outline-light px-4">Tìm</button>
                         </form>
                         <!-- nút đăng nhập sau khi login sẽ chuyển thành giỏ hàng và ô chat -->
                         <%
@@ -196,15 +203,15 @@
                             if (cartCount == null) {
                                 cartCount = 0;
                             }
-                            Object user = session.getAttribute("user");
-                            if (user == null) {
+                            Object currentUser = session.getAttribute("user");
+                            if (currentUser == null) {
                         %>
                         <a href="dangnhap.jsp" class="btn btn-light">Đăng nhập</a>
                         <%
                         } else {
                         %>
                         <!-- ICON GIỎ HÀNG -->
-                        <a href="giohang" class="btn btn-light me-2 position-relative">
+                        <a href="giohang" class="btn btn-light me-2 position-relative rounded-pill px-3">
                             <i class="fa fa-shopping-cart"></i>
                             <% if (cartCount > 0) {%>
                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -215,7 +222,7 @@
                             %>
                         </a>
                         <!-- USER -->
-                        <a href="dangxuat" class="btn btn-danger">Đăng xuất</a>
+                        <a href="dangxuat" class="btn btn-danger rounded-pill px-4">Đăng xuất</a>
                         <%
                             }
                         %>
@@ -225,17 +232,16 @@
         </nav>
 
         <!-- 🔵 MAIN -->
-        <div class="container-fluid mt-4">
+        <div class="container-fluid">
             <div class="row">
 
                 <!-- 🔵 SECTION LIÊN HỆ -->
-                <div class="container-fluid mt-4 px-5">
-                    <div class="row" style="background:white; color:#000; padding:50px 30px; border-radius:8px;">
-
+                <div class="container pt-4 pb-5">
+                    <div class="row g-0 contact-wrapper">
                         <!-- LEFT: FORM -->
-                        <div class="col-md-7">
-                            <h2 class="fw-bold mb-4">Gửi thắc mắc cho chúng tôi</h2>
-                            <p class="mb-4" style="font-size:18px; line-height:1.7;">
+                        <div class="col-lg-7 contact-left">
+                            <h2 class="contact-title">Gửi thắc mắc cho chúng tôi</h2>
+                            <p class="contact-desc">
                                 Nếu bạn có thắc mắc gì, có thể gửi yêu cầu cho chúng tôi,
                                 và chúng tôi sẽ liên lạc lại với bạn sớm nhất có thể.
                             </p>
@@ -252,133 +258,86 @@
                                 <%
                                     }
                                 %>
-
-                                <%
-                                    Object obj = session.getAttribute("user");
+                                <% 
+                                    if (currentUser == null) { 
                                 %>
-
-                                <% if (obj == null) { %>
-
-
-
                                 <!-- Tên -->
                                 <div class="mb-3">
-                                    <input 
-                                        type="text"
-                                        name="username"
-                                        class="form-control bg-white text-dark border p-3"
-                                        placeholder="Tên của bạn"
-                                        required
-                                        >
+                                    <input type="text" name="username" class="form-control bg-white text-dark border p-3"
+                                        placeholder="Tên của bạn" required >
                                 </div>
 
                                 <!-- Email + SĐT -->
                                 <div class="row mb-3">
                                     <div class="col-md-6">
-                                        <input 
-                                            type="email"
-                                            name="email"
-                                            class="form-control bg-white text-dark border p-3"
-                                            placeholder="Email của bạn"
-                                            required
-                                            >
+                                        <input type="email" name="email" class="form-control bg-white text-dark border p-3"
+                                            placeholder="Email của bạn" required >
                                     </div>
-
                                     <div class="col-md-6">
-                                        <input 
-                                            type="text"
-                                            name="phone"
-                                            class="form-control bg-white text-dark border p-3"
-                                            placeholder="Số điện thoại của bạn"
-                                            required
-                                            >
+                                        <input  type="text" name="phone" class="form-control bg-white text-dark border p-3"
+                                            placeholder="Số điện thoại của bạn" required >
                                     </div>
                                 </div>
 
                                 <% } else {
-                                    User u = (User) obj;
+                                    User u = (User) currentUser;
                                 %>
-
 
                                 <!-- Username -->
                                 <div class="mb-3">
-                                    <input 
-                                        type="text"
-                                        class="form-control bg-white text-dark border p-3"
-                                        value="<%= u.getUserName()%>"
-                                        readonly>
-
+                                    <input  type="text" class="form-control bg-white text-dark border p-3" value="<%= u.getUserName()%>" readonly>
                                     <!-- hidden để servlet nhận -->
-                                    <input 
-                                        type="hidden"
-                                        name="username"
-                                        value="<%= u.getUserName()%>">
+                                    <input  type="hidden" name="username" value="<%= u.getUserName()%>">
                                 </div>
-
                                 <!-- Email + Phone -->
                                 <div class="row mb-3">
                                     <div class="col-md-6">
-                                        <input 
-                                            type="text"
-                                            class="form-control bg-white text-dark border p-3"
-                                            value="<%= u.getEmail()%>"
-                                            readonly>
+                                        <input  type="text" class="form-control bg-white text-dark border p-3" value="<%= u.getEmail()%>" readonly>
                                     </div>
-
                                     <div class="col-md-6">
-                                        <input 
-                                            type="text"
-                                            class="form-control bg-white text-dark border p-3"
-                                            value="<%= u.getPhone()%>"
-                                            readonly>
+                                        <input  type="text" class="form-control bg-white text-dark border p-3" value="<%= u.getPhone()%>" readonly>
                                     </div>
                                 </div>
-
-                                <% }%>
-
+                                <% 
+                                    }
+                                %>
                                 <!-- Nội dung -->
                                 <div class="mb-3">
-                                    <textarea 
-                                        name="msg"
-                                        class="form-control bg-white text-dark border p-3"
-                                        rows="6"
-                                        placeholder="Nội dung"
-                                        required></textarea>
+                                    <textarea  name="msg" class="form-control bg-white text-dark border p-3"
+                                        rows="6" placeholder="Nội dung" required></textarea>
                                 </div>
-
                                 <!-- Button -->
-                                <button 
-                                    type="submit"
-                                    class="btn btn-danger px-5 py-3 fw-bold mt-2"
-                                    style="background:#8b4513; border:none; color:#fff;">
+                                <button  type="submit" class="btn btn-send mt-2">
                                     GỬI CHO CHÚNG TÔI
                                 </button>
 
                             </form>
                         </div>
-
                         <!-- RIGHT: THÔNG TIN -->
-                        <div class="col-md-5" style="border-left:4px solid #000; padding-left:40px;">
-                            <h2 class="fw-bold mb-4">Thông tin liên hệ</h2>
-
-                            <div class="mb-4 d-flex">
-                                <i class="fa fa-map-marker-alt me-3 mt-1"></i>
+                        <div class="col-lg-5 contact-right">
+                            <h2 class="contact-info-title">Thông tin liên hệ</h2>
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fa fa-map-marker-alt"></i>
+                                </div>
                                 <div>
                                     <h5 class="fw-bold">Địa chỉ</h5>
                                     <p>Ngõ 218 Lĩnh Nam, quận Hoàng Mai, Hà Nội</p>
                                 </div>
                             </div>
-
-                            <div class="mb-4 d-flex">
-                                <i class="fa fa-phone me-3 mt-1"></i>
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fa fa-phone"></i>
+                                </div>
                                 <div>
                                     <h5 class="fw-bold">Điện thoại</h5>
                                     <p>0987.654.321</p>
                                 </div>
                             </div>
-
-                            <div class="mb-4 d-flex">
-                                <i class="fa fa-clock me-3 mt-1"></i>
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fa fa-clock"></i>
+                                </div>
                                 <div>
                                     <h5 class="fw-bold">Thời gian làm việc</h5>
                                     <p>
@@ -387,9 +346,10 @@
                                     </p>
                                 </div>
                             </div>
-
-                            <div class="mb-4 d-flex">
-                                <i class="fa fa-envelope me-3 mt-1"></i>
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fa fa-envelope"></i>
+                                </div>
                                 <div>
                                     <h5 class="fw-bold">Email</h5>
                                     <p>cskh@uneti.vn</p>
@@ -399,19 +359,15 @@
 
                     </div>
                 </div>
-
-
-
-            </div>
-
+            </div>                   
+        </div>                        
             <!-- 🔵 FOOTER -->
-            <div class="bg-dark text-white text-center p-3 mt-4">
+            <div class="bg-dark text-white text-center p-3">
                 <p>Đàm Thu Trang - 11/11/2005</p>
                 <p>Nguyễn Tiến Nam - 21/12/2005</p>
                 <p>Phạm Doãn Nguyên - 25/04/2005</p>
             </div>
-
-            <script src="css/css/js/bootstrap.bundle.min.js"></script>
+            <script src="css/js/bootstrap.bundle.min.js"></script>
             <jsp:include page="chatbox.jsp"/>
     </body>
 </html>

@@ -101,11 +101,15 @@
         <!-- 🔵 MENU -->
         <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
             <div class="container-fluid">
-                <a class="navbar-brand" href="trangchu">Trang chủ</a>
+            <a class="navbar-brand fw-bold" href="trangchu">
+                NTN SHOP
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
 
-                <div class="collapse navbar-collapse" id="mainNav">
                     <ul class="navbar-nav me-auto">
-
                         <!-- ÁO -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button">
@@ -156,7 +160,7 @@
                     <div class="d-flex align-items-center">
                         <form class="d-flex me-3" action="TimKiem" method="get">
                             <input class="form-control me-2" type="search" name="name" placeholder="Nhập tên sản phẩm">
-                            <button class="btn btn-outline-light">Tìm</button>
+                            <button class="btn btn-outline-light px-4">Tìm</button>
                         </form>
                         <!-- nút đăng nhập sau khi login sẽ chuyển thành giỏ hàng và ô chat -->
                         <%
@@ -168,7 +172,7 @@
                         } else {
                         %>
                         <!-- ICON GIỎ HÀNG -->
-                        <a href="giohang" class="btn btn-light me-2 position-relative">
+                        <a href="giohang" class="btn btn-light me-2 position-relative rounded-pill px-3">
                             <i class="fa fa-shopping-cart"></i>
                             <% if (cartCount > 0) {%>
                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -178,10 +182,8 @@
                                 }
                             %>
                         </a>
-                        <!-- ICON CHAT -->
-
                         <!-- USER -->
-                        <a href="dangxuat" class="btn btn-danger">Đăng xuất</a>
+                        <a href="dangxuat" class="btn btn-danger rounded-pill px-4">Đăng xuất</a>
                         <%
                             }
                         %>

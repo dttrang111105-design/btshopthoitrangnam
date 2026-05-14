@@ -92,4 +92,26 @@ public class OrderDAO {
         ps.setInt(2, order.getId());
         ps.executeUpdate();
     }
+    
+    public List<Orders> search(String keyword) throws SQLException{
+        if (con == null) {
+            con = new dbConnect().getConnect();
+        }
+        
+        String sql = "SELECT * FROM orders " + "WHERE CAST(id AS CHAR) LIKE ? " + "OR CAST(user_id AS CHAR) LIKE ? " + "ORDER BY id DESC";
+        ps = con.prepareStatement(sql);
+        ps.setString(1, "%" + keyword + "%");
+        ps.setString(2, "%" + keyword + "%");
+        List<Orders> list = new ArrayList<>();
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()){
+            Orders o = new Orders();
+            o.setId(rs.getInt("id"));
+            o.setUserId(rs.getInt("user_id"));
+            o.setTotalMoney(rs.getDouble("total_money"));
+            o.setOrderDate(rs.getTimestamp("order_date"));
+            list.add(o);
+            }
+        return list;
+    }
 }

@@ -23,19 +23,111 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
         <style>
-            /* ảnh sản phẩm */
-            .cart-img {
-                width: 70px;
-                height: 70px;
-                object-fit: cover;
-                border-radius: 10px;
-                border: 1px solid #eee;
-                transition: 0.3s;
+        .cart-img{
+            width:90px;
+            height:90px;
+            object-fit:cover;
+            border-radius:18px;
+            border:2px solid #f3f4f6;
+            transition:.35s;
+        }
+        .cart-img:hover{
+            transform:scale(1.05);
+        }
+        .cart-wrapper{
+            background:white;
+            border-radius:28px;
+            padding:28px;
+            box-shadow:0 10px 30px rgba(0,0,0,.08);
+        }
+        .cart-title{
+            font-size:34px;
+            font-weight:800;
+            color:#111827;
+            margin-bottom:28px;
+        }
+        .table{
+            margin-bottom:0;
+        }
+        .table thead{
+            background:#111827;
+            color:white;
+        }
+        .table thead th{
+            border:none;
+            padding:18px;
+            font-size:14px;
+            text-transform:uppercase;
+        }
+        .table tbody td{
+            vertical-align:middle;
+            padding:18px 12px;
+        }
+        .product-name{
+            font-size:17px;
+            font-weight:700;
+            color:#111827;
+        }
+        .stock-text{
+            font-size:13px;
+        }
+        .price-text{
+            color:#8b4513;
+            font-weight:700;
+            font-size:17px;
+        }
+        .btn-update{
+            background:#111827;
+            color:white;
+            border:none;
+            border-radius:12px;
+            width:42px;
+            height:42px;
+            transition:.3s;
+        }
+        .btn-update:hover{
+            background:#8b4513;
+            color:white;
+        }
+        .btn-delete{
+            border-radius:12px;
+        }
+        .total-box{
+            background:#f9fafb;
+            padding:24px;
+            border-radius:22px;
+            margin-top:24px;
+        }
+        .total-price{
+            color:#8b4513;
+            font-size:32px;
+            font-weight:800;
+        }
+        .btn-checkout{
+            background:#16a34a;
+            border:none;
+            border-radius:16px;
+            padding:14px 28px;
+            font-weight:700;
+            transition:.3s;
+        }
+        .btn-checkout:hover{
+            transform:translateY(-2px);
+        }
+        .alert{
+            border-radius:20px;
+        }
+        input[type=number]{
+            border-radius:12px;
+        }
+        @media(max-width:768px){
+            .cart-title{
+                font-size:28px;
             }
-
-            .cart-img:hover {
-                transform: scale(1.1);
+            .cart-wrapper{
+                padding:20px;
             }
+        }
         </style>
 
     </head>
@@ -49,8 +141,14 @@
         <!-- 🔵 MENU -->
         <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
             <div class="container-fluid">
-                <a class="navbar-brand" href="trangchu">Trang chủ</a>
+                <a class="navbar-brand fw-bold" href="trangchu">
+                    NTN SHOP
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
                 <div class="collapse navbar-collapse" id="mainNav">
+                    <!-- MENU -->
                     <ul class="navbar-nav me-auto">
                         <!-- ÁO -->
                         <li class="nav-item dropdown">
@@ -58,9 +156,21 @@
                                 Áo
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="trangchu?category=áo polo">Áo polo</a></li>
-                                <li><a class="dropdown-item" href="trangchu?category=áo sơ mi">Áo sơ mi</a></li>
-                                <li><a class="dropdown-item" href="trangchu?category=áo khoác">Áo khoác</a></li>
+                                <li>
+                                    <a class="dropdown-item" href="trangchu?category=áo polo">
+                                        Áo polo
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="trangchu?category=áo sơ mi">
+                                        Áo sơ mi
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="trangchu?category=áo khoác">
+                                        Áo khoác
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         <!-- QUẦN -->
@@ -69,8 +179,16 @@
                                 Quần
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="trangchu?category=quần jean">Quần jean</a></li>
-                                <li><a class="dropdown-item" href="trangchu?category=quần âu">Quần âu</a></li>
+                                <li>
+                                    <a class="dropdown-item" href="trangchu?category=quần jean">
+                                        Quần jean
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="trangchu?category=quần âu">
+                                        Quần âu
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         <!-- GIÀY -->
@@ -79,8 +197,16 @@
                                 Giày
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="trangchu?category=giày sneaker">Giày sneaker</a></li>
-                                <li><a class="dropdown-item" href="trangchu?category=giày da">Giày da</a></li>
+                                <li>
+                                    <a class="dropdown-item" href="trangchu?category=giày sneaker">
+                                        Giày sneaker
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="trangchu?category=giày da">
+                                        Giày da
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         <!-- PHỤ KIỆN -->
@@ -89,48 +215,57 @@
                                 Phụ kiện
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="trangchu?category=đồng hồ">Đồng hồ</a></li>
-                                <li><a class="dropdown-item" href="trangchu?category=thắt lưng">Thắt lưng</a></li>
+                                <li>
+                                    <a class="dropdown-item" href="trangchu?category=đồng hồ">
+                                        Đồng hồ
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="trangchu?category=thắt lưng">
+                                        Thắt lưng
+                                    </a>
+                                </li>
                             </ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="lienhe.jsp">Liên hệ</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="lienhe.jsp">
+                                Liên hệ
+                            </a>
+                        </li>
                     </ul>
+                    <!-- RIGHT -->
                     <div class="d-flex align-items-center">
+                        <!-- SEARCH -->
                         <form class="d-flex me-3" action="TimKiem" method="get">
                             <input class="form-control me-2" type="search" name="name" placeholder="Nhập tên sản phẩm">
-                            <button class="btn btn-outline-light">Tìm</button>
+                            <button class="btn btn-outline-light px-4">
+                                Tìm
+                            </button>
                         </form>
-                        <!-- nút đăng nhập sau khi login sẽ chuyển thành giỏ hàng và ô chat -->
-                        <%
-                            Object user = session.getAttribute("user");
-                            if (user == null) {
-                        %>
-                        <a href="dangnhap.jsp" class="btn btn-light">Đăng nhập</a>
-                        <%
-                        } else {
-                        %>
-                        <!-- ICON GIỎ HÀNG -->
-                        <a href="giohang" class="btn btn-light me-2 position-relative">
+                        <!-- GIỎ HÀNG -->
+                        <a href="giohang" class="btn btn-light me-2 position-relative rounded-pill px-3">
                             <i class="fa fa-shopping-cart"></i>
-                            <% if (cartCount > 0) {%>
+                            <% 
+                                if(cartCount > 0){
+                            %>
                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                 <%=cartCount%>
                             </span>
-                            <%
-                                }
+                            <% 
+                                } 
                             %>
                         </a>
                         <!-- USER -->
-                        <a href="dangxuat" class="btn btn-danger">Đăng xuất</a>
-                        <%
-                            }
-                        %>
+                        <a href="dangxuat" class="btn btn-danger rounded-pill px-4">
+                            Đăng xuất
+                        </a>
                     </div>
                 </div>
             </div>
         </nav>
+
         <div class="container mt-5">
-            <h2 class="mb-4">🛒 Giỏ hàng của bạn</h2>
+            <h2 class="cart-title">🛒 Giỏ hàng của bạn</h2>
             <%
                 if (items == null || items.isEmpty()) {
             %>
@@ -142,7 +277,7 @@
                 double total = 0;
             %>
             <!--Card box-->
-            <div class="card shadow-lg p-3">
+            <div class="cart-wrapper">
                 <table class="table table-hover align-middle text-center">
                     <thead class="table-dark">
                         <tr>
@@ -177,7 +312,7 @@
                                 <div class="d-flex align-items-center gap-3">
                                     <img src="<%=request.getContextPath()%>/<%=p.getImage()%>" class="cart-img"/>
                                     <div class="text-start">
-                                        <div class="fw-bold"><%=p.getName()%></div>
+                                        <div class="product-name"><%=p.getName()%></div>
                                         <small class="<%= (p.getStock() < 5) ? "text-danger" : "text-muted"%> fw-bold">
                                             Kho còn: <%= p.getStock()%>
                                         </small> <!-- Hiển thị tồn kho -->
@@ -191,14 +326,14 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="text-primary"><%=p.getFormattedPrice()%> VNĐ</td>
+                            <td class="price-text"><%=p.getFormattedPrice()%> VNĐ</td>
 
                             <!--Update-->
                             <td>
                                 <form action="capnhatgiohang" method="post" class="d-flex justify-content-center">
                                     <input type="hidden" name="id" value="<%=item.getId()%>">
                                     <input type="number" name="quantity" value="<%=quantity%>" min="1" max="<%=p.getStock()%>" class="form-control w-50 me-2">
-                                    <button class="btn btn-dark btn-sm">
+                                    <button class="btn-update">
                                         <i class="fa-solid fa-rotate"></i>
                                     </button>
                                 </form>
@@ -235,17 +370,17 @@
                     </tbody>
                 </table>
                 <!--Total-->
-                <div class="text-end mt-3">
+                <div class="text-end total-box">
                     <h4>
                         Tổng tiền:
-                        <span class="text-danger fw-bold">
+                        <span class="total-price">
                             <%=Product.formatPrice(total)%> VNĐ
                         </span>
                     </h4>
 
                     <div class="mt-3">
                         <form action="ThanhToan" method="get">
-                            <button  class="btn btn-success btn-lg">
+                            <button  class="btn btn-checkout">
                                 <i class="fa-solid fa-credit-card"></i>
                                 Thanh toán tất cả
                             </button>

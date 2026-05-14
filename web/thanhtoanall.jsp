@@ -15,24 +15,121 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
 
         <style>
-            .checkout-box{
-                background:white;
-                padding:30px;
-                border-radius:12px;
-                box-shadow:0 5px 20px rgba(0,0,0,0.1);
+            body{
+                background:#f3f4f6;
             }
-            .product-img{
-                height:120px;
+            /* MAIN BOX */
+            .checkout-wrapper{
+                background:white;
+                border-radius:28px;
+                padding:40px;
+                box-shadow:0 10px 40px rgba(0,0,0,0.08);
+            }
+            /* TITLE */
+            .checkout-title{
+                font-size:36px;
+                font-weight:800;
+                margin-bottom:35px;
+                color:#111827;
+            }
+            /* ITEM */
+            .checkout-item{
+                padding:22px 0;
+                border-bottom:1px solid #f0f0f0;
+            }
+            .checkout-img{
+                width:100%;
+                height:140px;
                 object-fit:cover;
+                border-radius:18px;
+            }
+            /* PRODUCT INFO */
+            .checkout-product-name{
+                font-size:22px;
+                font-weight:700;
+                margin-bottom:10px;
+            }
+            .checkout-meta{
+                color:#6b7280;
+                margin-bottom:6px;
+            }
+            .checkout-subtotal{
+                font-size:26px;
+                font-weight:800;
+                color:#dc2626;
+            }
+            /* TOTAL */
+            .total-box{
+                background:#111827;
+                color:white;
+                border-radius:22px;
+                padding:28px;
+                margin-top:35px;
+            }
+            .total-label{
+                font-size:20px;
             }
             .total-price{
-                color:#8b4513;
-                font-size:28px;
-                font-weight:bold;
+                font-size:40px;
+                font-weight:800;
             }
-            .item-box{
-                border-bottom:1px solid #eee;
-                padding:10px 0;
+            /* FORM */
+            .form-section{
+                margin-top:45px;
+            }
+            .form-title{
+                font-size:30px;
+                font-weight:800;
+                margin-bottom:30px;
+            }
+            .checkout-input{
+                border:2px solid #e5e7eb;
+                border-radius:14px;
+                padding:14px 16px;
+                transition:.3s;
+            }
+            .checkout-input:focus{
+                border-color:#111827;
+                box-shadow:none;
+            }
+            .checkout-label{
+                font-weight:700;
+                margin-bottom:10px;
+            }
+            /* BUTTON */
+            .checkout-btn{
+                width:100%;
+                border:none;
+                background:#8b4513;
+                color:white;
+                border-radius:16px;
+                padding:16px;
+                font-size:18px;
+                font-weight:700;
+                transition:.3s;
+            }
+            .checkout-btn:hover{
+                background:#6d3410;
+            }
+            /* MOBILE */
+            @media(max-width:991px){
+                .checkout-wrapper{
+                    padding:24px;
+                }
+                .checkout-title{
+                    font-size:28px;
+                }
+                .checkout-product-name{
+                    margin-top:18px;
+                    font-size:20px;
+                }
+                .checkout-subtotal{
+                    margin-top:15px;
+                    text-align:left !important;
+                }
+                .total-price{
+                    font-size:32px;
+                }
             }
         </style>
     </head>
@@ -40,14 +137,104 @@
     <body>
 
         <%
+            Integer cartCount = (Integer) request.getAttribute("cartCount");
+                if(cartCount == null){
+                    cartCount = 0;
+                }
             List<CartItem> items = (List<CartItem>) request.getAttribute("items");
             Map<Integer, Product> productMap = (Map<Integer, Product>) request.getAttribute("productMap");
             Double total = (Double) request.getAttribute("total");
         %>
+        <!-- 🔵 MENU -->
+        <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="trangchu">Trang chủ</a>
+                <div class="collapse navbar-collapse" id="mainNav">
+                    <ul class="navbar-nav me-auto">
+                        <!-- ÁO -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button">
+                                Áo
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="trangchu?category=áo polo">Áo polo</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=áo sơ mi">Áo sơ mi</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=áo khoác">Áo khoác</a></li>
+                            </ul>
+                        </li>
+                        <!-- QUẦN -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button">
+                                Quần
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="trangchu?category=quần jean">Quần jean</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=quần âu">Quần âu</a></li>
+                            </ul>
+                        </li>
+                        <!-- GIÀY -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button">
+                                Giày
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="trangchu?category=giày sneaker">Giày sneaker</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=giày da">Giày da</a></li>
+                            </ul>
+                        </li>
+                        <!-- PHỤ KIỆN -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button">
+                                Phụ kiện
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="trangchu?category=đồng hồ">Đồng hồ</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=thắt lưng">Thắt lưng</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="lienhe">Liên hệ</a></li>
+                    </ul>
+                    <div class="d-flex align-items-center">
+                        <form class="d-flex me-3" action="TimKiem" method="get">
+                            <input class="form-control me-2" type="search" name="name" placeholder="Nhập tên sản phẩm">
+                            <button class="btn btn-outline-light">Tìm</button>
+                        </form>
+                        <!-- nút đăng nhập sau khi login sẽ chuyển thành giỏ hàng và ô chat -->
+                        <%
+                            Object user = session.getAttribute("user");
+                            if (user == null) {
+                        %>
+                        <a href="dangnhap.jsp" class="btn btn-light">Đăng nhập</a>
+                        <%
+                        } else {
+                        %>
+                        <!-- ICON GIỎ HÀNG -->
+                                <a href="giohang" class="btn btn-light me-2 position-relative">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    <% if(cartCount > 0){ %>
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            <%=cartCount%>
+                                        </span>
+                                    <% 
+                                        } 
+                                    %>
+                                </a>
+                        
+                        <!-- USER -->
+                        <a href="dangxuat" class="btn btn-danger">Đăng xuất</a>
+                        <%
+                            }
+                        %>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="container py-5">
+            <div class="checkout-wrapper">
+                <h1 class="checkout-title">
+                    Thanh toán tất cả sản phẩm
+                </h1>
 
-        <div class="container mt-5 mb-5">
-            <div class="checkout-box">
-                <h2 class="mb-4">Thanh toán tất cả sản phẩm</h2>
                 <!-- LIST SẢN PHẨM -->
                 <%
                     for (CartItem item : items) {
@@ -59,54 +246,58 @@
                         double sub = p.getPrice() * item.getQuantity();
                 %>
 
-                <div class="item-box row align-items-center">
+                <div class="checkout-item row align-items-center">
                     <div class="col-md-2">
-                        <img src="<%=request.getContextPath()%>/<%=p.getImage()%>" class="product-img w-100 rounded">
+                        <img src="<%=request.getContextPath()%>/<%=p.getImage()%>" class="checkout-img">
                     </div>
                     <div class="col-md-6">
-                        <h5><%=p.getName()%></h5>
-                        <p>Số lượng: <b>x<%=item.getQuantity()%></b></p>
-                        <p><%=p.getFormattedPrice()%> VNĐ</p>
-                    </div>
-
-                    <div class="col-md-4 text-end">
-                        <h5 class="text-danger">
-                            <%=String.format("%,.0f", sub)%> VNĐ
-                        </h5>
+                        <div class="checkout-product-name">
+                            <%=p.getName()%>
+                        </div>
+                        <div class="checkout-meta">
+                            Số lượng:
+                            <b>x<%=item.getQuantity()%></b>
+                        </div>
+                        <div class="checkout-meta">
+                            Giá:
+                            <%=p.getFormattedPrice()%> VNĐ
+                        </div>
                     </div>
                 </div>
-                <% }%>
-                <hr>
-                <h3 class="text-end">
-                    Tổng tiền:
-                    <span class="total-price">
+                <% 
+                    }
+                %>
+                <div class="total-box d-flex justify-content-between align-items-center">
+                    <div class="total-label">
+                        Tổng thanh toán
+                    </div>
+                    <div class="total-price">
                         <%=String.format("%,.0f", total)%> VNĐ
-                    </span>
-                </h3>
+                    </div>
+                </div>
 
-                <hr>
 
-                <h4 class="mb-4">Thông tin nhận hàng</h4>
+                <h2 class="form-title">Thông tin nhận hàng</h2>
 
                 <form action="ThanhToan" method="post">
                     <input type="hidden" name="all" value="true">
 
                     <div class="mb-3">
-                        <label>Họ tên</label>
-                        <input type="text" name="name" class="form-control" required>
+                        <label class="checkout-label">Họ tên</label>
+                        <input type="text" name="name" class="form-control checkout-input" required>
                     </div>
 
                     <div class="mb-3">
-                        <label>Số điện thoại</label>
-                        <input type="tel" name="phone" class="form-control" required>
+                        <label class="checkout-label">Số điện thoại</label>
+                        <input type="tel" name="phone" class="form-control checkout-input" required>
                     </div>
 
                     <div class="mb-3">
-                        <label>Địa chỉ</label>
-                        <textarea name="address" class="form-control" required></textarea>
+                        <label class="checkout-label">Địa chỉ</label>
+                        <textarea name="address" class="form-control checkout-input" required></textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-danger w-100">
+                    <button type="submit" class="checkout-btn">
                         Xác nhận thanh toán tất cả
                     </button>
                 </form>

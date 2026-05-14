@@ -19,118 +19,238 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
 
         <style>
-            body {
-                background:#f5f5f5;
+            body{
+                background:#f3f4f6;
+                font-family:'Segoe UI',sans-serif;
+                color:#111827;
             }
-            /* CARD */
-            .product-card {
-                background: #fff;
-                padding: 30px;
-                border-radius: 12px;
-                box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-                display: flex;
-                align-items: center;
-            }
-            .product-card .col-md-5 {
-                padding-right: 30px;
-            }
-            .product-card .col-md-7 {
-                padding-left: 30px;
-            }
-            .row.product-card {
-                display: flex;
-                flex-direction: row !important;
-            }
-            /* ẢNH */
-            .img-box {
-                height: 450px;
-                position: relative;
-                overflow: hidden;
-                border: 1px solid #eee;
-                background: #fff;
-            }
-            /* hover zoom */
-            .img-box:hover .product-img {
-                transform: scale(1.1);
-            }
-            .product-img {
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                transition: 0.4s;
-                display: block;
-            }
-            /* NAME */
-            .product-name {
-                font-size:28px;
-                font-weight:bold;
-            }
-            /* PRICE */
-            .price-old {
-                text-decoration: line-through;
-                color:#999;
-            }
-            .price-new {
-                color:#d0021b;
-                font-size:32px;
-                font-weight:bold;
-            }
-            .price-box {
-                background:#fff5f5;
-                padding:15px;
-                border-radius:10px;
-                margin:15px 0;
-            }
-            /* BUTTON */
-            .btn-cart {
-                border:2px solid #8b4513;
-                color:#8b4513;
-                border-radius:25px;
-                padding:10px 20px;
-            }
-            .btn-cart:hover {
-                background:#8b4513;
-                color:white;
-            }
-            .btn-buy {
-                background:black;
-                color:white;
-                border-radius:25px;
-                padding:10px 25px;
-            }
-            .btn-buy:hover {
-                background:#8b4513;
-            }
-            /* DESC */
-            .desc-box {
+
+            /* MAIN CARD */
+            .detail-wrapper{
                 background:white;
-                padding:25px;
-                border-radius:10px;
-                margin-top:20px;
+                border-radius:24px;
+                overflow:hidden;
+                box-shadow:0 10px 40px rgba(0,0,0,0.08);
+                padding:40px;
             }
-            .section-title {
-                font-weight:bold;
-                border-left:5px solid #8b4513;
-                padding-left:10px;
+
+            /* IMAGE */
+            .product-gallery{
+                position:relative;
+                overflow:hidden;
+                border-radius:20px;
+                background:#f9fafb;
+            }
+
+            .product-gallery img{
+                width:100%;
+                height:620px;
+                object-fit:cover;
+                transition:.5s;
+            }
+
+            .product-gallery:hover img{
+                transform:scale(1.06);
+            }
+
+            /* INFO */
+            .product-info{
+                padding-left:30px;
+            }
+
+            .product-category{
+                display:inline-block;
+                background:#111827;
+                color:white;
+                padding:6px 14px;
+                border-radius:20px;
+                font-size:13px;
                 margin-bottom:15px;
             }
-            .category-link {
-                color: #8b4513;
-                font-weight: bold;
-                text-decoration: none;
+
+            .product-title{
+                font-size:42px;
+                font-weight:800;
+                margin-bottom:10px;
+                line-height:1.2;
             }
-            .category-link:hover {
-                text-decoration: underline;
-                color: #5a2e0d;
+
+            .rating{
+                color:#f59e0b;
+                margin-bottom:18px;
             }
-            /*Xuống dòng ở mô tả sp*/
-            .desc-box p {
-                white-space: pre-line;
+
+            .price-box{
+                background:linear-gradient(135deg,#111827,#1f2937);
+                color:white;
+                padding:22px;
+                border-radius:18px;
+                margin-bottom:25px;
             }
-            /* FOOTER */
-            .bg-dark.text-white {
-                background-color: #000 !important;
+
+            .old-price{
+                text-decoration:line-through;
+                opacity:.7;
+                font-size:18px;
+            }
+
+            .new-price{
+                font-size:42px;
+                font-weight:800;
+            }
+
+            .stock{
+                display:inline-block;
+                background:#dcfce7;
+                color:#166534;
+                padding:8px 14px;
+                border-radius:12px;
+                font-weight:600;
+                margin-bottom:20px;
+            }
+
+            .stock.out{
+                background:#fee2e2;
+                color:#991b1b;
+            }
+
+            /* FEATURES */
+            .feature-list{
+                margin:25px 0;
+            }
+
+            .feature-item{
+                display:flex;
+                align-items:center;
+                gap:12px;
+                margin-bottom:12px;
+                font-size:15px;
+            }
+
+            .feature-item i{
+                color:#8b4513;
+                font-size:18px;
+            }
+
+            /* QUANTITY */
+            .qty-box{
+                margin:20px 0;
+            }
+
+            .qty-input{
+                width:110px;
+                border:2px solid #e5e7eb;
+                border-radius:12px;
+                padding:10px;
+                text-align:center;
+                font-weight:600;
+            }
+
+            /* BUTTON */
+            .action-group{
+                display:flex;
+                gap:15px;
+                margin-top:25px;
+            }
+
+            .btn-cart{
+                flex:1;
+                background:white;
+                border:2px solid #111827;
+                color:#111827;
+                border-radius:14px;
+                padding:14px;
+                font-weight:700;
+                transition:.3s;
+            }
+
+            .btn-cart:hover{
+                background:#111827;
+                color:white;
+            }
+
+            .btn-buy{
+                flex:1;
+                border:none;
+                background:#8b4513;
+                color:white;
+                border-radius:14px;
+                padding:14px;
+                font-weight:700;
+                transition:.3s;
+            }
+
+            .btn-buy:hover{
+                background:#6d3410;
+            }
+
+            /* SECTION */
+            .info-section{
+                background:white;
+                border-radius:20px;
+                padding:30px;
+                margin-top:30px;
+                box-shadow:0 5px 20px rgba(0,0,0,0.05);
+            }
+
+            .section-title{
+                font-size:24px;
+                font-weight:800;
+                margin-bottom:20px;
+                position:relative;
+            }
+
+            .section-title::after{
+                content:"";
+                width:70px;
+                height:4px;
+                background:#8b4513;
+                position:absolute;
+                left:0;
+                bottom:-8px;
+                border-radius:10px;
+            }
+
+            /* DESCRIPTION */
+            .desc-content{
+                line-height:1.9;
+                color:#4b5563;
+                white-space:pre-line;
+            }
+
+            /* TABLE */
+            .spec-table tr{
+                border-bottom:1px solid #f0f0f0;
+            }
+
+            .spec-table td{
+                padding:14px 10px;
+            }
+
+            .spec-table td:first-child{
+                font-weight:700;
+                width:180px;
+            }
+
+            /* MOBILE */
+            @media(max-width:991px){
+
+                .product-info{
+                    padding-left:0;
+                    margin-top:30px;
+                }
+                .product-gallery img{
+                    height:400px;
+                }
+                .product-title{
+                    font-size:32px;
+                }
+                .new-price{
+                    font-size:34px;
+                }
+                .action-group{
+                    flex-direction:column;
+                }
             }
         </style>
     </head>
@@ -234,108 +354,158 @@
         </nav>
         <form action="themvaogiohang" method="get">
             <!-- 🔵 CONTENT -->
-            <div class="container mt-4">
-                <div class="row product-card">
-                    <!-- ️ ẢNH -->
-                    <div class="col-md-5">
-                        <div class="img-box">
-                            <img src="<%=request.getContextPath()%>/<%=d.getImage()%>" class="product-img">
-                        </div>
-                    </div>
-                    <!--  INFO -->
-                    <div class="col-md-7">
-                        <!-- CATEGORY -->
-                        <p>
-                            Danh mục: 
-                            <a href="trangchu?category=<%=d.getCategory()%>" class="category-link">
-                                <%=d.getCategory()%>
-                            </a>
-                        </p>
-                        <h2 class="product-name"><%=d.getName()%></h2>
-                        <!--  fake -->
-                        ⭐⭐⭐⭐⭐ <span class="text-muted">(120 đánh giá)</span>
-                        <!--  PRICE -->
-                        <div class="price-box">
-                            <%
-                                if ("sale".equalsIgnoreCase(d.getType())) {
-                            %>
-                            <div class="price-old">
-                                <%= (int) (d.getPrice() / 0.8)%> VNĐ
-                            </div>
-                            <%
-                                }
-                            %>
-                            <div class="price-new">
-                                <%=d.getFormattedPrice()%> VNĐ
+            <div class="container my-5">
+                <div class="detail-wrapper">
+                    <div class="row align-items-center">
+                        <!-- IMAGE -->
+                        <div class="col-lg-6">
+                            <div class="product-gallery">
+                                <img src="<%=request.getContextPath()%>/<%=d.getImage()%>">
                             </div>
                         </div>
                         <!-- INFO -->
-                        <div>
-                            <p>🚚 Giao hàng toàn quốc</p>
-                            <p>✔ Hàng chính hãng 100%</p>
-                            <p>✔ Đổi trả trong 7 ngày</p>
-                        </div>
-                        <input type="hidden" name="id" value="<%=d.getId()%>">
-                        <!-- SỐ LƯỢNG -->
-                        <div class="mt-3">
-                            <label>Số lượng:</label>
-                            <input type="number" name="quantity" value="1" min="1" style="width:80px">
-                        </div>
-                        <!-- Tồn kho -->
-                        <p style="color:red;font-weight:bold;font-size:16px">
-                            Còn lại: <%=d.getStock()%> sản phẩm
-                        </p>
-                        <!-- BUTTON -->
-                        <div class="mt-4">
-                            <%
-                                if (user != null) {
-                                    if (d.getStock() > 0) {
-                            %>
-                                <button type="submit" class="btn btn-cart">
-                                    <i class="fa fa-cart-plus"></i> Thêm vào giỏ
-                                </button>
-                                <button type="submit" formaction="ThanhToan" class="btn btn-buy"> Mua ngay
-                                </button>
-                            <%
+                        <div class="col-lg-6">
+                            <div class="product-info">
+                                <div class="product-category">
+                                    <%=d.getCategory()%>
+                                </div>
+                                <h1 class="product-title">
+                                    <%=d.getName()%>
+                                </h1>
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <span class="text-muted ms-2">
+                                        (120 đánh giá)
+                                    </span>
+                                </div>
+                                <div class="price-box">
+                                    <% if ("sale".equalsIgnoreCase(d.getType())) { %>
+                                        <div class="old-price">
+                                            <%= (int)(d.getPrice()/0.8) %> VNĐ
+                                        </div>
+                                    <% 
+                                        } 
+                                    %>
+                                    <div class="new-price">
+                                        <%=d.getFormattedPrice()%> VNĐ
+                                    </div>
+                                </div>
+                                <% 
+                                    if(d.getStock() > 0){ 
+                                %>
+                                    <div class="stock">
+                                        Còn <%=d.getStock()%> sản phẩm
+                                    </div>
+                                <% 
+                                    } else { 
+                                %>
+                                    <div class="stock out">
+                                        Hết hàng
+                                    </div>
+                                <% 
                                     } 
-                                else {
-                            %>
-                                <button class="btn btn-secondary" disabled>
-                                    Hết hàng
-                                </button>
-                            <%
-                                    }
+                                %>
+                                <div class="feature-list">
+                                    <div class="feature-item">
+                                        <i class="fa fa-truck"></i>
+                                        Giao hàng toàn quốc
+                                    </div>
+                                    <div class="feature-item">
+                                        <i class="fa fa-shield"></i>
+                                        Cam kết chính hãng 100%
+                                    </div>
+                                    <div class="feature-item">
+                                        <i class="fa fa-rotate-left"></i>
+                                        Đổi trả trong 7 ngày
+                                    </div>
+                                </div>
+                                <input type="hidden" name="id" value="<%=d.getId()%>">
+                                <div class="qty-box">
+                                    <label class="fw-bold mb-2">
+                                        Số lượng
+                                    </label>
+                                    <br>
+                                    <input type="number" class="qty-input" name="quantity" value="1" min="1">
+                                </div>
+                                <div class="action-group">
+                                    <%
+                                         if(user != null){ 
+                                    %>
+                                    <% 
+                                        if(d.getStock() > 0){ 
+                                    %>
+                                            <button type="submit" class="btn-cart">
+                                                <i class="fa fa-cart-plus"></i>
+                                                Thêm vào giỏ
+                                            </button>
+                                            <button type="submit" formaction="ThanhToan" class="btn-buy">
+                                                Mua ngay
+                                            </button>
+                                        <% 
+                                            } else { 
+                                        %>
+                                            <button class="btn btn-secondary w-100" disabled>
+                                                Hết hàng
+                                            </button>
+                                        <% 
+                                            } 
+                                        %>
 
-                                } else {
-                            %>
-                                <a href="dangnhap.jsp" class="btn btn-buy">
-                                    Đăng nhập để mua hàng
-                                </a>
-                            <%
-                                }
-                            %>
+                                    <% 
+                                        } else { 
+                                    %>
+                                        <a href="dangnhap.jsp" class="btn-buy text-center text-decoration-none">
+                                            Đăng nhập để mua hàng
+                                        </a>
+                                    <% 
+                                        } 
+                                    %>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <!--  MÔ TẢ -->
-                <div class="desc-box">
-                    <div class="section-title">Mô tả sản phẩm</div>
-                    <p><%=d.getDesc()%></p>
+                <!-- DESCRIPTION -->
+                <div class="info-section">
+                    <div class="section-title">
+                        Mô tả sản phẩm
+                    </div>
+                    <div class="desc-content">
+                        <%=d.getDesc()%>
+                    </div>
                 </div>
-                <!--  THÔNG TIN -->
-                <div class="desc-box">
-                    <div class="section-title">Thông tin chi tiết</div>
-                    <p>Danh mục: <%=d.getCategory()%></p>
-                    <p>Loại: <%=d.getType()%></p>
-                </div>
-                <!--  FOOTER -->
-                <div class="bg-dark text-white text-center p-3 mt-4">
-                    <p>Đàm Thu Trang - 11/11/2005</p>
-                    <p>Nguyễn Tiến Nam - 21/12/2005</p>
-                    <p>Phạm Doãn Nguyên - 25/04/2005</p>
+                <!-- SPEC -->
+                <div class="info-section">
+                    <div class="section-title">
+                        Thông tin chi tiết
+                    </div>
+                    <table class="table spec-table">
+                        <tr>
+                            <td>Danh mục</td>
+                            <td><%=d.getCategory()%></td>
+                        </tr>
+                        <tr>
+                            <td>Loại sản phẩm</td>
+                            <td><%=d.getType()%></td>
+                        </tr>
+                        <tr>
+                            <td>Tồn kho</td>
+                            <td><%=d.getStock()%> sản phẩm</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </form>
+        <!-- 🔵 FOOTER -->
+        <div class="bg-dark text-white text-center p-3 mt-4">
+            <p>Đàm Thu Trang - 11/11/2005</p>
+            <p>Nguyễn Tiến Nam - 21/12/2005</p>
+            <p>Phạm Doãn Nguyên - 25/04/2005</p>
+        </div>
         <jsp:include page="chatbox.jsp"/>
     </body>
 </html>

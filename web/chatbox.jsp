@@ -144,7 +144,7 @@
                     id="message"
                     placeholder="Nhập tin nhắn..."
                     onkeypress="handleEnter(event)"
-                >
+                    >
                 <button onclick="sendMessage()">Gửi</button>
             </div>
 
@@ -167,7 +167,8 @@
                 var chatBox = document.getElementById("chat-box");
                 var userMessage = input.value.trim();
 
-                if (userMessage === "") return;
+                if (userMessage === "")
+                    return;
 
                 // Hiển thị tin nhắn user
                 chatBox.innerHTML += '<div class="user-msg"><span>' + escapeHtml(userMessage) + '</span></div>';
@@ -192,14 +193,16 @@
 
                     // Xóa typing indicator
                     var typingEl = document.getElementById(typingId);
-                    if (typingEl) typingEl.remove();
+                    if (typingEl)
+                        typingEl.remove();
 
                     // Hiển thị phản hồi bot
                     chatBox.innerHTML += '<div class="bot-msg"><span>' + escapeHtml(botReply) + '</span></div>';
 
                 } catch (err) {
                     var typingEl = document.getElementById(typingId);
-                    if (typingEl) typingEl.remove();
+                    if (typingEl)
+                        typingEl.remove();
 
                     chatBox.innerHTML += '<div class="bot-msg"><span>⚠️ Lỗi kết nối. Vui lòng thử lại.</span></div>';
                 }

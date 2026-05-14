@@ -80,7 +80,7 @@ public class suasp extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try{
+        try {
             request.setCharacterEncoding("UTF-8");
             Product p = new Product();
             p.setId(Integer.parseInt(request.getParameter("id")));
@@ -93,7 +93,7 @@ public class suasp extends HttpServlet {
             p.setStock(Integer.parseInt(request.getParameter("stock")));
             new ProductDAO().Update(p);
             response.sendRedirect("quanlysanpham");
-        } catch ( Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         processRequest(request, response);

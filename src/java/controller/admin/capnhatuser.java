@@ -30,39 +30,38 @@ public class capnhatuser extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            response.setContentType("text/html;charset=UTF-8");
-            request.setCharacterEncoding("UTF-8");
-            try {
-                int id = Integer.parseInt(request.getParameter("id"));
-                String username = request.getParameter("username");
-                String password = request.getParameter("password");
-                String email = request.getParameter("email");
-                String phone = request.getParameter("phone");
-                String address = request.getParameter("address");
-                String role = request.getParameter("role");
-                User u = new User();
-                UserDAO dao = new UserDAO();
-                
-                u.setId(id);
-                u.setUserName(username);
-                u.setPassWord(dao.getById(id).getPassWord());
-                u.setEmail(email);
-                u.setPhone(phone);
-                u.setAddress(address);
-                u.setRole(role);
-                boolean check = dao.Update(u);
-                if(check){
-                    response.sendRedirect("quanlyuser");
-                }
-                else {
-                    response.getWriter().println("Update thất bại!");
-                }
-            } catch ( Exception e ){
-                e.printStackTrace();
-//                response.getWriter().println("Lỗi update User!");
-response.getWriter().println("Lỗi: " + e.getMessage());
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        try {
+            int id = Integer.parseInt(request.getParameter("id"));
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            String email = request.getParameter("email");
+            String phone = request.getParameter("phone");
+            String address = request.getParameter("address");
+            String role = request.getParameter("role");
+            User u = new User();
+            UserDAO dao = new UserDAO();
+
+            u.setId(id);
+            u.setUserName(username);
+            u.setPassWord(dao.getById(id).getPassWord());
+            u.setEmail(email);
+            u.setPhone(phone);
+            u.setAddress(address);
+            u.setRole(role);
+            boolean check = dao.Update(u);
+            if (check) {
+                response.sendRedirect("quanlyuser");
+            } else {
+                response.getWriter().println("Update thất bại!");
             }
-            
+        } catch (Exception e) {
+            e.printStackTrace();
+//                response.getWriter().println("Lỗi update User!");
+            response.getWriter().println("Lỗi: " + e.getMessage());
+        }
+
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");

@@ -33,12 +33,12 @@ public class suauser extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-            response.setContentType("text/html;charset=UTF-8");
-            request.setCharacterEncoding("UTF-8");
-            int id = Integer.parseInt(request.getParameter("id"));
-            User u = new UserDAO().getById(id);
-            request.setAttribute("user", u);
-            request.getRequestDispatcher("suauser.jsp").forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        int id = Integer.parseInt(request.getParameter("id"));
+        User u = new UserDAO().getById(id);
+        request.setAttribute("user", u);
+        request.getRequestDispatcher("suauser.jsp").forward(request, response);
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");

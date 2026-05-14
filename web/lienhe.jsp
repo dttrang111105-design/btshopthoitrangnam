@@ -193,30 +193,30 @@
                         <!-- nút đăng nhập sau khi login sẽ chuyển thành giỏ hàng và ô chat -->
                         <%
                             Integer cartCount = (Integer) request.getAttribute("cartCount");
-                            if(cartCount == null){
+                            if (cartCount == null) {
                                 cartCount = 0;
                             }
                             Object user = session.getAttribute("user");
                             if (user == null) {
-                            %>
-                                <a href="dangnhap.jsp" class="btn btn-light">Đăng nhập</a>
+                        %>
+                        <a href="dangnhap.jsp" class="btn btn-light">Đăng nhập</a>
+                        <%
+                        } else {
+                        %>
+                        <!-- ICON GIỎ HÀNG -->
+                        <a href="giohang" class="btn btn-light me-2 position-relative">
+                            <i class="fa fa-shopping-cart"></i>
+                            <% if (cartCount > 0) {%>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                <%=cartCount%>
+                            </span>
                             <%
-                            } else {
+                                }
                             %>
-                                <!-- ICON GIỎ HÀNG -->
-                                <a href="giohang" class="btn btn-light me-2 position-relative">
-                                    <i class="fa fa-shopping-cart"></i>
-                                    <% if(cartCount > 0){ %>
-                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                            <%=cartCount%>
-                                        </span>
-                                    <% 
-                                        } 
-                                    %>
-                                </a>
-                                <!-- USER -->
-                                <a href="dangxuat" class="btn btn-danger">Đăng xuất</a>
-                            <%
+                        </a>
+                        <!-- USER -->
+                        <a href="dangxuat" class="btn btn-danger">Đăng xuất</a>
+                        <%
                             }
                         %>
                     </div>
@@ -259,7 +259,7 @@
 
                                 <% if (obj == null) { %>
 
-                                
+
 
                                 <!-- Tên -->
                                 <div class="mb-3">

@@ -39,8 +39,7 @@ public class quanlysanpham extends HttpServlet {
         List<Product> list = new ProductDAO().getAll();
         request.setAttribute("list", list);
 
-        request.getRequestDispatcher("quanlysanpham.jsp")
-        .forward(request, response);
+        request.getRequestDispatcher("quanlysanpham.jsp").forward(request, response);
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");

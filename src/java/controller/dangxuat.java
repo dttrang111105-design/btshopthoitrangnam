@@ -32,9 +32,10 @@ public class dangxuat extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         try {
-            HttpSession session =  request.getSession(false);
-            if(session != null)
+            HttpSession session = request.getSession(false);
+            if (session != null) {
                 session.invalidate(); // xóa session
+            }
             response.sendRedirect("dangnhap.jsp");
         } catch (Exception e) {
         }

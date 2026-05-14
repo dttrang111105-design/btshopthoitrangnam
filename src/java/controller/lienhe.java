@@ -55,22 +55,21 @@ public class lienhe extends HttpServlet {
             } else {
                 request.setAttribute("mess", "Gửi liên hệ thất bại!");
             }
-            
+
             //Giỏ hàng
             int cartCount = 0;
-            if(user != null){
+            if (user != null) {
                 Cart cart = new CartDAO().getCartByUserId(user.getId());
-                if(cart != null){
-                    List<CartItem> cartItems =
-                            new CartItemDAO().getItemsByCartId(cart.getId());
-                    for(CartItem item : cartItems){
+                if (cart != null) {
+                    List<CartItem> cartItems
+                            = new CartItemDAO().getItemsByCartId(cart.getId());
+                    for (CartItem item : cartItems) {
                         cartCount += item.getQuantity();
                     }
                 }
             }
             request.setAttribute("cartCount", cartCount);
             request.getRequestDispatcher("lienhe.jsp").forward(request, response);
-
 
             try (PrintWriter out = response.getWriter()) {
                 /* TODO output your page here. You may use following sample code. */

@@ -24,7 +24,6 @@ import model.User;
  *
  * @author XPS
  */
-
 public class trangchu extends HttpServlet {
 
     /**
@@ -40,48 +39,48 @@ public class trangchu extends HttpServlet {
             throws ServletException, IOException {
         try {
             response.setContentType("text/html;charset=UTF-8");
-            
+
             request.setCharacterEncoding("UTF-8");
             String type = request.getParameter("type");
             String category = request.getParameter("category");
-            
+
             List<Product> list = null;
-            if((category != null && !category.isEmpty()) || (type != null && !type.isEmpty())){
-                if(category != null){
+            if ((category != null && !category.isEmpty()) || (type != null && !type.isEmpty())) {
+                if (category != null) {
                     list = new ProductDAO().getByCategory(category);
-                } else if(type != null){
+                } else if (type != null) {
                     list = new ProductDAO().getByType(type);
-            }
+                }
                 request.setAttribute("list", list);
             }
             request.setAttribute("type", type);
             request.setAttribute("category", category);
-                
+
             List<Product> plist = new ProductDAO().getAll();
             List<Product> listNew = new ProductDAO().getByType("new");
             List<Product> listHot = new ProductDAO().getByType("hot");
             List<Product> listSale = new ProductDAO().getByType("sale");
-            
+
             request.setAttribute("plist", plist);
             request.setAttribute("lNew", listNew);
             request.setAttribute("lHot", listHot);
             request.setAttribute("lSale", listSale);
-            
+
             //Giỏ hàng
             HttpSession session = request.getSession();
             User user = (User) session.getAttribute("user");
             int cartCount = 0;
-            if(user != null){
+            if (user != null) {
                 Cart cart = new CartDAO().getCartByUserId(user.getId());
-                if(cart != null){
+                if (cart != null) {
                     List<CartItem> cartItems = new CartItemDAO().getItemsByCartId(cart.getId());
-                    for(CartItem item : cartItems){
+                    for (CartItem item : cartItems) {
                         cartCount += item.getQuantity();
                     }
                 }
             }
             request.setAttribute("cartCount", cartCount);
-           
+
             request.getRequestDispatcher("/trangchu.jsp").forward(request, response);
             return;
 //            try (PrintWriter out = response.getWriter()) {
@@ -96,9 +95,9 @@ public class trangchu extends HttpServlet {
 //                out.println("</body>");
 //                out.println("</html>");
 //            }
-        }   catch (SQLException ex) {
+        } catch (SQLException ex) {
 //            Logger.getLogger(trangchu.class.getName()).log(Level.SEVERE, null, ex);
-ex.printStackTrace();
+            ex.printStackTrace();
         }
     }
 
@@ -115,7 +114,7 @@ ex.printStackTrace();
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        try {
-              processRequest(request, response);
+        processRequest(request, response);
 //            request.setCharacterEncoding("UTF-8");
 //            List<Product> plist = new ProductDAO().getAll();
 //            request.setAttribute("plist", plist);

@@ -51,10 +51,10 @@ public class Admin extends HttpServlet {
             return;
         }
         //Lấy đơn hàng
-        List<Orders> list =  new OrderDAO().getAll();
+        List<Orders> list = new OrderDAO().getAll();
         request.setAttribute("list", list);
         request.getRequestDispatcher("admin.jsp").forward(request, response);
-    
+
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");

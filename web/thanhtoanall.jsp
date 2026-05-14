@@ -47,9 +47,7 @@
 
         <div class="container mt-5 mb-5">
             <div class="checkout-box">
-
                 <h2 class="mb-4">Thanh toán tất cả sản phẩm</h2>
-
                 <!-- LIST SẢN PHẨM -->
                 <%
                     for (CartItem item : items) {
@@ -65,7 +63,6 @@
                     <div class="col-md-2">
                         <img src="<%=request.getContextPath()%>/<%=p.getImage()%>" class="product-img w-100 rounded">
                     </div>
-
                     <div class="col-md-6">
                         <h5><%=p.getName()%></h5>
                         <p>Số lượng: <b>x<%=item.getQuantity()%></b></p>
@@ -78,11 +75,8 @@
                         </h5>
                     </div>
                 </div>
-
                 <% }%>
-
                 <hr>
-
                 <h3 class="text-end">
                     Tổng tiền:
                     <span class="total-price">
@@ -92,12 +86,9 @@
 
                 <hr>
 
-                <!-- FORM GIỐNG HỆT THANHTOAN.JSP -->
                 <h4 class="mb-4">Thông tin nhận hàng</h4>
 
                 <form action="ThanhToan" method="post">
-
-                    <!-- KHÔNG cần id vì là ALL -->
                     <input type="hidden" name="all" value="true">
 
                     <div class="mb-3">
@@ -119,9 +110,7 @@
                         Xác nhận thanh toán tất cả
                     </button>
                 </form>
-
             </div>
         </div>
-
     </body>
 </html>

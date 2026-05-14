@@ -47,16 +47,16 @@ public class trangchitiet extends HttpServlet {
             Product p = new ProductDAO().getByID(id);
 
             request.setAttribute("detail", p);
-            
+
             //Giỏ hàng
             HttpSession session = request.getSession();
             User user = (User) session.getAttribute("user");
             int cartCount = 0;
-            if(user != null){
+            if (user != null) {
                 Cart cart = new CartDAO().getCartByUserId(user.getId());
-                if(cart != null){
+                if (cart != null) {
                     List<CartItem> cartItems = new CartItemDAO().getItemsByCartId(cart.getId());
-                    for(CartItem item : cartItems){
+                    for (CartItem item : cartItems) {
                         cartCount += item.getQuantity();
                     }
                 }

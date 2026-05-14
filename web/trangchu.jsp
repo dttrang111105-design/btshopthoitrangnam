@@ -17,7 +17,7 @@
         <title>NTN Shop - Thời trang nam</title>
         <link href="css/css/bootstrap.min.css" rel="stylesheet">
         <link href="trangchu.css" rel="stylesheet">
-        
+
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&display=swap" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
         <style>
@@ -94,9 +94,9 @@
 
         <%
             Integer cartCount = (Integer) request.getAttribute("cartCount");
-                if(cartCount == null){
-                    cartCount = 0;
-                }
+            if (cartCount == null) {
+                cartCount = 0;
+            }
         %>
         <!-- 🔵 MENU -->
         <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
@@ -128,7 +128,7 @@
                                 <li><a class="dropdown-item" href="trangchu?category=quần âu">Quần âu</a></li>
                             </ul>
                         </li>
-                        
+
                         <!-- GIÀY -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button">
@@ -163,25 +163,25 @@
                             Object user = session.getAttribute("user");
                             if (user == null) {
                         %>
-                            <a href="dangnhap.jsp" class="btn btn-light">Đăng nhập</a>
+                        <a href="dangnhap.jsp" class="btn btn-light">Đăng nhập</a>
                         <%
-                            } else {
+                        } else {
                         %>
-                            <!-- ICON GIỎ HÀNG -->
-                                <a href="giohang" class="btn btn-light me-2 position-relative">
-                                    <i class="fa fa-shopping-cart"></i>
-                                    <% if(cartCount > 0){ %>
-                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                            <%=cartCount%>
-                                        </span>
-                                    <% 
-                                        } 
-                                    %>
-                                </a>
-                            <!-- ICON CHAT -->
-                            
-                            <!-- USER -->
-                            <a href="dangxuat" class="btn btn-danger">Đăng xuất</a>
+                        <!-- ICON GIỎ HÀNG -->
+                        <a href="giohang" class="btn btn-light me-2 position-relative">
+                            <i class="fa fa-shopping-cart"></i>
+                            <% if (cartCount > 0) {%>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                <%=cartCount%>
+                            </span>
+                            <%
+                                }
+                            %>
+                        </a>
+                        <!-- ICON CHAT -->
+
+                        <!-- USER -->
+                        <a href="dangxuat" class="btn btn-danger">Đăng xuất</a>
                         <%
                             }
                         %>
@@ -191,201 +191,200 @@
         </nav>
 
         <!-- 🔵 MAIN -->
-            <div class="container-fluid mt-4">
-                <div class="row">
+        <div class="container-fluid mt-4">
+            <div class="row">
 
-                    <!-- 🟡 LEFT MENU -->
-                    <div class="col-md-3">
-                        <div class="left-menu-box sticky-top" style="top: 60px;">
-                            <div class="list-group">
-                                <a href="#" class="list-group-item active">Danh mục</a>
-                                <a href="trangchu?type=new" class="list-group-item">Hàng mới</a>
-                                <a href="trangchu?type=hot" class="list-group-item">Hàng bán chạy</a>
-                                <a href="trangchu?type=sale" class="list-group-item">Hàng giảm giá</a>
-                            </div>
+                <!-- 🟡 LEFT MENU -->
+                <div class="col-md-3">
+                    <div class="left-menu-box sticky-top" style="top: 60px;">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item active">Danh mục</a>
+                            <a href="trangchu?type=new" class="list-group-item">Hàng mới</a>
+                            <a href="trangchu?type=hot" class="list-group-item">Hàng bán chạy</a>
+                            <a href="trangchu?type=sale" class="list-group-item">Hàng giảm giá</a>
                         </div>
                     </div>
+                </div>
 
-                    <!-- 🟢 CONTENT -->
-                    <div class="col-md-9">
-                        <%
-                            List<Product> list = (List<Product>) request.getAttribute("list");
-                            String name = (String) request.getAttribute("name");
-                            String category = (String) request.getAttribute("category");
-                            String type = (String) request.getAttribute("type");
-                        %>
-                        <% if(list != null){ %>
+                <!-- 🟢 CONTENT -->
+                <div class="col-md-9">
+                    <%
+                        List<Product> list = (List<Product>) request.getAttribute("list");
+                        String name = (String) request.getAttribute("name");
+                        String category = (String) request.getAttribute("category");
+                        String type = (String) request.getAttribute("type");
+                    %>
+                    <% if (list != null) { %>
 
-                            <!-- 🔥 TITLE -->
-                            <% 
-                                if(name != null){ 
-                            %>
-                                <h3>Kết quả tìm kiếm của "<%=name%>"</h3>
-                            <% 
-                                } else if(category != null){ 
-                            %>
-                                <h3>Sản phẩm thuộc danh mục "<%=category%>"</h3>
-                            <%
-                                } else if(type != null){
-                                    if(type.equals("new")){ 
-                            %>
-                                <h3>Hàng mới</h3>
-                            <% 
-                                }   else if(type.equals("hot")){ 
-                            %>
-                                <h3>Hàng bán chạy</h3>
-                            <% 
-                                }   else if(type.equals("sale")){
-                            %>
-                                <h3>Hàng giảm giá</h3>
-                            <% 
-                                    }
-                                }
-                                else { 
-                            %>
-                                <h3>Tất cả sản phẩm</h3>
-                            <% 
-                                } 
-                            %>                  
-                            <!-- 🔥 LIST -->
-                                <div class="row row-cols-5">
-                                    <% for(Product p : list){ %>
-                                        <div class="col mb-4">
-                                            <div class="card product-card">
-                                                <img src="<%=request.getContextPath()%>/<%= p.getImage() %>" class="card-img-top product-img">
-                                                <div class="card-body text-center">
-                                                    <h5><%=p.getName()%></h5>
-                                                    <p><%=p.getFormattedPrice()%> VNĐ</p>
-                                                    <a href="trangchitiet?id=<%= p.getId() %>" 
-                                                       class="btn btn-detail">
-                                                        Xem chi tiết
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    <%
-                                        } 
-                                    %>
+                    <!-- 🔥 TITLE -->
+                    <%
+                        if (name != null) {
+                    %>
+                    <h3>Kết quả tìm kiếm của "<%=name%>"</h3>
+                    <%
+                    } else if (category != null) {
+                    %>
+                    <h3>Sản phẩm thuộc danh mục "<%=category%>"</h3>
+                    <%
+                    } else if (type != null) {
+                        if (type.equals("new")) {
+                    %>
+                    <h3>Hàng mới</h3>
+                    <%
+                    } else if (type.equals("hot")) {
+                    %>
+                    <h3>Hàng bán chạy</h3>
+                    <%
+                    } else if (type.equals("sale")) {
+                    %>
+                    <h3>Hàng giảm giá</h3>
+                    <%
+                        }
+                    } else {
+                    %>
+                    <h3>Tất cả sản phẩm</h3>
+                    <%
+                        }
+                    %>                  
+                    <!-- 🔥 LIST -->
+                    <div class="row row-cols-5">
+                        <% for (Product p : list) {%>
+                        <div class="col mb-4">
+                            <div class="card product-card">
+                                <img src="<%=request.getContextPath()%>/<%= p.getImage()%>" class="card-img-top product-img">
+                                <div class="card-body text-center">
+                                    <h5><%=p.getName()%></h5>
+                                    <p><%=p.getFormattedPrice()%> VNĐ</p>
+                                    <a href="trangchitiet?id=<%= p.getId()%>" 
+                                       class="btn btn-detail">
+                                        Xem chi tiết
+                                    </a>
                                 </div>
-                            <% 
-                                } else { 
-                            %>
-                            <!-- HÀNG MỚI -->
-                            <div class="slider-section">
-                                <h3 class="mb-3">Hàng mới</h3>
-                                <%
-                                    List<Product> listNew = (List<Product>) request.getAttribute("lNew");
-                                    if (listNew != null && !listNew.isEmpty()) {
-                                %>
-                                <div class="custom-slider">
-                                    <button class="slider-btn prev-btn" onclick="slideMove('sliderNew', -1)">&#10094;</button>
-                                    <div class="slider-track-wrap">
-                                        <div class="slider-track" id="sliderNew">
-                                            <%
-                                                for (Product p : listNew) {
-                                            %>
-                                            <div class="slider-card">
-                                                <div class="card product-card">
-                                                    <img src="<%=request.getContextPath()%>/<%=p.getImage()%>" class="card-img-top product-img">
-                                                    <div class="card-body text-center">
-                                                        <h5 class="card-title"><%=p.getName()%></h5>
-                                                        <p class="price"><%=p.getFormattedPrice()%> VNĐ</p>
-                                                        <a href="trangchitiet?id=<%=p.getId()%>" class="btn btn-detail">Xem chi tiết</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <%
-                                                }
-                                            %>
-                                        </div>
-                                    </div>
-                                    <button class="slider-btn next-btn" onclick="slideMove('sliderNew', 1)">&#10095;</button>
-                                </div>
-                                <%
-                                    }
-                                %>
                             </div>
-                                 
-                            <!-- HÀNG BÁN CHẠY -->
-                            <div class="slider-section">
-                                <h3 class="mb-3">Hàng bán chạy</h3>
-                                <%
-                                    List<Product> listHot= (List<Product>) request.getAttribute("lHot");
-                                    if (listHot != null && !listHot.isEmpty()) {
-                                %>
-                                <div class="custom-slider">
-                                    <button class="slider-btn prev-btn" onclick="slideMove('sliderHot', -1)">&#10094;</button>
-                                    <div class="slider-track-wrap">
-                                        <div class="slider-track" id="sliderHot">
-                                            <%
-                                                for (Product p : listHot) {
-                                            %>
-                                            <div class="slider-card">
-                                                <div class="card product-card">
-                                                    <img src="<%=request.getContextPath()%>/<%=p.getImage()%>" class="card-img-top product-img">
-                                                    <div class="card-body text-center">
-                                                        <h5 class="card-title"><%=p.getName()%></h5>
-                                                        <p class="price"><%=p.getFormattedPrice()%> VNĐ</p>
-                                                        <a href="trangchitiet?id=<%=p.getId()%>" class="btn btn-detail">Xem chi tiết</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <%
-                                                }
-                                            %>
-                                        </div>
-                                    </div>
-                                    <button class="slider-btn next-btn" onclick="slideMove('sliderHot', 1)">&#10095;</button>
-                                </div>
-                                <%
-                                    }
-                                %>
-                            </div>
-                            <!-- HÀNG GIẢM GIÁ -->
-                            <div class="slider-section">
-                                <h3 class="mb-3">Hàng giảm giá</h3>
-                                <%
-                                    NumberFormat formatter = NumberFormat.getInstance(new Locale("vi", "VN"));
-                                    List<Product> listSale = (List<Product>) request.getAttribute("lSale");
-                                    if (listSale != null && !listSale.isEmpty()) {
-                                %>
-                                <div class="custom-slider">
-                                    <button class="slider-btn prev-btn" onclick="slideMove('sliderSale', -1)">&#10094;</button>
-                                    <div class="slider-track-wrap">
-                                        <div class="slider-track" id="sliderSale">
-                                            <%
-                                                for (Product p : listSale) {
-                                            %>
-                                            <div class="slider-card">
-                                                <div class="card product-card">
-                                                    <img src="<%=request.getContextPath()%>/<%=p.getImage()%>" class="card-img-top product-img">
-                                                    <div class="card-body text-center">
-                                                        <h5 class="card-title"><%=p.getName()%></h5>
-                                                        <p class="price">
-                                                            <del><%=formatter.format(p.getPrice()/0.8)%> VNĐ</del><br>
-                                                            <b style="color:red"><%= p.getFormattedPrice()%> VNĐ</b>
-                                                        </p>
-                                                        <a href="trangchitiet?id=<%=p.getId()%>" class="btn btn-detail">Xem chi tiết</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <%
-                                                }
-                                            %>
-                                        </div>
-                                    </div>
-                                    <button class="slider-btn next-btn" onclick="slideMove('sliderSale', 1)">&#10095;</button>
-                                </div>
-                                <%
-                                    }
-                                %>
-                            </div>
+                        </div>
                         <%
-                            } 
+                            }
                         %>
                     </div>
+                    <%
+                    } else {
+                    %>
+                    <!-- HÀNG MỚI -->
+                    <div class="slider-section">
+                        <h3 class="mb-3">Hàng mới</h3>
+                        <%
+                            List<Product> listNew = (List<Product>) request.getAttribute("lNew");
+                            if (listNew != null && !listNew.isEmpty()) {
+                        %>
+                        <div class="custom-slider">
+                            <button class="slider-btn prev-btn" onclick="slideMove('sliderNew', -1)">&#10094;</button>
+                            <div class="slider-track-wrap">
+                                <div class="slider-track" id="sliderNew">
+                                    <%
+                                        for (Product p : listNew) {
+                                    %>
+                                    <div class="slider-card">
+                                        <div class="card product-card">
+                                            <img src="<%=request.getContextPath()%>/<%=p.getImage()%>" class="card-img-top product-img">
+                                            <div class="card-body text-center">
+                                                <h5 class="card-title"><%=p.getName()%></h5>
+                                                <p class="price"><%=p.getFormattedPrice()%> VNĐ</p>
+                                                <a href="trangchitiet?id=<%=p.getId()%>" class="btn btn-detail">Xem chi tiết</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%
+                                        }
+                                    %>
+                                </div>
+                            </div>
+                            <button class="slider-btn next-btn" onclick="slideMove('sliderNew', 1)">&#10095;</button>
+                        </div>
+                        <%
+                            }
+                        %>
+                    </div>
+
+                    <!-- HÀNG BÁN CHẠY -->
+                    <div class="slider-section">
+                        <h3 class="mb-3">Hàng bán chạy</h3>
+                        <%
+                            List<Product> listHot = (List<Product>) request.getAttribute("lHot");
+                            if (listHot != null && !listHot.isEmpty()) {
+                        %>
+                        <div class="custom-slider">
+                            <button class="slider-btn prev-btn" onclick="slideMove('sliderHot', -1)">&#10094;</button>
+                            <div class="slider-track-wrap">
+                                <div class="slider-track" id="sliderHot">
+                                    <%
+                                        for (Product p : listHot) {
+                                    %>
+                                    <div class="slider-card">
+                                        <div class="card product-card">
+                                            <img src="<%=request.getContextPath()%>/<%=p.getImage()%>" class="card-img-top product-img">
+                                            <div class="card-body text-center">
+                                                <h5 class="card-title"><%=p.getName()%></h5>
+                                                <p class="price"><%=p.getFormattedPrice()%> VNĐ</p>
+                                                <a href="trangchitiet?id=<%=p.getId()%>" class="btn btn-detail">Xem chi tiết</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%
+                                        }
+                                    %>
+                                </div>
+                            </div>
+                            <button class="slider-btn next-btn" onclick="slideMove('sliderHot', 1)">&#10095;</button>
+                        </div>
+                        <%
+                            }
+                        %>
+                    </div>
+                    <!-- HÀNG GIẢM GIÁ -->
+                    <div class="slider-section">
+                        <h3 class="mb-3">Hàng giảm giá</h3>
+                        <%
+                            NumberFormat formatter = NumberFormat.getInstance(new Locale("vi", "VN"));
+                            List<Product> listSale = (List<Product>) request.getAttribute("lSale");
+                            if (listSale != null && !listSale.isEmpty()) {
+                        %>
+                        <div class="custom-slider">
+                            <button class="slider-btn prev-btn" onclick="slideMove('sliderSale', -1)">&#10094;</button>
+                            <div class="slider-track-wrap">
+                                <div class="slider-track" id="sliderSale">
+                                    <%
+                                        for (Product p : listSale) {
+                                    %>
+                                    <div class="slider-card">
+                                        <div class="card product-card">
+                                            <img src="<%=request.getContextPath()%>/<%=p.getImage()%>" class="card-img-top product-img">
+                                            <div class="card-body text-center">
+                                                <h5 class="card-title"><%=p.getName()%></h5>
+                                                <p class="price">
+                                                    <del><%=formatter.format(p.getPrice() / 0.8)%> VNĐ</del><br>
+                                                    <b style="color:red"><%= p.getFormattedPrice()%> VNĐ</b>
+                                                </p>
+                                                <a href="trangchitiet?id=<%=p.getId()%>" class="btn btn-detail">Xem chi tiết</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%
+                                        }
+                                    %>
+                                </div>
+                            </div>
+                            <button class="slider-btn next-btn" onclick="slideMove('sliderSale', 1)">&#10095;</button>
+                        </div>
+                        <%
+                            }
+                        %>
+                    </div>
+                    <%
+                        }
+                    %>
                 </div>
             </div>
+        </div>
 
         <!-- 🔵 FOOTER -->
         <div class="bg-dark text-white text-center p-3 mt-4">
@@ -396,7 +395,8 @@
         <script>
             function slideMove(id, direction) {
                 const track = document.getElementById(id);
-                if (!track) return;
+                if (!track)
+                    return;
                 const wrap = track.parentElement;
                 wrap.scrollLeft += direction * 212;
             }

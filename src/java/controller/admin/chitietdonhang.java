@@ -40,8 +40,7 @@ public class chitietdonhang extends HttpServlet {
 
             request.setAttribute("order", order);
 
-            request.getRequestDispatcher("chitietdonhang.jsp")
-                   .forward(request, response);
+            request.getRequestDispatcher("chitietdonhang.jsp").forward(request, response);
 
         } catch (Exception e) {
             e.printStackTrace();

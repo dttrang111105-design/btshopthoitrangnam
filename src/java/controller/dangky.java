@@ -40,7 +40,7 @@ public class dangky extends HttpServlet {
         String address = request.getParameter("address");
         UserDAO dao = new UserDAO();
         try {
-            if(dao.checkExist(user, email)){
+            if (dao.checkExist(user, email)) {
                 request.setAttribute("error", "exist");
                 request.getRequestDispatcher("dangky.jsp").forward(request, response);
                 return;

@@ -95,7 +95,6 @@
                     <a href="trangchu" class="btn btn-detail btn-back">
                         Quay lại mua sắm
                     </a>
-
                 </div>
             </div>
         </div>

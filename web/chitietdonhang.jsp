@@ -67,47 +67,47 @@
         </style>
     </head>
     <body>
-    <%
-        Orders o = (Orders) request.getAttribute("order");
+        <%
+            Orders o = (Orders) request.getAttribute("order");
 
-        if (o == null) {
-            response.sendRedirect("Admin");
-            return;
-        }
-    %>
-    <div class="container py-5">
-        <div class="success-box">
-            <!-- HEADER -->
-            <div class="success-header">
-                <i class="fa fa-circle-check"></i>
-                <h2>ĐƠN HÀNG ĐÃ ĐƯỢC ĐẶT</h2>
-                <p>Mã đơn: #NTN<%= System.currentTimeMillis() %></p>
+            if (o == null) {
+                response.sendRedirect("Admin");
+                return;
+            }
+        %>
+        <div class="container py-5">
+            <div class="success-box">
+                <!-- HEADER -->
+                <div class="success-header">
+                    <i class="fa fa-circle-check"></i>
+                    <h2>ĐƠN HÀNG ĐÃ ĐƯỢC ĐẶT</h2>
+                    <p>Mã đơn: #NTN<%= System.currentTimeMillis()%></p>
+                </div>
+                <!-- BODY -->
+                <div class="success-body">
+                    <div class="info-row">
+                        <span>Mã đơn:</span>
+                        <b>#<%= o.getId()%></b>
+                    </div>
+
+                    <div class="info-row">
+                        <span>User:</span>
+                        <b>USER_<%= o.getUserId()%></b>
+                    </div>
+
+                    <div class="info-row">
+                        <span>Tổng tiền:</span>
+                        <b><%= o.getTotalMoney()%></b>
+                    </div>
+
+                    <div class="info-row">
+                        <span>Ngày mua:</span>
+                        <b><%= o.getOrderDate()%></b>
+                    </div>
+                </div>
             </div>
-            <!-- BODY -->
-            <div class="success-body">
-                <div class="info-row">
-                    <span>Mã đơn:</span>
-                    <b>#<%= o.getId() %></b>
-                </div>
 
-                <div class="info-row">
-                    <span>User:</span>
-                    <b>USER_<%= o.getUserId() %></b>
-                </div>
-
-                <div class="info-row">
-                    <span>Tổng tiền:</span>
-                    <b><%= o.getTotalMoney() %></b>
-                </div>
-
-                <div class="info-row">
-                    <span>Ngày mua:</span>
-                    <b><%= o.getOrderDate() %></b>
-                </div>
-            </div>
         </div>
-
-    </div>
 
     </body>
 </html>

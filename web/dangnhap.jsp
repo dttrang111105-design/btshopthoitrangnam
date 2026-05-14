@@ -111,28 +111,28 @@
                 String success = (String) request.getAttribute("success");
                 if ("1".equals(error)) {
             %>
-                <div class="error-msg">Tài khoản hoặc mật khẩu không đúng!</div>
+            <div class="error-msg">Tài khoản hoặc mật khẩu không đúng!</div>
             <%
-                } else if ("db".equals(error)) {
+            } else if ("db".equals(error)) {
             %>
-                <div class="error-msg">Lỗi kết nối cơ sở dữ liệu!</div>
+            <div class="error-msg">Lỗi kết nối cơ sở dữ liệu!</div>
             <%
-                } else if("exist".equals(error)){
+            } else if ("exist".equals(error)) {
             %>
-                <div class="error-msg">Tài khoản hoặc email đã tồn tại!</div>
+            <div class="error-msg">Tài khoản hoặc email đã tồn tại!</div>
             <%
-                } else if("phone_invalid".equals(error)){
+            } else if ("phone_invalid".equals(error)) {
             %>
-                <div class="error-msg">Số điện thoại không hợp lệ!</div>
+            <div class="error-msg">Số điện thoại không hợp lệ!</div>
             <%
-                } else if("not_admin".equals(error)){
+            } else if ("not_admin".equals(error)) {
             %>
-                <div class="error-msg">Bạn không có quyền admin!</div>
+            <div class="error-msg">Bạn không có quyền admin!</div>
             <%
                 }
-                if("1".equals(success)){
+                if ("1".equals(success)) {
             %>
-                <div class="alert alert-success">Đăng ký thành công!Mời đăng nhập</div>
+            <div class="alert alert-success">Đăng ký thành công!Mời đăng nhập</div>
             <%
                 }
             %>
@@ -140,7 +140,7 @@
             <form action="dangnhap" method="post">
                 <div class="mb-3">
                     <input type="text" name="user" class="form-control" placeholder="Tên đăng nhập / Email"
-                           value="<%=request.getAttribute("user")!=null ? request.getAttribute("user") : ""%>" required>
+                           value="<%=request.getAttribute("user") != null ? request.getAttribute("user") : ""%>" required>
                 </div>
                 <div class="mb-3">
                     <input type="password" name="pass" class="form-control" placeholder="Mật khẩu" required>

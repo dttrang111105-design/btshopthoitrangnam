@@ -81,7 +81,7 @@
                                 <li><a class="dropdown-item" href="trangchu?category=quần âu">Quần âu</a></li>
                             </ul>
                         </li>
-                        
+
                         <!-- GIÀY -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button">
@@ -116,16 +116,16 @@
                             Object user = session.getAttribute("user");
                             if (user == null) {
                         %>
-                            <a href="dangnhap.jsp" class="btn btn-light">Đăng nhập</a>
+                        <a href="dangnhap.jsp" class="btn btn-light">Đăng nhập</a>
                         <%
                             } else {
                         %>
-                            <!-- ICON GIỎ HÀNG -->
-                            <a href="giohang" class="btn btn-light me-2">
-                                <i class="fa fa-shopping-cart"></i>
-                            </a>
-                            <!-- USER -->
-                            <a href="dangxuat" class="btn btn-danger">Đăng xuất</a>
+                        <!-- ICON GIỎ HÀNG -->
+                        <a href="giohang" class="btn btn-light me-2">
+                            <i class="fa fa-shopping-cart"></i>
+                        </a>
+                        <!-- USER -->
+                        <a href="dangxuat" class="btn btn-danger">Đăng xuất</a>
                         <%
                             }
                         %>
@@ -141,7 +141,7 @@
                     <div class="col-md-5">
                         <img src="<%=request.getContextPath()%>/<%=p.getImage()%>" class="product-img w-100 rounded">
                     </div>
-                    
+
                     <!-- Thông tin -->
                     <div class="col-md-7">
                         <h2 class="card-title mb-3"><%=p.getName()%></h2>

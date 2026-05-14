@@ -11,7 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Thanh toán thành công</title>
-        
+
         <link href="css/css/bootstrap.min.css" rel="stylesheet">
         <link href="trangchu.css" rel="stylesheet"> 
         <style>
@@ -63,33 +63,33 @@
                 <div class="success-header text-center p-4">
                     <h1>✔</h1>
                     <h2 class="fw-bold">ĐẶT HÀNG THÀNH CÔNG</h2>
-                    <p>Mã đơn: #NTN<%= System.currentTimeMillis() %></p>
+                    <p>Mã đơn: #NTN<%= System.currentTimeMillis()%></p>
                 </div>
                 <div class="p-4">
                     <h4 class="text-center mb-4">
-                        Cảm ơn <%= name %> đã ủng hộ NTN SHOP!
+                        Cảm ơn <%= name%> đã ủng hộ NTN SHOP!
                     </h4>
                     <div class="d-flex justify-content-between mb-2">
                         <span>Số điện thoại:</span>
-                        <span class="fw-bold"><%= phone %></span>
+                        <span class="fw-bold"><%= phone%></span>
                     </div>
                     <div class="d-flex justify-content-between mb-2">
                         <span>Địa chỉ nhận:</span>
-                        <span class="fw-bold text-end"><%= address %></span>
+                        <span class="fw-bold text-end"><%= address%></span>
                     </div>
                     <div class="dashed-line"></div>
                     <div class="d-flex justify-content-between mb-2">
                         <span>Sản phẩm:</span>
-                        <span class="fw-bold"><%= p.getName() %></span>
+                        <span class="fw-bold"><%= p.getName()%></span>
                     </div>
                     <div class="d-flex justify-content-between mb-2">
                         <span>Số lượng:</span>
-                        <span class="fw-bold">x<%= quantity %></span>
+                        <span class="fw-bold">x<%= quantity%></span>
                     </div>
                     <div class="bg-light rounded text-center p-4 mt-4">
                         <p class="mb-2">Tổng tiền thanh toán (COD)</p>
                         <div class="total-price">
-                            <%= Product.formatPrice(total) %> VNĐ
+                            <%= Product.formatPrice(total)%> VNĐ
                         </div>
                     </div>
                     <a href="trangchu" class="btn btn-detail btn-back">
@@ -98,10 +98,10 @@
                 </div>
             </div>
         </div>
-        <% 
-            } else { 
+        <%
+            } else {
                 response.sendRedirect("trangchu"); // Nếu vào trực tiếp mà không có data thì về trang chủ
-            } 
+            }
         %>
     </body>
 </html>

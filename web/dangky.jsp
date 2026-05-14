@@ -107,9 +107,9 @@
                 text-decoration: underline;
             }
             /* nhóm input cho gọn */
-                .mb-3 {
-                    margin-bottom: 18px;
-                }
+            .mb-3 {
+                margin-bottom: 18px;
+            }
             /* chỉnh lại nút đăng ký nhỏ hơn */
             .btn-register {
                 width: 65%;              /* nhỏ lại */
@@ -129,15 +129,15 @@
                 String error = (String) request.getAttribute("error");
                 if ("exist".equals(error)) {
             %>
-                <div class="error-msg">Tài khoản hoặc email đã tồn tại!</div>
+            <div class="error-msg">Tài khoản hoặc email đã tồn tại!</div>
             <%
-                } else if("password_mismatch".equals(error)) {
+            } else if ("password_mismatch".equals(error)) {
             %>
-                <div class="error-msg">Mật khẩu nhập lại không khớp!</div>
+            <div class="error-msg">Mật khẩu nhập lại không khớp!</div>
             <%
-                } else if ("db".equals(error)) {
+            } else if ("db".equals(error)) {
             %>
-                <div class="error-msg">Lỗi hệ thống, vui lòng thử lại!</div>
+            <div class="error-msg">Lỗi hệ thống, vui lòng thử lại!</div>
             <%
                 }
             %>

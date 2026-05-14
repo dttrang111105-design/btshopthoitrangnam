@@ -132,18 +132,18 @@
                         </thead>
 
                         <tbody>
-                        <%
-                            List<User> list = (List<User>) request.getAttribute("list");
-                            if(list != null && !list.isEmpty()){
-                                for(User u : list){
-                        %>
+                            <%
+                                List<User> list = (List<User>) request.getAttribute("list");
+                                if (list != null && !list.isEmpty()) {
+                                    for (User u : list) {
+                            %>
                             <tr>
                                 <td class="fw-bold text-muted">#<%=u.getId()%></td>
 
                                 <td>
                                     <div class="d-flex align-items-center gap-3">
                                         <div class="avatar-circle">
-                                            <%= (u.getUserName() != null && !u.getUserName().isEmpty()) ? u.getUserName().charAt(0) : "?" %>
+                                            <%= (u.getUserName() != null && !u.getUserName().isEmpty()) ? u.getUserName().charAt(0) : "?"%>
                                         </div>
                                         <div>
                                             <div class="fw-bold text-dark"><%=u.getUserName()%></div>
@@ -155,30 +155,30 @@
                                 <td>
                                     <i class="fa-regular fa-envelope me-2 text-muted"></i><%=u.getEmail()%>
                                 </td>
-                                
+
                                 <td>
                                     <i class="fa-solid fa-phone-flip me-2 text-muted" style="font-size: 0.8rem;"></i><%=u.getPhone()%>
                                 </td>
 
                                 <td class="text-center">
                                     <a class="btn btn-outline-dark btn-sm rounded-pill px-3" href="suauser?id=<%=u.getId()%>">
-                                         <i class="fa-solid fa-pen-to-square me-1"></i> Sửa
-                                     </a>
+                                        <i class="fa-solid fa-pen-to-square me-1"></i> Sửa
+                                    </a>
                                 </td>
                             </tr>
-                        <%
+                            <%
                                 }
                             } else {
-                        %>
+                            %>
                             <tr>
                                 <td colspan="5" class="text-center py-5 text-muted">
                                     <i class="fa-solid fa-user-slash d-block mb-2" style="font-size: 2rem;"></i>
                                     Chưa có người dùng nào trong danh sách.
                                 </td>
                             </tr>
-                        <%
-                            }
-                        %>
+                            <%
+                                }
+                            %>
                         </tbody>
                     </table>
                 </div>

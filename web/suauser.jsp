@@ -129,8 +129,8 @@
                 <div class="mb-3">
                     <label class="form-label">Role</label>
                     <select class="form-control" name="role">
-                        <option value="USER" <%= "USER".equals(u.getRole()) ? "selected" : "" %>>USER</option>
-                        <option value="ADMIN" <%= "ADMIN".equals(u.getRole()) ? "selected" : "" %>>ADMIN</option>
+                        <option value="USER" <%= "USER".equals(u.getRole()) ? "selected" : ""%>>USER</option>
+                        <option value="ADMIN" <%= "ADMIN".equals(u.getRole()) ? "selected" : ""%>>ADMIN</option>
                     </select>
                 </div>
                 <div class="d-flex justify-content-between">

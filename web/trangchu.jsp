@@ -200,6 +200,12 @@
                                 }
                             %>
                         </a>
+
+                        <!-- ICON LỊCH SỬ ĐƠN HÀNG -->
+                        <a href="lichsumuahang" class="btn btn-light me-2 rounded-pill px-3">
+                            <i class="fa fa-clock-rotate-left"></i>
+                        </a>
+
                         <!-- USER -->
                         <a href="dangxuat" class="btn btn-danger rounded-pill px-4">Đăng xuất</a>
                         <%

@@ -257,9 +257,9 @@
     <body>
         <%
             Integer cartCount = (Integer) request.getAttribute("cartCount");
-                if(cartCount == null){
-                    cartCount = 0;
-                }
+            if (cartCount == null) {
+                cartCount = 0;
+            }
             Product d = (Product) request.getAttribute("detail");
             if (d == null) {
         %>
@@ -332,17 +332,22 @@
                         } else {
                         %>
                         <!-- ICON GIỎ HÀNG -->
-                                <a href="giohang" class="btn btn-light me-2 position-relative">
-                                    <i class="fa fa-shopping-cart"></i>
-                                    <% if(cartCount > 0){ %>
-                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                            <%=cartCount%>
-                                        </span>
-                                    <% 
-                                        } 
-                                    %>
-                                </a>
-                        
+                        <a href="giohang" class="btn btn-light me-2 position-relative">
+                            <i class="fa fa-shopping-cart"></i>
+                            <% if (cartCount > 0) {%>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                <%=cartCount%>
+                            </span>
+                            <%
+                                }
+                            %>
+                        </a>
+
+                        <!-- ICON LỊCH SỬ ĐƠN HÀNG -->
+                        <a href="lichsumuahang" class="btn btn-light me-2 rounded-pill px-3">
+                            <i class="fa fa-clock-rotate-left"></i>
+                        </a>
+
                         <!-- USER -->
                         <a href="dangxuat" class="btn btn-danger">Đăng xuất</a>
                         <%
@@ -383,31 +388,31 @@
                                     </span>
                                 </div>
                                 <div class="price-box">
-                                    <% if ("sale".equalsIgnoreCase(d.getType())) { %>
-                                        <div class="old-price">
-                                            <%= (int)(d.getPrice()/0.8) %> VNĐ
-                                        </div>
-                                    <% 
-                                        } 
+                                    <% if ("sale".equalsIgnoreCase(d.getType())) {%>
+                                    <div class="old-price">
+                                        <%= (int) (d.getPrice() / 0.8)%> VNĐ
+                                    </div>
+                                    <%
+                                        }
                                     %>
                                     <div class="new-price">
                                         <%=d.getFormattedPrice()%> VNĐ
                                     </div>
                                 </div>
-                                <% 
-                                    if(d.getStock() > 0){ 
+                                <%
+                                    if (d.getStock() > 0) {
                                 %>
-                                    <div class="stock">
-                                        Còn <%=d.getStock()%> sản phẩm
-                                    </div>
-                                <% 
-                                    } else { 
+                                <div class="stock">
+                                    Còn <%=d.getStock()%> sản phẩm
+                                </div>
+                                <%
+                                } else {
                                 %>
-                                    <div class="stock out">
-                                        Hết hàng
-                                    </div>
-                                <% 
-                                    } 
+                                <div class="stock out">
+                                    Hết hàng
+                                </div>
+                                <%
+                                    }
                                 %>
                                 <div class="feature-list">
                                     <div class="feature-item">
@@ -433,36 +438,36 @@
                                 </div>
                                 <div class="action-group">
                                     <%
-                                         if(user != null){ 
+                                        if (user != null) {
                                     %>
-                                    <% 
-                                        if(d.getStock() > 0){ 
+                                    <%
+                                        if (d.getStock() > 0) {
                                     %>
-                                            <button type="submit" class="btn-cart">
-                                                <i class="fa fa-cart-plus"></i>
-                                                Thêm vào giỏ
-                                            </button>
-                                            <button type="submit" formaction="ThanhToan" class="btn-buy">
-                                                Mua ngay
-                                            </button>
-                                        <% 
-                                            } else { 
-                                        %>
-                                            <button class="btn btn-secondary w-100" disabled>
-                                                Hết hàng
-                                            </button>
-                                        <% 
-                                            } 
-                                        %>
+                                    <button type="submit" class="btn-cart">
+                                        <i class="fa fa-cart-plus"></i>
+                                        Thêm vào giỏ
+                                    </button>
+                                    <button type="submit" formaction="ThanhToan" class="btn-buy">
+                                        Mua ngay
+                                    </button>
+                                    <%
+                                    } else {
+                                    %>
+                                    <button class="btn btn-secondary w-100" disabled>
+                                        Hết hàng
+                                    </button>
+                                    <%
+                                        }
+                                    %>
 
-                                    <% 
-                                        } else { 
+                                    <%
+                                    } else {
                                     %>
-                                        <a href="dangnhap.jsp" class="btn-buy text-center text-decoration-none">
-                                            Đăng nhập để mua hàng
-                                        </a>
-                                    <% 
-                                        } 
+                                    <a href="dangnhap.jsp" class="btn-buy text-center text-decoration-none">
+                                        Đăng nhập để mua hàng
+                                    </a>
+                                    <%
+                                        }
                                     %>
                                 </div>
                             </div>

@@ -17,117 +17,117 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
 
         <style>
-        body{
-            background:#f5f6fa;
-        }
-        /* CONTACT */
-        .contact-wrapper{
-            background:white;
-            border-radius:28px;
-            overflow:hidden;
-            box-shadow:0 10px 30px rgba(0,0,0,.08);
-        }
-        /* LEFT */
-        .contact-left{
-            padding:50px;
-        }
-        .contact-title{
-            font-size:38px;
-            font-weight:800;
-            color:#111827;
-            margin-bottom:20px;
-        }
-        .contact-desc{
-            color:#6b7280;
-            line-height:1.8;
-            font-size:17px;
-            margin-bottom:30px;
-        }
-        /* FORM */
-        .form-control{
-            border:none;
-            border-radius:16px;
-            padding:14px 16px;
-            background:#f9fafb !important;
-            transition:.3s;
-        }
-        .form-control:focus{
-            box-shadow:none;
-            border:2px solid #8b4513;
-            background:white !important;
-        }
-        /* BUTTON */
-        .btn-send{
-            background:#111827;
-            color:white;
-            border:none;
-            border-radius:16px;
-            padding:14px 28px;
-            font-weight:700;
-            transition:.3s;
-        }
-        .btn-send:hover{
-            background:#8b4513;
-            color:white;
-            transform:translateY(-2px);
-        }
-        /* RIGHT */
-        .contact-right{
-            background:#111827;
-            color:white;
-            padding:50px;
-            height:100%;
-        }
-        .contact-info-title{
-            font-size:34px;
-            font-weight:800;
-            margin-bottom:35px;
-        }
-        .contact-item{
-            display:flex;
-            gap:18px;
-            margin-bottom:35px;
-        }
-        .contact-icon{
-            width:52px;
-            height:52px;
-            border-radius:16px;
-            background:rgba(255,255,255,.08);
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            flex-shrink:0;
-        }
-        .contact-icon i{
-            font-size:20px;
-            color:#f3d19c;
-        }
-        .contact-item h5{
-            font-weight:700;
-            margin-bottom:8px;
-        }
-        .contact-item p{
-            color:#d1d5db;
-            margin:0;
-            line-height:1.7;
-        }
-        /* ALERT */
-        .alert{
-            border-radius:16px;
-        }
-        /* MOBILE */
-        @media(max-width:991px){
-            .contact-left,
-            .contact-right{
-                padding:32px;
+            body{
+                background:#f5f6fa;
+            }
+            /* CONTACT */
+            .contact-wrapper{
+                background:white;
+                border-radius:28px;
+                overflow:hidden;
+                box-shadow:0 10px 30px rgba(0,0,0,.08);
+            }
+            /* LEFT */
+            .contact-left{
+                padding:50px;
             }
             .contact-title{
-                font-size:30px;
+                font-size:38px;
+                font-weight:800;
+                color:#111827;
+                margin-bottom:20px;
+            }
+            .contact-desc{
+                color:#6b7280;
+                line-height:1.8;
+                font-size:17px;
+                margin-bottom:30px;
+            }
+            /* FORM */
+            .form-control{
+                border:none;
+                border-radius:16px;
+                padding:14px 16px;
+                background:#f9fafb !important;
+                transition:.3s;
+            }
+            .form-control:focus{
+                box-shadow:none;
+                border:2px solid #8b4513;
+                background:white !important;
+            }
+            /* BUTTON */
+            .btn-send{
+                background:#111827;
+                color:white;
+                border:none;
+                border-radius:16px;
+                padding:14px 28px;
+                font-weight:700;
+                transition:.3s;
+            }
+            .btn-send:hover{
+                background:#8b4513;
+                color:white;
+                transform:translateY(-2px);
+            }
+            /* RIGHT */
+            .contact-right{
+                background:#111827;
+                color:white;
+                padding:50px;
+                height:100%;
             }
             .contact-info-title{
-                font-size:28px;
+                font-size:34px;
+                font-weight:800;
+                margin-bottom:35px;
             }
-        }
+            .contact-item{
+                display:flex;
+                gap:18px;
+                margin-bottom:35px;
+            }
+            .contact-icon{
+                width:52px;
+                height:52px;
+                border-radius:16px;
+                background:rgba(255,255,255,.08);
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                flex-shrink:0;
+            }
+            .contact-icon i{
+                font-size:20px;
+                color:#f3d19c;
+            }
+            .contact-item h5{
+                font-weight:700;
+                margin-bottom:8px;
+            }
+            .contact-item p{
+                color:#d1d5db;
+                margin:0;
+                line-height:1.7;
+            }
+            /* ALERT */
+            .alert{
+                border-radius:16px;
+            }
+            /* MOBILE */
+            @media(max-width:991px){
+                .contact-left,
+                .contact-right{
+                    padding:32px;
+                }
+                .contact-title{
+                    font-size:30px;
+                }
+                .contact-info-title{
+                    font-size:28px;
+                }
+            }
         </style>
     </head>
     <body>
@@ -142,11 +142,11 @@
         <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
             <div class="container-fluid">
                 <a class="navbar-brand fw-bold" href="trangchu">
-                     NTN SHOP
-                 </a>
-                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-                     <span class="navbar-toggler-icon"></span>
-                 </button>
+                    NTN SHOP
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
                 <div class="collapse navbar-collapse" id="mainNav">
                     <ul class="navbar-nav me-auto">
                         <!-- ÁO -->
@@ -221,6 +221,12 @@
                                 }
                             %>
                         </a>
+
+                        <!-- ICON LỊCH SỬ ĐƠN HÀNG -->
+                        <a href="lichsumuahang" class="btn btn-light me-2 rounded-pill px-3">
+                            <i class="fa fa-clock-rotate-left"></i>
+                        </a>
+
                         <!-- USER -->
                         <a href="dangxuat" class="btn btn-danger rounded-pill px-4">Đăng xuất</a>
                         <%
@@ -258,24 +264,24 @@
                                 <%
                                     }
                                 %>
-                                <% 
-                                    if (currentUser == null) { 
+                                <%
+                                    if (currentUser == null) {
                                 %>
                                 <!-- Tên -->
                                 <div class="mb-3">
                                     <input type="text" name="username" class="form-control bg-white text-dark border p-3"
-                                        placeholder="Tên của bạn" required >
+                                           placeholder="Tên của bạn" required >
                                 </div>
 
                                 <!-- Email + SĐT -->
                                 <div class="row mb-3">
                                     <div class="col-md-6">
                                         <input type="email" name="email" class="form-control bg-white text-dark border p-3"
-                                            placeholder="Email của bạn" required >
+                                               placeholder="Email của bạn" required >
                                     </div>
                                     <div class="col-md-6">
                                         <input  type="text" name="phone" class="form-control bg-white text-dark border p-3"
-                                            placeholder="Số điện thoại của bạn" required >
+                                                placeholder="Số điện thoại của bạn" required >
                                     </div>
                                 </div>
 
@@ -298,13 +304,13 @@
                                         <input  type="text" class="form-control bg-white text-dark border p-3" value="<%= u.getPhone()%>" readonly>
                                     </div>
                                 </div>
-                                <% 
+                                <%
                                     }
                                 %>
                                 <!-- Nội dung -->
                                 <div class="mb-3">
                                     <textarea  name="msg" class="form-control bg-white text-dark border p-3"
-                                        rows="6" placeholder="Nội dung" required></textarea>
+                                               rows="6" placeholder="Nội dung" required></textarea>
                                 </div>
                                 <!-- Button -->
                                 <button  type="submit" class="btn btn-send mt-2">
@@ -361,13 +367,13 @@
                 </div>
             </div>                   
         </div>                        
-            <!-- 🔵 FOOTER -->
-            <div class="bg-dark text-white text-center p-3">
-                <p>Đàm Thu Trang - 11/11/2005</p>
-                <p>Nguyễn Tiến Nam - 21/12/2005</p>
-                <p>Phạm Doãn Nguyên - 25/04/2005</p>
-            </div>
-            <script src="css/js/bootstrap.bundle.min.js"></script>
-            <jsp:include page="chatbox.jsp"/>
+        <!-- 🔵 FOOTER -->
+        <div class="bg-dark text-white text-center p-3">
+            <p>Đàm Thu Trang - 11/11/2005</p>
+            <p>Nguyễn Tiến Nam - 21/12/2005</p>
+            <p>Phạm Doãn Nguyên - 25/04/2005</p>
+        </div>
+        <script src="css/js/bootstrap.bundle.min.js"></script>
+        <jsp:include page="chatbox.jsp"/>
     </body>
 </html>

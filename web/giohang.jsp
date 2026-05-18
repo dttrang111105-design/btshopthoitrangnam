@@ -23,111 +23,111 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
         <style>
-        .cart-img{
-            width:90px;
-            height:90px;
-            object-fit:cover;
-            border-radius:18px;
-            border:2px solid #f3f4f6;
-            transition:.35s;
-        }
-        .cart-img:hover{
-            transform:scale(1.05);
-        }
-        .cart-wrapper{
-            background:white;
-            border-radius:28px;
-            padding:28px;
-            box-shadow:0 10px 30px rgba(0,0,0,.08);
-        }
-        .cart-title{
-            font-size:34px;
-            font-weight:800;
-            color:#111827;
-            margin-bottom:28px;
-        }
-        .table{
-            margin-bottom:0;
-        }
-        .table thead{
-            background:#111827;
-            color:white;
-        }
-        .table thead th{
-            border:none;
-            padding:18px;
-            font-size:14px;
-            text-transform:uppercase;
-        }
-        .table tbody td{
-            vertical-align:middle;
-            padding:18px 12px;
-        }
-        .product-name{
-            font-size:17px;
-            font-weight:700;
-            color:#111827;
-        }
-        .stock-text{
-            font-size:13px;
-        }
-        .price-text{
-            color:#8b4513;
-            font-weight:700;
-            font-size:17px;
-        }
-        .btn-update{
-            background:#111827;
-            color:white;
-            border:none;
-            border-radius:12px;
-            width:42px;
-            height:42px;
-            transition:.3s;
-        }
-        .btn-update:hover{
-            background:#8b4513;
-            color:white;
-        }
-        .btn-delete{
-            border-radius:12px;
-        }
-        .total-box{
-            background:#f9fafb;
-            padding:24px;
-            border-radius:22px;
-            margin-top:24px;
-        }
-        .total-price{
-            color:#8b4513;
-            font-size:32px;
-            font-weight:800;
-        }
-        .btn-checkout{
-            background:#16a34a;
-            border:none;
-            border-radius:16px;
-            padding:14px 28px;
-            font-weight:700;
-            transition:.3s;
-        }
-        .btn-checkout:hover{
-            transform:translateY(-2px);
-        }
-        .alert{
-            border-radius:20px;
-        }
-        input[type=number]{
-            border-radius:12px;
-        }
-        @media(max-width:768px){
-            .cart-title{
-                font-size:28px;
+            .cart-img{
+                width:90px;
+                height:90px;
+                object-fit:cover;
+                border-radius:18px;
+                border:2px solid #f3f4f6;
+                transition:.35s;
+            }
+            .cart-img:hover{
+                transform:scale(1.05);
             }
             .cart-wrapper{
-                padding:20px;
+                background:white;
+                border-radius:28px;
+                padding:28px;
+                box-shadow:0 10px 30px rgba(0,0,0,.08);
             }
-        }
+            .cart-title{
+                font-size:34px;
+                font-weight:800;
+                color:#111827;
+                margin-bottom:28px;
+            }
+            .table{
+                margin-bottom:0;
+            }
+            .table thead{
+                background:#111827;
+                color:white;
+            }
+            .table thead th{
+                border:none;
+                padding:18px;
+                font-size:14px;
+                text-transform:uppercase;
+            }
+            .table tbody td{
+                vertical-align:middle;
+                padding:18px 12px;
+            }
+            .product-name{
+                font-size:17px;
+                font-weight:700;
+                color:#111827;
+            }
+            .stock-text{
+                font-size:13px;
+            }
+            .price-text{
+                color:#8b4513;
+                font-weight:700;
+                font-size:17px;
+            }
+            .btn-update{
+                background:#111827;
+                color:white;
+                border:none;
+                border-radius:12px;
+                width:42px;
+                height:42px;
+                transition:.3s;
+            }
+            .btn-update:hover{
+                background:#8b4513;
+                color:white;
+            }
+            .btn-delete{
+                border-radius:12px;
+            }
+            .total-box{
+                background:#f9fafb;
+                padding:24px;
+                border-radius:22px;
+                margin-top:24px;
+            }
+            .total-price{
+                color:#8b4513;
+                font-size:32px;
+                font-weight:800;
+            }
+            .btn-checkout{
+                background:#16a34a;
+                border:none;
+                border-radius:16px;
+                padding:14px 28px;
+                font-weight:700;
+                transition:.3s;
+            }
+            .btn-checkout:hover{
+                transform:translateY(-2px);
+            }
+            .alert{
+                border-radius:20px;
+            }
+            input[type=number]{
+                border-radius:12px;
+            }
+            @media(max-width:768px){
+                .cart-title{
+                    font-size:28px;
+                }
+                .cart-wrapper{
+                    padding:20px;
+                }
+            }
         </style>
 
     </head>
@@ -245,16 +245,22 @@
                         <!-- GIỎ HÀNG -->
                         <a href="giohang" class="btn btn-light me-2 position-relative rounded-pill px-3">
                             <i class="fa fa-shopping-cart"></i>
-                            <% 
-                                if(cartCount > 0){
+                            <%
+                                if (cartCount > 0) {
                             %>
                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                 <%=cartCount%>
                             </span>
-                            <% 
-                                } 
+                            <%
+                                }
                             %>
                         </a>
+
+                        <!-- ICON LỊCH SỬ ĐƠN HÀNG -->
+                        <a href="lichsumuahang" class="btn btn-light me-2 rounded-pill px-3">
+                            <i class="fa fa-clock-rotate-left"></i>
+                        </a>
+
                         <!-- USER -->
                         <a href="dangxuat" class="btn btn-danger rounded-pill px-4">
                             Đăng xuất

@@ -88,6 +88,10 @@
         <servlet-name>capnhatuser</servlet-name>
         <servlet-class>controller.admin.capnhatuser</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>lichsumuahang</servlet-name>
+        <servlet-class>controller.lichsumuahang</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>trangchu</servlet-name>
         <url-pattern>/trangchu</url-pattern>
@@ -175,6 +179,10 @@
     <servlet-mapping>
         <servlet-name>capnhatuser</servlet-name>
         <url-pattern>/capnhatuser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>lichsumuahang</servlet-name>
+        <url-pattern>/lichsumuahang</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

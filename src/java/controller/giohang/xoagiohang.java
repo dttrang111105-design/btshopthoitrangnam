@@ -30,10 +30,14 @@ public class xoagiohang extends HttpServlet {
             throws ServletException, IOException {
         try {
             response.setContentType("text/html;charset=UTF-8");
+            
+            
             //Lấy id để xóa khỏi giỏ hàng
             int id = Integer.parseInt(request.getParameter("id"));           
             new CartItemDAO().Delete(id);            
-            response.sendRedirect("giohang");            
+            response.sendRedirect("giohang");   
+            
+            
             try (PrintWriter out = response.getWriter()) {
                 /* TODO output your page here. You may use following sample code. */
                 out.println("<!DOCTYPE html>");

@@ -43,7 +43,10 @@ public class trangchitiet extends HttpServlet {
         try {
             response.setContentType("text/html;charset=UTF-8");
             request.setCharacterEncoding("UTF-8");
+            
+            
             int id = Integer.parseInt(request.getParameter("id"));
+            
             Product p = new ProductDAO().getByID(id);
 
             request.setAttribute("detail", p);
@@ -57,7 +60,7 @@ public class trangchitiet extends HttpServlet {
                 if (cart != null) {
                     List<CartItem> cartItems = new CartItemDAO().getItemsByCartId(cart.getId());
                     for (CartItem item : cartItems) {
-                        cartCount += item.getQuantity();
+                        cartCount = cartItems.size();
                     }
                 }
             }

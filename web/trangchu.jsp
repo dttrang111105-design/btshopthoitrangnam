@@ -80,6 +80,19 @@
             .slider-btn:hover {
                 background: #8b4513;
             }
+            .navbar{
+                position: sticky;
+                top: 0;
+                z-index: 9999 !important;
+            }
+
+            .dropdown-menu{
+                z-index: 10000 !important;
+            }
+
+            .left-menu-box{
+                z-index: 10 !important;
+            }
         </style>
     </head>
 
@@ -93,6 +106,7 @@
         </div>
 
         <%
+            //hiển thị số lượng hàng trong giỏ
             Integer cartCount = (Integer) request.getAttribute("cartCount");
             if (cartCount == null) {
                 cartCount = 0;
@@ -101,18 +115,18 @@
         <!-- 🔵 MENU -->
         <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
             <div class="container-fluid">
-            <a class="navbar-brand fw-bold" href="trangchu">
-                NTN SHOP
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="mainNav">
+                <a class="navbar-brand fw-bold" href="trangchu">
+                    NTN SHOP
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mainNav">
 
                     <ul class="navbar-nav me-auto">
                         <!-- ÁO -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Áo
                             </a>
                             <ul class="dropdown-menu">
@@ -124,7 +138,7 @@
 
                         <!-- QUẦN -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Quần
                             </a>
                             <ul class="dropdown-menu">
@@ -135,7 +149,7 @@
 
                         <!-- GIÀY -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Giày
                             </a>
                             <ul class="dropdown-menu">
@@ -146,7 +160,7 @@
 
                         <!-- PHỤ KIỆN -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Phụ kiện
                             </a>
                             <ul class="dropdown-menu">
@@ -158,10 +172,14 @@
                     </ul>
 
                     <div class="d-flex align-items-center">
+
+                        Tìm kiếm theo loại
                         <form class="d-flex me-3" action="TimKiem" method="get">
                             <input class="form-control me-2" type="search" name="name" placeholder="Nhập tên sản phẩm">
                             <button class="btn btn-outline-light px-4">Tìm</button>
                         </form>
+
+
                         <!-- nút đăng nhập sau khi login sẽ chuyển thành giỏ hàng và ô chat -->
                         <%
                             Object user = session.getAttribute("user");
@@ -198,7 +216,7 @@
 
                 <!-- 🟡 LEFT MENU -->
                 <div class="col-md-3">
-                    <div class="left-menu-box sticky-top" style="top: 60px;">
+                    <div class="left-menu-box sticky-top" style="top: 70px;">
                         <div class="list-group">
                             <a href="#" class="list-group-item active">Danh mục</a>
                             <a href="trangchu?type=new" class="list-group-item">Hàng mới</a>

@@ -75,7 +75,7 @@ public class trangchu extends HttpServlet {
                 if (cart != null) {
                     List<CartItem> cartItems = new CartItemDAO().getItemsByCartId(cart.getId());
                     for (CartItem item : cartItems) {
-                        cartCount += item.getQuantity();
+                        cartCount = cartItems.size();
                     }
                 }
             }

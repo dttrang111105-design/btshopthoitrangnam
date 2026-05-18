@@ -39,6 +39,10 @@ public class giohang extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            
+            
+            
+            
             response.setContentType("text/html;charset=UTF-8"); 
             request.setCharacterEncoding("UTF-8");
             // biến đếm để hiển thị ở giỏ hàng
@@ -50,7 +54,9 @@ public class giohang extends HttpServlet {
             if (user == null) {
                 response.sendRedirect("dangnhap");
                 return;
-            }            
+            }  
+            
+            //Người dùng đã đăng nhập
             //Lấy id người dùng
             int userId = user.getId();           
             Cart cart = new CartDAO().getCartByUserId(userId);           
@@ -59,23 +65,30 @@ public class giohang extends HttpServlet {
                 request.setAttribute("items", null);
                 request.getRequestDispatcher("giohang.jsp").forward(request, response);
                 return;
-            }            
+            }   
+            
             //Lấy danh sách sản phẩm trong giỏ hàng
             List<CartItem> items = new CartItemDAO().getItemsByCartId(cart.getId());
             //Dùng map lưu key:productId và value:Product
-            //Ví dụ productMap.get(1) → Quần bò
+            //Ví dụ productMap.get(1) → Áo nỉ len
+            //Ví dụ productMap.get(2) → Quần bò
             Map<Integer, Product> productMap = new HashMap<>();
             for (CartItem item : items) {
                 Product p = new ProductDAO().getByID(item.getProductId());
                 productMap.put(item.getProductId(), p);
                 // cộng số lượng sản phẩm
-                cartCount += item.getQuantity();
+                cartCount = items.size();
             }
             request.setAttribute("items", items);
             request.setAttribute("productMap", productMap);
             request.setAttribute("cartCount", cartCount);
             request.getRequestDispatcher("giohang.jsp").forward(request, response);
 
+            
+            
+            
+            
+            
             try (PrintWriter out = response.getWriter()) {
                 /* TODO output your page here. You may use following sample code. */
                 out.println("<!DOCTYPE html>");

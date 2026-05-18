@@ -29,19 +29,25 @@ public class capnhatgiohang extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            response.setContentType("text/html;charset=UTF-8");           
+            response.setContentType("text/html;charset=UTF-8");   
+            
+            
             //Lấy id của sản phẩm và số lượng mới
             int itemId = Integer.parseInt(request.getParameter("id"));
             int quantity = Integer.parseInt(request.getParameter("quantity"));            
             //số lượng phải > 0
             if (quantity <= 0) {
                 quantity = 1;
-            }           
+            }    
+            
             //Cập nhật số lượng mới của sản phẩm
             new CartItemDAO().UpdateQuantity(itemId, quantity);   
             response.setContentType("text/html;charset=UTF-8");
             
             response.sendRedirect("giohang");
+            
+            
+            
             
             try (PrintWriter out = response.getWriter()) {
                 /* TODO output your page here. You may use following sample code. */

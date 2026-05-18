@@ -315,7 +315,7 @@
                                 <li><a class="dropdown-item" href="trangchu?category=thắt lưng">Thắt lưng</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="lienhe">Liên hệ</a></li>
+                        <li class="nav-item"><a class="nav-link" href="lienhe.jsp">Liên hệ</a></li>
                     </ul>
                     <div class="d-flex align-items-center">
                         <form class="d-flex me-3" action="TimKiem" method="get">

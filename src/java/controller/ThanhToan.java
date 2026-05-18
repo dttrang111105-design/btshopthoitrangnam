@@ -51,12 +51,13 @@ public class ThanhToan extends HttpServlet {
                         response.sendRedirect("dangnhap.jsp");
                         return;
                     }
-                    Cart cart = new CartDAO()
-                            .getCartByUserId(user.getId());
+                    
+                    Cart cart = new CartDAO().getCartByUserId(user.getId());
                     if (cart == null) {
                         response.getWriter().println("Không có giỏ hàng");
                         return;
                     }
+                    
                     List<CartItem> items = new CartItemDAO().getItemsByCartId(cart.getId());
                     if (items == null || items.isEmpty()) {
                         response.getWriter().println("Giỏ hàng trống");

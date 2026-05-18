@@ -35,6 +35,8 @@ public class TimKiem extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
+        
+        
         request.setCharacterEncoding("UTF-8");
         String name = request.getParameter("name");
         String category = request.getParameter("category");
@@ -47,6 +49,8 @@ public class TimKiem extends HttpServlet {
             list = dao.getByName(category);
             request.setAttribute("category", category);
         }
+        
+        
         
         request.setAttribute("list", list);       
         request.getRequestDispatcher("trangchu.jsp").forward(request, response);

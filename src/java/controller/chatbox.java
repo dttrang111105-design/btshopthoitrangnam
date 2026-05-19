@@ -19,7 +19,7 @@ import model.Product;
     @WebServlet("/chat")
     public class chatbox extends HttpServlet {
 
-        private static final String API_KEY = "key"; 
+        private static final String API_KEY = "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"; 
  
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {

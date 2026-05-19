@@ -1,5 +1,7 @@
 package controller;
 
+import DAO.CartDAO;
+import DAO.CartItemDAO;
 import DAO.OrderDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Cart;
+import model.CartItem;
 import model.Orders;
 import model.User;
 
@@ -51,6 +55,18 @@ public class lichsumuahang extends HttpServlet {
 
             request.setAttribute("listOrder", listOrder);
 
+            int cartCount = 0;
+            if (user != null) {
+                Cart cart = new CartDAO().getCartByUserId(user.getId());
+                if (cart != null) {
+                    List<CartItem> cartItems = new CartItemDAO().getItemsByCartId(cart.getId());
+                    for (CartItem item : cartItems) {
+                        cartCount = cartItems.size();
+                    }
+                }
+            }
+            request.setAttribute("cartCount", cartCount);
+            
             request.getRequestDispatcher("lichsumuahang.jsp")
                     .forward(request, response);
 

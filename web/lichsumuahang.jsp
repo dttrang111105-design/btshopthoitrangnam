@@ -100,14 +100,114 @@
             </div>
         </div>
 
-        <!-- MENU -->
-        <nav class="navbar navbar-expand-lg navbar-dark">
+        <%
+            //hiển thị số lượng hàng trong giỏ
+            Integer cartCount = (Integer) request.getAttribute("cartCount");
+            if (cartCount == null) {
+                cartCount = 0;
+            }
+        %>
+        <!-- 🔵 MENU -->
+        <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
             <div class="container-fluid">
-
-                <a class="navbar-brand" href="trangchu">
-                    Trang chủ
+                <a class="navbar-brand fw-bold" href="trangchu">
+                    NTN SHOP
                 </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mainNav">
 
+                    <ul class="navbar-nav me-auto">
+                        <!-- ÁO -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Áo
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="trangchu?category=áo polo">Áo polo</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=áo sơ mi">Áo sơ mi</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=áo khoác">Áo khoác</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- QUẦN -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Quần
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="trangchu?category=quần jean">Quần jean</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=quần âu">Quần âu</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- GIÀY -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Giày
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="trangchu?category=giày sneaker">Giày sneaker</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=giày da">Giày da</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- PHỤ KIỆN -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Phụ kiện
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="trangchu?category=đồng hồ">Đồng hồ</a></li>
+                                <li><a class="dropdown-item" href="trangchu?category=thắt lưng">Thắt lưng</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="lienhe.jsp">Liên hệ</a></li>
+                    </ul>
+
+                    <div class="d-flex align-items-center">
+
+                        Tìm kiếm theo loại
+                        <form class="d-flex me-3" action="TimKiem" method="get">
+                            <input class="form-control me-2" type="search" name="name" placeholder="Nhập tên sản phẩm">
+                            <button class="btn btn-outline-light px-4">Tìm</button>
+                        </form>
+
+
+                        <!-- nút đăng nhập sau khi login sẽ chuyển thành giỏ hàng và ô chat -->
+                        <%
+                            Object user = session.getAttribute("user");
+                            if (user == null) {
+                        %>
+                        <a href="dangnhap.jsp" class="btn btn-light">Đăng nhập</a>
+                        <%
+                        } else {
+                        %>
+                        <!-- ICON GIỎ HÀNG -->
+                        <a href="giohang" class="btn btn-light me-2 position-relative rounded-pill px-3">
+                            <i class="fa fa-shopping-cart"></i>
+                            <% if (cartCount > 0) {%>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                <%=cartCount%>
+                            </span>
+                            <%
+                                }
+                            %>
+                        </a>
+
+                        <!-- ICON LỊCH SỬ ĐƠN HÀNG -->
+                        <a href="lichsumuahang" class="btn btn-light me-2 rounded-pill px-3">
+                            <i class="fa fa-clock-rotate-left"></i>
+                        </a>
+
+                        <!-- USER -->
+                        <a href="dangxuat" class="btn btn-danger rounded-pill px-4">Đăng xuất</a>
+                        <%
+                            }
+                        %>
+                    </div>
+                </div>
             </div>
         </nav>
 

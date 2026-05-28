@@ -37,20 +37,11 @@ public class dangnhap extends HttpServlet {
         String loginType = request.getParameter("loginType");
         UserDAO dao = new UserDAO();
         try {
-            List<User> list = dao.getAll();
-            boolean found = false;
-            User userLogin = null;
-            for (User u : list) {
-                if ((u.getUserName().equals(userInput) || u.getEmail().equals(userInput)) && u.getPassWord().equals(passInput)) {
-                    found = true;
-                    userLogin = u;
-                    break;
-                }
-            }
-            if (found) {
+            User userLogin = dao.login( userInput, passInput );
+            if (userLogin != null) {
                 // LOGIN ADMIN
-                if ("Admin".equals(loginType)) {
-                    if ("admin".equals(userLogin.getRole())) {
+                if ("Admin".equalsIgnoreCase(loginType)) {
+                    if ("admin".equalsIgnoreCase(userLogin.getRole())) {
                         HttpSession session = request.getSession();
                         session.setAttribute("user", userLogin);
                         response.sendRedirect("Admin");

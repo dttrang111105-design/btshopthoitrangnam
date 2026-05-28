@@ -35,44 +35,35 @@ public class themvaogiohang extends HttpServlet {
             throws ServletException, IOException {
 
         try {
-            response.setContentType("text/html;charset=UTF-8");           
-            //Session để lưu thông tin người dùng đăng nhập
+            response.setContentType("text/html;charset=UTF-8");      
             HttpSession session = request.getSession();
             User user = (User) session.getAttribute("user");
             
             
-            //Kiểm tra người dùng đã đăng nhập chưa, null là chưa và chuyển hướng đến trang đăng nhập
             if (user == null) {
                 response.sendRedirect("dangnhap");
                 return;
             }
             
-            //Lấy id người dùng
             int userId = user.getId();
             int quantity = Integer.parseInt(request.getParameter("quantity"));  
             
-            //Lấy id sản phẩm
             int productId = Integer.parseInt(request.getParameter("id"));
-            
-            // Lấy thông tin giỏ hàng của người dùng
             
             Cart cart = new CartDAO().getCartByUserId(userId);
             
-            //Nếu user chưa có cart thì tạo cart mới
             if (cart == null) {
                 cart = new CartDAO().createCart(userId);
             }
             
-            //Kiểm tra xem sản phẩm đã có trong giỏ hàng hay chưa
-            CartItem item = new CartItemDAO().getItem(cart.getId(), productId);            //Nếu đã có sản phẩm thì tăng số lượng, nếu chưa có thì thêm sản phẩm vào giỏ hàng
+            CartItem item = new CartItemDAO().getItem(cart.getId(), productId);           
             if (item != null) {
                 int newQuantity = item.getQuantity() + quantity;
                 new CartItemDAO().UpdateQuantity(item.getId(), newQuantity);
             } else {
                 new CartItemDAO().Add(cart.getId(), productId, quantity);
             }
-            //chuyển đến trang giỏ hàng
-            response.sendRedirect("giohang"); // hoặc trang bạn muốn
+            response.sendRedirect("giohang"); 
             
             
             try (PrintWriter out = response.getWriter()) {

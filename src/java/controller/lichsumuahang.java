@@ -50,8 +50,7 @@ public class lichsumuahang extends HttpServlet {
 
             OrderDAO orderDAO = new OrderDAO();
 
-            List<Orders> listOrder
-                    = orderDAO.getOrdersByUser(user.getId());
+            List<Orders> listOrder = orderDAO.getOrdersByUser(user.getId());
 
             request.setAttribute("listOrder", listOrder);
 
@@ -67,8 +66,7 @@ public class lichsumuahang extends HttpServlet {
             }
             request.setAttribute("cartCount", cartCount);
             
-            request.getRequestDispatcher("lichsumuahang.jsp")
-                    .forward(request, response);
+            request.getRequestDispatcher("lichsumuahang.jsp").forward(request, response);
 
             try (PrintWriter out = response.getWriter()) {
                 /* TODO output your page here. You may use following sample code. */

@@ -92,6 +92,22 @@
         <servlet-name>lichsumuahang</servlet-name>
         <servlet-class>controller.lichsumuahang</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>xuathoadon</servlet-name>
+        <servlet-class>controller.xuathoadon</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ThongKe</servlet-name>
+        <servlet-class>controller.admin.ThongKe</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GoogleLogin</servlet-name>
+        <servlet-class>controller.GoogleLogin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>googlecallback</servlet-name>
+        <servlet-class>controller.googlecallback</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>trangchu</servlet-name>
         <url-pattern>/trangchu</url-pattern>
@@ -183,6 +199,22 @@
     <servlet-mapping>
         <servlet-name>lichsumuahang</servlet-name>
         <url-pattern>/lichsumuahang</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>xuathoadon</servlet-name>
+        <url-pattern>/xuathoadon</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ThongKe</servlet-name>
+        <url-pattern>/ThongKe</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GoogleLogin</servlet-name>
+        <url-pattern>/GoogleLogin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>googlecallback</servlet-name>
+        <url-pattern>/googlecallback</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -98,7 +98,6 @@
                 font-size:42px;
                 font-weight:800;
             }
-
             .stock{
                 display:inline-block;
                 background:#dcfce7;
@@ -108,17 +107,19 @@
                 font-weight:600;
                 margin-bottom:20px;
             }
-
             .stock.out{
                 background:#fee2e2;
                 color:#991b1b;
             }
-
+            .stock.low-stock{
+                background:#fee2e2;
+                color:#b91c1c;
+                animation:pulse 1.5s infinite;
+            }
             /* FEATURES */
             .feature-list{
                 margin:25px 0;
             }
-
             .feature-item{
                 display:flex;
                 align-items:center;
@@ -126,17 +127,14 @@
                 margin-bottom:12px;
                 font-size:15px;
             }
-
             .feature-item i{
                 color:#8b4513;
                 font-size:18px;
             }
-
             /* QUANTITY */
             .qty-box{
                 margin:20px 0;
             }
-
             .qty-input{
                 width:110px;
                 border:2px solid #e5e7eb;
@@ -145,14 +143,12 @@
                 text-align:center;
                 font-weight:600;
             }
-
             /* BUTTON */
             .action-group{
                 display:flex;
                 gap:15px;
                 margin-top:25px;
             }
-
             .btn-cart{
                 flex:1;
                 background:white;
@@ -163,12 +159,10 @@
                 font-weight:700;
                 transition:.3s;
             }
-
             .btn-cart:hover{
                 background:#111827;
                 color:white;
             }
-
             .btn-buy{
                 flex:1;
                 border:none;
@@ -179,7 +173,6 @@
                 font-weight:700;
                 transition:.3s;
             }
-
             .btn-buy:hover{
                 background:#6d3410;
             }
@@ -400,16 +393,24 @@
                                     </div>
                                 </div>
                                 <%
-                                    if (d.getStock() > 0) {
+                                    if (d.getStock() <= 0) {
                                 %>
-                                <div class="stock">
-                                    Còn <%=d.getStock()%> sản phẩm
+                                <div class="stock out">
+                                    <i class="fa fa-circle-xmark"></i>
+                                    Hết hàng
+                                </div>
+                                <%} else if (d.getStock() < 5) {
+                                %>
+                                <div class="stock low-stock">
+                                    <i class="fa fa-triangle-exclamation"></i>
+                                    Chỉ còn <%=d.getStock()%> sản phẩm
                                 </div>
                                 <%
                                 } else {
                                 %>
-                                <div class="stock out">
-                                    Hết hàng
+                                <div class="stock">
+                                    <i class="fa fa-box"></i>
+                                    Còn <%=d.getStock()%> sản phẩm
                                 </div>
                                 <%
                                     }
@@ -439,31 +440,33 @@
                                 <div class="action-group">
                                     <%
                                         if (user != null) {
+                                            if (d.getStock() > 0) {
                                     %>
-                                    <%
-                                        if (d.getStock() > 0) {
-                                    %>
+                                    <!-- THÊM GIỎ HÀNG -->
                                     <button type="submit" class="btn-cart">
-                                        <i class="fa fa-cart-plus"></i>
-                                        Thêm vào giỏ
+                                        <i class="fa fa-cart-shopping"></i>
+                                        Thêm vào giỏ hàng
                                     </button>
+                                    <!-- MUA NGAY -->
                                     <button type="submit" formaction="ThanhToan" class="btn-buy">
                                         Mua ngay
                                     </button>
                                     <%
                                     } else {
                                     %>
-                                    <button class="btn btn-secondary w-100" disabled>
+                                    <!-- HẾT HÀNG -->
+                                    <button class="btn-buy" disabled style=" background:#9ca3af; cursor:not-allowed; ">
+                                        <i class="fa fa-circle-xmark"></i>
                                         Hết hàng
                                     </button>
                                     <%
                                         }
-                                    %>
-
-                                    <%
                                     } else {
                                     %>
-                                    <a href="dangnhap.jsp" class="btn-buy text-center text-decoration-none">
+                                    <!-- CHƯA LOGIN -->
+                                    <a href="dangnhap.jsp"
+                                       class="btn-buy text-center text-decoration-none">
+                                        <i class="fa fa-user"></i>
                                         Đăng nhập để mua hàng
                                     </a>
                                     <%

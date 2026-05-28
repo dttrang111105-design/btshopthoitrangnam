@@ -2,22 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.admin;
+package controller;
 
-import DAO.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.User;
 
 /**
  *
  * @author ADMIN
  */
-public class capnhatuser extends HttpServlet {
+public class GoogleLogin extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,45 +29,27 @@ public class capnhatuser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-        try {
-            int id = Integer.parseInt(request.getParameter("id"));
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            String email = request.getParameter("email");
-            String phone = request.getParameter("phone");
-            String address = request.getParameter("address");
-            String role = request.getParameter("role");
-            User u = new User();
-            UserDAO dao = new UserDAO();
+        String clientId = "key";
+        String redirectUri = "http://localhost:9090/BTLShopThoiTrangNam/googlecallback";
+        String url = "https://accounts.google.com/o/oauth2/v2/auth"
+                + "?scope=email%20profile"
+                + "&access_type=online"
+                + "&include_granted_scopes=true"
+                + "&response_type=code"
+                + "&redirect_uri=" + redirectUri
+                + "&client_id=" + clientId
+                + "&prompt=select_account";
 
-            u.setId(id);
-            u.setUserName(username);
-            u.setPassWord(dao.getById(id).getPassWord());
-            u.setEmail(email);
-            u.setPhone(phone);
-            u.setAddress(address);
-            u.setRole(role);
-            boolean check = dao.Update(u);
-            if (check) {
-                response.sendRedirect("quanlyuser");
-            } else {
-                response.getWriter().println("Update thất bại!");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.getWriter().println("Lỗi: " + e.getMessage());
-        }
-
+        response.sendRedirect(url);
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet capnhatuser</title>");
+            out.println("<title>Servlet GoogleLogin</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet capnhatuser at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet GoogleLogin at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }

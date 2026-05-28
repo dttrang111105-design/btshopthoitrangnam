@@ -44,16 +44,13 @@ public class trangchitiet extends HttpServlet {
             response.setContentType("text/html;charset=UTF-8");
             request.setCharacterEncoding("UTF-8");
             
-            
             int id = Integer.parseInt(request.getParameter("id"));
-            
             Product p = new ProductDAO().getByID(id);
-
             request.setAttribute("detail", p);
 
             //Giỏ hàng
-            HttpSession session = request.getSession();
-            User user = (User) session.getAttribute("user");
+            HttpSession session = request.getSession(); //lấy session hiện tại
+            User user = (User) session.getAttribute("user"); //lấy ttin ng dùng đã đn đc lưu trong session để biết ai sd hệ thống
             int cartCount = 0;
             if (user != null) {
                 Cart cart = new CartDAO().getCartByUserId(user.getId());

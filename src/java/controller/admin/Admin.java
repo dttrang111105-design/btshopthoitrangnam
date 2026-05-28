@@ -45,12 +45,11 @@ public class Admin extends HttpServlet {
             return;
         }
 
-        // KHÔNG PHẢI ADMIN
         if (!user.getRole().equals("admin")) {
             response.sendRedirect("trangchu");
             return;
         }
-        // SEARCH
+ 
         String keyword = request.getParameter("keyword");
         List<Orders> list;
         if(keyword != null && !keyword.trim().isEmpty()){

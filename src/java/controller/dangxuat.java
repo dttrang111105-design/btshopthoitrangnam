@@ -34,7 +34,7 @@ public class dangxuat extends HttpServlet {
         try {
             HttpSession session = request.getSession(false);
             if (session != null) {
-                session.invalidate(); // xóa session
+                session.invalidate();
             }
             response.sendRedirect("dangnhap.jsp");
         } catch (Exception e) {

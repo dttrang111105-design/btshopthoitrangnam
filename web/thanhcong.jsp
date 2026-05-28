@@ -55,6 +55,8 @@
             String address = (String) request.getAttribute("address");
             Integer quantity = (Integer) request.getAttribute("quantity");
             Double total = (Double) request.getAttribute("total");
+            double subtotal = total / 1.08;
+            double vat = total - subtotal;
 
             if (p != null) {
         %>
@@ -86,11 +88,42 @@
                         <span>Số lượng:</span>
                         <span class="fw-bold">x<%= quantity%></span>
                     </div>
-                    <div class="bg-light rounded text-center p-4 mt-4">
-                        <p class="mb-2">Tổng tiền thanh toán (COD)</p>
-                        <div class="total-price">
-                            <%= Product.formatPrice(total)%> VNĐ
+                    <div class="bg-light rounded p-4 mt-4">
+
+                        <div class="d-flex justify-content-between mb-2">
+
+                            <span>Tạm tính:</span>
+
+                            <span class="fw-bold">
+                                <%= Product.formatPrice(subtotal)%> VNĐ
+                            </span>
+
                         </div>
+
+                        <div class="d-flex justify-content-between mb-2">
+
+                            <span>VAT (8%):</span>
+
+                            <span class="fw-bold text-danger">
+                                + <%= Product.formatPrice(vat)%> VNĐ
+                            </span>
+
+                        </div>
+
+                        <div class="dashed-line"></div>
+
+                        <div class="d-flex justify-content-between align-items-center">
+
+                            <h5 class="mb-0">
+                                Tổng thanh toán
+                            </h5>
+
+                            <div class="total-price">
+                                <%= Product.formatPrice(total)%> VNĐ
+                            </div>
+
+                        </div>
+
                     </div>
                     <a href="trangchu" class="btn btn-detail btn-back">
                         Quay lại mua sắm

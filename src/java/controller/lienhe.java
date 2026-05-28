@@ -56,7 +56,6 @@ public class lienhe extends HttpServlet {
                 request.setAttribute("mess", "Gửi liên hệ thất bại!");
             }
 
-            //Giỏ hàng
             int cartCount = 0;
             if (user != null) {
                 Cart cart = new CartDAO().getCartByUserId(user.getId());
@@ -64,7 +63,7 @@ public class lienhe extends HttpServlet {
                     List<CartItem> cartItems
                             = new CartItemDAO().getItemsByCartId(cart.getId());
                     for (CartItem item : cartItems) {
-                        cartCount += item.getQuantity();
+                        cartCount += cartItems.size();
                     }
                 }
             }

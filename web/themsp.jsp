@@ -119,26 +119,33 @@
             </button>
             <div class="collapse navbar-collapse" id="adminNav">
                 <!-- LEFT -->
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="Admin">
-                            <i class="fa fa-home"></i>
-                            Trang chủ
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="quanlysanpham">
-                            <i class="fa fa-box"></i>
-                            Sản phẩm
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="quanlyuser">
-                            <i class="fa fa-users"></i>
-                            Người dùng
-                        </a>
-                    </li>
-                </ul>
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="Admin">
+                                <i class="fa fa-home"></i>
+                                Trang chủ
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="quanlysanpham">
+                                <i class="fa fa-box"></i>
+                                Sản phẩm
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="quanlyuser">
+                                <i class="fa fa-users"></i>
+                                Người dùng
+                            </a>
+                        </li>
+                        <!-- THỐNG KÊ -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="ThongKe">
+                                <i class="fa fa-chart-line"></i>
+                                Thống kê
+                            </a>
+                        </li>
+                    </ul>
                 <!-- RIGHT -->
                 <div class="d-flex align-items-center">
                     <span class="text-white me-3">

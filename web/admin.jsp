@@ -26,7 +26,7 @@
                     135deg,
                     #111827,
                     #1f2937
-                );
+                    );
                 padding:40px;
                 border-radius:24px;
                 color:white;
@@ -177,6 +177,13 @@
                                 Người dùng
                             </a>
                         </li>
+                        <!-- THỐNG KÊ -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="ThongKe">
+                                <i class="fa fa-chart-line"></i>
+                                Thống kê
+                            </a>
+                        </li>
                     </ul>
                     <!-- RIGHT -->
                     <div class="d-flex align-items-center">
@@ -192,7 +199,7 @@
                 </div>
             </div>
         </nav>
-        <!-- CONTENT -->
+
         <div class="container py-5">
             <!-- HEADER -->
             <div class="admin-header">

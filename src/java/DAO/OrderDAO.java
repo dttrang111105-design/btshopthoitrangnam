@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Orders;
+import model.ThongKe;
 import model.dbConnect;
 
 /**
@@ -131,6 +132,65 @@ public class OrderDAO {
             o.setTotalMoney(rs.getDouble("total_money"));
             o.setOrderDate(rs.getTimestamp("order_date"));
             list.add(o);
+        }
+        return list;
+    }
+
+    public List<ThongKe> getRevenueByDay() {
+        if (con == null) {
+            con = dbConnect.getConnect();
+        }
+        List<ThongKe> list = new ArrayList<>();
+        String sql = "SELECT DATE(order_date) ngay, " + "SUM(total_money) doanhthu "
+                + "FROM orders " + "GROUP BY DATE(order_date) " + "ORDER BY ngay DESC";
+        try {
+            ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new ThongKe(rs.getString("ngay"), rs.getDouble("doanhthu")));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public List<ThongKe> getRevenueByWeek() {
+        List<ThongKe> list = new ArrayList<>();
+        String sql = "SELECT " + "WEEK(order_date) AS tuan, " + "YEAR(order_date) AS nam, "
+                + "SUM(total_money) AS doanhthu " + "FROM orders "
+                + "GROUP BY YEAR(order_date), WEEK(order_date) " + "ORDER BY nam DESC, tuan DESC";
+
+        try {
+            ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String label = "Tuần " + rs.getInt("tuan") + " - " + rs.getInt("nam");
+                ThongKe r = new ThongKe( label, rs.getDouble("doanhthu") );
+                list.add(r);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public List<ThongKe> getRevenueByMonth() {
+        List<ThongKe> list = new ArrayList<>();
+        String sql = "SELECT "
+                + "MONTH(order_date) AS thang, " + "YEAR(order_date) AS nam, " + "SUM(total_money) AS doanhthu "
+                + "FROM orders " + "GROUP BY YEAR(order_date), MONTH(order_date) " + "ORDER BY nam DESC, thang DESC";
+
+        try {
+            ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String label = "Tháng " + rs.getInt("thang") + "/" + rs.getInt("nam");
+                ThongKe r = new ThongKe( label, rs.getDouble("doanhthu") );
+                list.add(r);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return list;
     }

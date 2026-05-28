@@ -37,9 +37,7 @@ public class ThanhToan extends HttpServlet {
             request.setCharacterEncoding("UTF-8");
             String method = request.getMethod();
 
-            // =========================
             // GET
-            // =========================
             if (method.equalsIgnoreCase("GET")) {
 
                 String idParam = request.getParameter("id");
@@ -102,15 +100,12 @@ public class ThanhToan extends HttpServlet {
 
                 // ================= THANH TOÁN 1 SẢN PHẨM =================
                 int id = Integer.parseInt(idParam);
-
-                int quantity = Integer.parseInt(
-                        request.getParameter("quantity"));
+                int quantity = Integer.parseInt(request.getParameter("quantity"));
                 Product p = new ProductDAO().getByID(id);
                 if (p == null) {
                     response.getWriter().println("Không tìm thấy sản phẩm");
                     return;
                 }
-                //Giỏ hàng
                 HttpSession session = request.getSession();
                 User user = (User) session.getAttribute("user");
                 int cartCount = 0;
@@ -130,9 +125,7 @@ public class ThanhToan extends HttpServlet {
                 return;
             }
 
-            // =========================
             // POST
-            // =========================
             String all = request.getParameter("all");
 
             HttpSession session = request.getSession();
@@ -196,7 +189,6 @@ public class ThanhToan extends HttpServlet {
                 order.setTotalMoney(total);
                 orderDAO.updateTotal(order);
 
-                // XÓA GIỎ HÀNG
                 cartItemDAO.clearCart(cart.getId());
                 
                 response.sendRedirect("thanhcongall.jsp");
@@ -219,7 +211,6 @@ public class ThanhToan extends HttpServlet {
 
             double total = p.getPrice() * quantity;
 
-            // TẠO ORDER
             Orders order = new Orders();
 
             order.setUserId(user.getId());
@@ -229,7 +220,6 @@ public class ThanhToan extends HttpServlet {
 
             int orderId = orderDAO.addOrders(order);
 
-            // TẠO ORDER DETAIL
             OrderDetail od = new OrderDetail();
 
             od.setOrderId(orderId);
@@ -239,7 +229,6 @@ public class ThanhToan extends HttpServlet {
 
             new OrderDetailDAO().addOrderDetail(od);
 
-            // XÓA SẢN PHẨM KHỎI GIỎ HÀNG
             Cart cart = new CartDAO().getCartByUserId(user.getId());
 
             if (cart != null) {

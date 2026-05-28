@@ -1,5 +1,6 @@
 
 package model;
+import DAO.OrderDAO;
 import java.sql.*;
 
 
@@ -17,5 +18,7 @@ public class dbConnect {
     public static void main(String[] args) {
         if(dbConnect.getConnect() != null) System.out.println("tc");
         else System.out.println("tb");
+        Connection con = dbConnect.getConnect();
+        System.out.println(new OrderDAO().getRevenueByDay());
     }
 }

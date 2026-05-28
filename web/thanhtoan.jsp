@@ -140,25 +140,131 @@
                     font-size:22px;
                 }
             }
+            .checkout-modern{
+                background:white;
+                border-radius:24px;
+                padding:28px;
+                box-shadow:0 10px 35px rgba(0,0,0,.08);
+            }
+            .product-mini-card{
+                display:flex;
+                gap:18px;
+                background:#f9fafb;
+                border-radius:20px;
+                padding:16px;
+                align-items:center;
+            }
+            .mini-product-image{
+                width:120px;
+                height:120px;
+                border-radius:18px;
+                object-fit:cover;
+            }
+            .mini-product-info h2{
+                font-size:22px;
+                font-weight:800;
+                margin-bottom:10px;
+            }
+            .mini-price{
+                color:#8b4513;
+                font-size:22px;
+                font-weight:800;
+                margin-bottom:12px;
+            }
+            .mini-meta{
+                display:flex;
+                gap:14px;
+                flex-wrap:wrap;
+            }
+            .payment-total-box{
+                margin-top:20px;
+                background:#111827;
+                color:white;
+                border-radius:22px;
+                padding:22px;
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+            }
+            .payment-total-price{
+                font-size:28px;
+                font-weight:800;
+            }
+            .payment-icon{
+                font-size:38px;
+                color:#c49b63;
+            }
+            .checkout-form-box{
+                background:#f9fafb;
+                border-radius:22px;
+                padding:24px;
+            }
+            .checkout-form-title{
+                font-size:28px;
+                font-weight:800;
+                margin-bottom:22px;
+            }
+            .modern-input{
+                border-radius:14px;
+                padding:14px;
+                border:2px solid #e5e7eb;
+            }
+            .modern-input:focus{
+                border-color:#111827;
+                box-shadow:none;
+            }
+            .payment-btn{
+                flex:1;
+                border:none;
+                border-radius:16px;
+                padding:15px;
+                font-weight:700;
+                color:white;
+                transition:.3s;
+            }
+            .qr-btn{
+                background:#111827;
+            }
+            .cash-btn{
+                background:#8b4513;
+            }
+            .payment-btn:hover{
+                transform:translateY(-2px);
+                opacity:.9;
+            }
+            .qr-box{
+                margin-top:20px;
+                background:white;
+                border-radius:22px;
+                padding:24px;
+                text-align:center;
+                border:2px dashed #d1d5db;
+            }
+            .qr-image{
+                width:240px;
+                max-width:100%;
+            }
         </style>
     </head>
     <body>
         <%
             Integer cartCount = (Integer) request.getAttribute("cartCount");
-                if(cartCount == null){
-                    cartCount = 0;
-                }
+            if (cartCount == null) {
+                cartCount = 0;
+            }
             Product p = (Product) request.getAttribute("p");
-            if(p == null){
+            if (p == null) {
         %>
         <div class="container mt-5">
             <h3>Không tìm thấy sản phẩm</h3>
         </div>
         <%
-            return;
+                return;
             }
             int quantity = (Integer) request.getAttribute("quantity");
-            double total = p.getPrice()*quantity;
+            double subtotal = p.getPrice() * quantity;
+            double vat = subtotal * 0.08;
+            double total = subtotal + vat;
         %>
         <!-- 🔵 MENU -->
         <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
@@ -224,17 +330,17 @@
                         } else {
                         %>
                         <!-- ICON GIỎ HÀNG -->
-                                <a href="giohang" class="btn btn-light me-2 position-relative">
-                                    <i class="fa fa-shopping-cart"></i>
-                                    <% if(cartCount > 0){ %>
-                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                            <%=cartCount%>
-                                        </span>
-                                    <% 
-                                        } 
-                                    %>
-                                </a>
-                        
+                        <a href="giohang" class="btn btn-light me-2 position-relative">
+                            <i class="fa fa-shopping-cart"></i>
+                            <% if (cartCount > 0) {%>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                <%=cartCount%>
+                            </span>
+                            <%
+                                }
+                            %>
+                        </a>
+
                         <!-- USER -->
                         <a href="dangxuat" class="btn btn-danger">Đăng xuất</a>
                         <%
@@ -244,82 +350,164 @@
                 </div>
             </div>
         </nav>
-        <!-- Thanh toán -->
-        <div class="container py-5">
-            <div class="checkout-wrapper">
-                <div class="row">
-                    <!-- Ảnh -->
-                    <div class="col-md-5">
-                        <div class="checkout-image-box">
-                            <img src="<%=request.getContextPath()%>/<%=p.getImage()%>"
-                                 class="checkout-image">
+        <!-- THANH TOÁN -->
+        <div class="container py-4">
+            <div class="checkout-modern">
+                <div class="row g-4 align-items-start">
+                    <!-- LEFT -->
+                    <div class="col-lg-5">
+                        <div class="product-mini-card">
+                            <img src="<%=request.getContextPath()%>/<%=p.getImage()%>" class="mini-product-image">
+                            <div class="mini-product-info">
+                                <h2><%=p.getName()%></h2>
+                                <div class="mini-price">
+                                    <%=p.getFormattedPrice()%> VNĐ
+                                </div>
+                                <div class="mini-meta">
+                                    <span>
+                                        <i class="fa fa-layer-group"></i>
+                                        <%=p.getCategory()%>
+                                    </span>
+                                    <span>
+                                        <i class="fa fa-cube"></i>
+                                        SL: <%=quantity%>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- TOTAL -->
+                        <div class="payment-total-box">
+                            <div>
+                                <p class="mb-1 text-secondary">
+                                    Tổng thanh toán
+                                </p>
+                                <div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>Tạm tính</span>
+                                        <span>
+                                            <%=String.format("%,.0f", subtotal)%> VNĐ
+                                        </span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>VAT (8%)</span>
+                                        <span class="text-warning">
+                                            + <%=String.format("%,.0f", vat)%> VNĐ
+                                        </span>
+                                    </div>
+                                    <hr class="border-light">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0">
+                                            Tổng thanh toán
+                                        </h5>
+                                        <h2 class="payment-total-price mb-0">
+                                            <%=String.format("%,.0f", total)%> VNĐ
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <i class="fa fa-wallet payment-icon"></i>
+                        </div>
+                        <!-- QR -->
+                        <div class="qr-box d-none" id="qrBox">
+                            <h4 class="mb-3">
+                                Quét mã để thanh toán
+                            </h4>
+                            <img
+                                src="https://img.vietqr.io/image/TPB-00004076457-compact2.png?amount=<%= (long) total%>&addInfo=NTNSHOP"
+                                class="qr-image">
+                            <div class="mt-3">
+                                <div>
+                                    Ngân hàng: <b>TP BANK</b>
+                                </div>
+                                <div>
+                                    STK: <b>00004076475</b>
+                                </div>
+                                <div class="text-danger fw-bold mt-2">
+                                    Nội dung: thanh toán đơn hàng của NTNSHOP
+                                </div>
+                            </div>
+                            <!-- BUTTON ĐÃ THANH TOÁN -->
+                            <form action="ThanhToan" method="post" class="mt-4">
+                                <input type="hidden" name="id" value="<%=p.getId()%>">
+                                <input type="hidden" name="quantity" value="<%=quantity%>">
+                                <input type="hidden" name="name" id="qrName">
+                                <input type="hidden" name="phone" id="qrPhone">
+                                <input type="hidden" name="address" id="qrAddress">
+                                <button type="submit" class="btn btn-success w-100 py-3 fw-bold">
+                                    <i class="fa fa-circle-check"></i>
+                                    Đã thanh toán
+                                </button>
+                            </form>
                         </div>
                     </div>
-
-                    <!-- Thông tin -->
-                    <div class="col-md-7">
-                        <h1 class="checkout-title"><%=p.getName()%></h2>
-                        <div class="checkout-price"><%=p.getFormattedPrice()%> VNĐ</p>
-                        <div class="checkout-meta">
-                            <p>
-                                <b>Danh mục:</b>
-                                <%=p.getCategory()%>
-                            </p>
-                            <p>
-                                <b>Loại:</b>
-                                <%=p.getType()%>
-                            </p>
-                            <p>
-                                <b>Số lượng:</b>
-                                <%=quantity%>
-                            </p>
+                    <!-- RIGHT -->
+                    <div class="col-lg-7">
+                        <div class="checkout-form-box">
+                            <h2 class="checkout-form-title">
+                                Thông tin nhận hàng
+                            </h2>
+                            <form action="ThanhToan" method="post" id="checkoutForm">
+                                <input type="hidden" name="id" value="<%=p.getId()%>">
+                                <input type="hidden" name="quantity" value="<%=quantity%>">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="checkout-label">
+                                            Họ tên
+                                        </label>
+                                        <input type="text" name="name" class="form-control modern-input" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="checkout-label">
+                                            Số điện thoại
+                                        </label>
+                                        <input type="tel" name="phone" class="form-control modern-input" required>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <label class="checkout-label">
+                                        Địa chỉ nhận hàng
+                                    </label>
+                                    <textarea name="address" class="form-control modern-input" rows="3" required></textarea>
+                                </div>
+                                <!-- BUTTONS -->
+                                <div class="d-flex gap-3">
+                                    <button type="button" class="payment-btn qr-btn" onclick="showQR()">
+                                        <i class="fa fa-qrcode"></i>
+                                        Thanh toán QR
+                                    </button>
+                                    <button type="submit" class="payment-btn cash-btn">
+                                        <i class="fa fa-money-bill-wave"></i>
+                                        Thanh toán COD
+                                    </button>
+                                </div>
+                            </form>
                         </div>
-                        <div class="total-box d-flex justify-content-between align-items-center">
-                            <div class="total-label">
-                                Tổng thanh toán
-                            </div>
-                            <div class="total-price">
-                                <%=String.format("%,.0f", total)%> VNĐ
-                            </div>
-                        </div>
-                        <hr>
-                        <h2 class="form-title">Thông tin nhận hàng</h4>
-                        <form action="ThanhToan" method="post">
-                            <!-- hidden fields -->
-                            <input type="hidden" name="id" value="<%=p.getId()%>"> <!-- Đã đóng thẻ > ở đây -->
-                            <input type="hidden" name="quantity" value="<%=quantity%>">
-
-                            <!-- họ tên -->
-                            <div class="mb-3">
-                                <label class="checkout-label"">Họ tên</label>
-                                <input type="text" name="name" class="form-control checkout-input" required 
-                                       oninvalid="this.setCustomValidity('Vui lòng nhập họ tên')" 
-                                       oninput="this.setCustomValidity('')">
-                            </div>
-
-                            <!-- sđt -->
-                            <div class="mb-3">
-                                <label class="checkout-label"">Số điện thoại</label>
-                                <input type="tel" name="phone" class="form-control checkout-input" required 
-                                       pattern="[0-9]{10,11}"
-                                       oninvalid="this.setCustomValidity('Vui lòng nhập số điện thoại hợp lệ')" 
-                                       oninput="this.setCustomValidity('')">
-                            </div>
-
-                            <!-- địa chỉ -->
-                            <div class="mb-3">
-                                <label class="checkout-label"">Địa chỉ</label>
-                                <textarea name="address" class="form-control checkout-input" required 
-                                          oninvalid="this.setCustomValidity('Vui lòng nhập địa chỉ')" 
-                                          oninput="this.setCustomValidity('')"></textarea>
-                            </div>
-
-                            <button type="submit" class="checkout-btn">Xác nhận thanh toán</button>
-                        </form>
                     </div>
                 </div>
             </div>
         </div>
+        <script>
+            function showQR() {
+                // COPY dữ liệu form sang QR form
+                document.getElementById("qrName").value =
+                        document.querySelector("input[name='name']").value;
+                document.getElementById("qrPhone").value =
+                        document.querySelector("input[name='phone']").value;
+                document.getElementById("qrAddress").value =
+                        document.querySelector("textarea[name='address']").value;
+                // HIỆN QR
+                document
+                        .getElementById("qrBox")
+                        .classList
+                        .remove("d-none");
+                document
+                        .getElementById("qrBox")
+                        .scrollIntoView({
+                            behavior: "smooth"
+                        });
+            }
+
+        </script>
         <!-- 🔵 FOOTER -->
         <div class="bg-dark text-white text-center p-3 mt-4">
             <p>Đàm Thu Trang - 11/11/2005</p>

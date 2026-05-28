@@ -66,7 +66,6 @@ public class trangchu extends HttpServlet {
             request.setAttribute("lHot", listHot);
             request.setAttribute("lSale", listSale);
 
-            //Giỏ hàng
             HttpSession session = request.getSession();
             User user = (User) session.getAttribute("user");
             int cartCount = 0;

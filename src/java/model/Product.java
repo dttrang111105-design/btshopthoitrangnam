@@ -80,7 +80,6 @@ public class Product {
     public void setType(String type) {
         this.type = type;
     }
-    // sản phẩm type = "sale" mặc định giảm 8%
     public double getPrice() {
         if (this.type != null && this.type.trim().equalsIgnoreCase("sale")) {
             return this.price * 0.8;
@@ -91,12 +90,11 @@ public class Product {
     public void setPrice(double price) {
         this.price = price;
     }   
-    //đổi format tiền thành định dạng 100.000 VNĐ
     public String getFormattedPrice() {
         NumberFormat formatter = NumberFormat.getInstance(new Locale("vi", "VN"));
-        return formatter.format(getPrice()); // dùng getPrice() để đã tính giảm giá
+        return formatter.format(getPrice()); 
     }
-    // dùng cho hàm tính thành tiền và tổng tiền 
+    
     public static String formatPrice( double money){
         NumberFormat formatter = NumberFormat.getInstance(new Locale("vi", "VN"));
         return formatter.format(money);

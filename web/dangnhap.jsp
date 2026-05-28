@@ -11,6 +11,8 @@
         <meta charset="UTF-8">
         <title>Đăng nhập - NTN Shop</title>
         <link href="css/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+              rel="stylesheet"/>
         <style>
             body {
                 margin: 0;
@@ -97,6 +99,52 @@
                 text-decoration: none;
                 font-weight: 500;
             }
+            .google-btn{
+                width:100%;
+                height:52px;
+                border:none;
+                border-radius:14px;
+                background:white;
+                color:#444;
+                font-weight:600;
+                font-size:15px;
+                border:1px solid #e5e7eb;
+                margin-top:15px;
+                transition:.25s;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                gap:12px;
+                text-decoration:none;
+                box-shadow: 0 2px 10px rgba(0,0,0,.05);
+            }
+            .google-btn:hover{
+                background:#fafafa;
+                transform:translateY(-2px);
+                box-shadow: 0 8px 20px rgba(0,0,0,.08);
+                color:#111;
+            }
+            .divider{
+                display:flex;
+                align-items:center;
+                text-align:center;
+                color:#9ca3af;
+                margin:24px 0;
+                font-size:14px;
+                font-weight:500;
+            }
+            .divider::before,
+            .divider::after{
+                content:'';
+                flex:1;
+                border-bottom:1px solid #e5e7eb;
+            }
+            .divider:not(:empty)::before{
+                margin-right:15px;
+            }
+            .divider:not(:empty)::after{
+                margin-left:15px;
+            }
         </style>
     </head>
     <body>
@@ -155,6 +203,14 @@
                         style="background: linear-gradient(135deg,#8B0000,#c0392b);">
                     ĐĂNG NHẬP VỚI TƯ CÁCH ADMIN
                 </button>
+                <div class="divider">
+                    HOẶC
+                </div>
+                <!-- GOOGLE LOGIN -->
+                <a href="GoogleLogin" class="google-btn">
+                    <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" width="22" height="22">
+                    <span> Đăng nhập với Google </span>
+                </a>
             </form>
 
             <div class="text-center mt-3">

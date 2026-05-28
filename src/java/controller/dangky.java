@@ -57,7 +57,7 @@ public class dangky extends HttpServlet {
             u.setPhone(phone);
             u.setAddress(address);
             dao.Add(u);
-            //đăng ký xong -> quay lại đăng nhập
+            
             request.setAttribute("success", "1");
             request.getRequestDispatcher("dangnhap.jsp").forward(request, response);
         } catch (Exception e) {

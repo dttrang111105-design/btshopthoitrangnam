@@ -4,20 +4,19 @@
  */
 package controller.admin;
 
-import DAO.UserDAO;
+import DAO.OrderDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.User;
 
 /**
  *
  * @author ADMIN
  */
-public class capnhatuser extends HttpServlet {
+public class ThongKe extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,43 +32,26 @@ public class capnhatuser extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         try {
-            int id = Integer.parseInt(request.getParameter("id"));
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            String email = request.getParameter("email");
-            String phone = request.getParameter("phone");
-            String address = request.getParameter("address");
-            String role = request.getParameter("role");
-            User u = new User();
-            UserDAO dao = new UserDAO();
+            OrderDAO dao = new OrderDAO();
 
-            u.setId(id);
-            u.setUserName(username);
-            u.setPassWord(dao.getById(id).getPassWord());
-            u.setEmail(email);
-            u.setPhone(phone);
-            u.setAddress(address);
-            u.setRole(role);
-            boolean check = dao.Update(u);
-            if (check) {
-                response.sendRedirect("quanlyuser");
-            } else {
-                response.getWriter().println("Update thất bại!");
-            }
+            request.setAttribute( "dailyRevenue", dao.getRevenueByDay());
+
+            request.setAttribute( "monthlyRevenue", dao.getRevenueByMonth() );
+            request.setAttribute( "weeklyRevenue", dao.getRevenueByWeek() );
+            request.getRequestDispatcher("ThongKe.jsp").forward(request, response);
+            
         } catch (Exception e) {
             e.printStackTrace();
-            response.getWriter().println("Lỗi: " + e.getMessage());
         }
-
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet capnhatuser</title>");
+            out.println("<title>Servlet ThongKe</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet capnhatuser at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ThongKe at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }

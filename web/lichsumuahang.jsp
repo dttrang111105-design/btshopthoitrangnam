@@ -220,16 +220,15 @@
             </h2>
 
             <%
+                List<Orders> listOrder
+                        = (List<Orders>) request.getAttribute("listOrder");
 
-                List<Orders> listOrder =
-                        (List<Orders>) request.getAttribute("listOrder");
+                if (listOrder != null && !listOrder.isEmpty()) {
 
-                if(listOrder != null && !listOrder.isEmpty()){
+                    OrderDetailDAO detailDAO
+                            = new OrderDetailDAO();
 
-                    OrderDetailDAO detailDAO =
-                            new OrderDetailDAO();
-
-                    for(Orders o : listOrder){
+                    for (Orders o : listOrder) {
 
             %>
 
@@ -238,46 +237,46 @@
 
                 <div class="order-title">
 
-                    Đơn hàng #<%= o.getId() %>
+                    Đơn hàng #<%= o.getId()%>
 
                     <div style="font-size:15px;color:gray;margin-top:5px;">
                         Ngày đặt:
-                        <%= o.getOrderDate() %>
+                        <%= o.getOrderDate()%>
                     </div>
 
                 </div>
 
                 <%
 
-                    List<OrderDetail> details =
-                            detailDAO.getByOrderId(o.getId());
+                    List<OrderDetail> details
+                            = detailDAO.getByOrderId(o.getId());
 
-                    for(OrderDetail od : details){
+                    for (OrderDetail od : details) {
 
                 %>
 
                 <!-- 1 SẢN PHẨM -->
                 <div class="product-item">
 
-                    <img src="<%=request.getContextPath()%>/<%= od.getImage() %>"
+                    <img src="<%=request.getContextPath()%>/<%= od.getImage()%>"
                          class="product-img">
 
                     <div style="flex:1;">
 
                         <div class="product-name">
-                            <%= od.getProductName() %>
+                            <%= od.getProductName()%>
                         </div>
 
                         <div>
                             Số lượng:
-                            <b><%= od.getQuantity() %></b>
+                            <b><%= od.getQuantity()%></b>
                         </div>
 
                     </div>
 
                     <div class="product-price">
 
-                        <%= String.format("%,.0f", od.getPrice()) %> VNĐ
+                        <%= String.format("%,.0f", od.getPrice())%> VNĐ
 
                     </div>
 
@@ -288,19 +287,37 @@
                 %>
 
                 <!-- TỔNG -->
+                <%
+                    double vat = o.getTotalMoney() * 0.08;
+                    double totalVat = o.getTotalMoney() + vat;
+                %>
+
                 <div class="total-box">
-
-                    Tổng tiền:
-                    <%= String.format("%,.0f", o.getTotalMoney()) %> VNĐ
-
+                    <div>
+                        Tạm tính:
+                        <%= String.format("%,.0f", o.getTotalMoney())%> VNĐ
+                    </div>
+                    <div style="font-size:18px;color:#ff9800;">
+                        VAT (8%):
+                        <%= String.format("%,.0f", vat)%> VNĐ
+                    </div>
+                    <div style=" margin-top:10px; font-size:26px; font-weight:bold; color:red; ">
+                        Tổng thanh toán:
+                        <%= String.format("%,.0f", totalVat)%> VNĐ
+                    </div>
+                    <!-- NÚT XUẤT PDF -->
+                    <a href="xuathoadon?id=<%= o.getId()%>" target="_blank" class="btn btn-danger mt-3">
+                        <i class="fa fa-file-pdf"></i>
+                        Xem hóa đơn PDF
+                    </a>
                 </div>
 
             </div>
 
             <%
-                    }
+                }
 
-                }else{
+            } else {
             %>
 
             <!-- KHÔNG CÓ ĐƠN -->

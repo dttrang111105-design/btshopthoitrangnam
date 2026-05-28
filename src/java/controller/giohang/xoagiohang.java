@@ -32,7 +32,6 @@ public class xoagiohang extends HttpServlet {
             response.setContentType("text/html;charset=UTF-8");
             
             
-            //Lấy id để xóa khỏi giỏ hàng
             int id = Integer.parseInt(request.getParameter("id"));           
             new CartItemDAO().Delete(id);            
             response.sendRedirect("giohang");   

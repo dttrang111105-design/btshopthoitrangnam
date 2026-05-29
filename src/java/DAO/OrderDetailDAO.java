@@ -67,4 +67,20 @@ public class OrderDetailDAO {
 
         return list;
     }
+
+    public int getTotalProductsSold() throws SQLException {
+
+        String sql
+                = "SELECT IFNULL(SUM(quantity),0) FROM orderdetail";
+
+        PreparedStatement ps = con.prepareStatement(sql);
+
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            return rs.getInt(1);
+        }
+
+        return 0;
+    }
 }

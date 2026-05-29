@@ -29,7 +29,7 @@ public class GoogleLogin extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String clientId = "key";
+        String clientId = "606015175038-742ob2p6phk84urr10jbknmf4cbmkj5s.apps.googleusercontent.com";
         String redirectUri = "http://localhost:9090/BTLShopThoiTrangNam/googlecallback";
         String url = "https://accounts.google.com/o/oauth2/v2/auth"
                 + "?scope=email%20profile"

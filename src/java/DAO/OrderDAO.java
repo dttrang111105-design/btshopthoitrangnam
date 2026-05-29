@@ -166,7 +166,7 @@ public class OrderDAO {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 String label = "Tuần " + rs.getInt("tuan") + " - " + rs.getInt("nam");
-                ThongKe r = new ThongKe( label, rs.getDouble("doanhthu") );
+                ThongKe r = new ThongKe(label, rs.getDouble("doanhthu"));
                 list.add(r);
             }
         } catch (Exception e) {
@@ -186,12 +186,72 @@ public class OrderDAO {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 String label = "Tháng " + rs.getInt("thang") + "/" + rs.getInt("nam");
-                ThongKe r = new ThongKe( label, rs.getDouble("doanhthu") );
+                ThongKe r = new ThongKe(label, rs.getDouble("doanhthu"));
                 list.add(r);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public double getTotalRevenue() throws SQLException {
+
+        if (con == null) {
+            con = new dbConnect().getConnect();
+        }
+        String sql
+                = "SELECT IFNULL(SUM(total_money),0) FROM orders";
+
+        PreparedStatement ps
+                = con.prepareStatement(sql);
+
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            return rs.getDouble(1);
+        }
+
+        return 0;
+    }
+
+    public int getTotalOrders() throws SQLException {
+
+        if (con == null) {
+            con = new dbConnect().getConnect();
+        }
+        String sql
+                = "SELECT COUNT(*) FROM orders";
+
+        PreparedStatement ps
+                = con.prepareStatement(sql);
+
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            return rs.getInt(1);
+        }
+
+        return 0;
+    }
+
+    public int getTotalProductsSold() throws SQLException {
+
+        if (con == null) {
+            con = new dbConnect().getConnect();
+        }
+        String sql
+                = "SELECT IFNULL(SUM(quantity),0) FROM order_detail";
+
+        PreparedStatement ps
+                = con.prepareStatement(sql);
+
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            return rs.getInt(1);
+        }
+
+        return 0;
     }
 }

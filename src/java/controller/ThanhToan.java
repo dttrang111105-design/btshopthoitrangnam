@@ -49,13 +49,13 @@ public class ThanhToan extends HttpServlet {
                         response.sendRedirect("dangnhap.jsp");
                         return;
                     }
-                    
+
                     Cart cart = new CartDAO().getCartByUserId(user.getId());
                     if (cart == null) {
                         response.getWriter().println("Không có giỏ hàng");
                         return;
                     }
-                    
+
                     List<CartItem> items = new CartItemDAO().getItemsByCartId(cart.getId());
                     if (items == null || items.isEmpty()) {
                         response.getWriter().println("Giỏ hàng trống");
@@ -183,6 +183,13 @@ public class ThanhToan extends HttpServlet {
                     od.setPrice(p.getPrice());
 
                     orderDetailDAO.addOrderDetail(od);
+
+                    int newStock = p.getStock() - item.getQuantity();
+
+                    productDAO.updateStock(
+                            p.getId(),
+                            newStock
+                    );
                 }
 
                 order.setId(orderId);
@@ -190,7 +197,7 @@ public class ThanhToan extends HttpServlet {
                 orderDAO.updateTotal(order);
 
                 cartItemDAO.clearCart(cart.getId());
-                
+
                 response.sendRedirect("thanhcongall.jsp");
                 return;
             }
@@ -204,6 +211,15 @@ public class ThanhToan extends HttpServlet {
             String address = request.getParameter("address");
 
             Product p = new ProductDAO().getByID(id);
+
+            if (p.getStock() < quantity) {
+
+                response.getWriter().println(
+                        "Sản phẩm không đủ tồn kho");
+
+                return;
+            }
+
             if (p == null) {
                 response.getWriter().println("Không tìm thấy sản phẩm");
                 return;
@@ -229,6 +245,13 @@ public class ThanhToan extends HttpServlet {
 
             new OrderDetailDAO().addOrderDetail(od);
 
+            int newStock = p.getStock() - quantity;
+
+            new ProductDAO().updateStock(
+                    p.getId(),
+                    newStock
+            );
+
             Cart cart = new CartDAO().getCartByUserId(user.getId());
 
             if (cart != null) {
@@ -247,7 +270,7 @@ public class ThanhToan extends HttpServlet {
             request.setAttribute("phone", phone);
             request.setAttribute("address", address);
             request.setAttribute("total", total);
-            
+
             request.getRequestDispatcher("thanhcong.jsp").forward(request, response);
 
         } catch (Exception e) {

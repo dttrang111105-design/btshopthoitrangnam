@@ -43,16 +43,37 @@ public class trangchu extends HttpServlet {
             request.setCharacterEncoding("UTF-8");
             String type = request.getParameter("type");
             String category = request.getParameter("category");
+            String minPriceStr = request.getParameter("minPrice");
+            String maxPriceStr = request.getParameter("maxPrice");
 
             List<Product> list = null;
-            if ((category != null && !category.isEmpty()) || (type != null && !type.isEmpty())) {
+
+            if (minPriceStr != null && maxPriceStr != null
+                    && !minPriceStr.isEmpty()
+                    && !maxPriceStr.isEmpty()) {
+
+                double minPrice = Double.parseDouble(minPriceStr);
+                double maxPrice = Double.parseDouble(maxPriceStr);
+
+                list = new ProductDAO().getByPriceRange(minPrice, maxPrice);
+
+                request.setAttribute("minPrice", minPrice);
+                request.setAttribute("maxPrice", maxPrice);
+
+            } else if ((category != null && !category.isEmpty())
+                    || (type != null && !type.isEmpty())) {
+
                 if (category != null) {
                     list = new ProductDAO().getByCategory(category);
                 } else if (type != null) {
                     list = new ProductDAO().getByType(type);
                 }
+            }
+
+            if (list != null) {
                 request.setAttribute("list", list);
             }
+
             request.setAttribute("type", type);
             request.setAttribute("category", category);
 

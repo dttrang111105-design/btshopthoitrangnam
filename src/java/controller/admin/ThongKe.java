@@ -5,6 +5,7 @@
 package controller.admin;
 
 import DAO.OrderDAO;
+import DAO.OrderDetailDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -34,12 +35,24 @@ public class ThongKe extends HttpServlet {
         try {
             OrderDAO dao = new OrderDAO();
 
-            request.setAttribute( "dailyRevenue", dao.getRevenueByDay());
+            request.setAttribute(
+                    "totalRevenue",
+                    dao.getTotalRevenue());
 
-            request.setAttribute( "monthlyRevenue", dao.getRevenueByMonth() );
-            request.setAttribute( "weeklyRevenue", dao.getRevenueByWeek() );
+            request.setAttribute(
+                    "totalOrders",
+                    dao.getTotalOrders());
+
+            request.setAttribute(
+                    "totalProducts",
+                    dao.getTotalProductsSold());
+
+            request.setAttribute("dailyRevenue", dao.getRevenueByDay());
+
+            request.setAttribute("monthlyRevenue", dao.getRevenueByMonth());
+            request.setAttribute("weeklyRevenue", dao.getRevenueByWeek());
             request.getRequestDispatcher("ThongKe.jsp").forward(request, response);
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }

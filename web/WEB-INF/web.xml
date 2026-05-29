@@ -108,6 +108,10 @@
         <servlet-name>googlecallback</servlet-name>
         <servlet-class>controller.googlecallback</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>profile</servlet-name>
+        <servlet-class>controller.profile</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>trangchu</servlet-name>
         <url-pattern>/trangchu</url-pattern>
@@ -215,6 +219,10 @@
     <servlet-mapping>
         <servlet-name>googlecallback</servlet-name>
         <url-pattern>/googlecallback</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>profile</servlet-name>
+        <url-pattern>/profile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

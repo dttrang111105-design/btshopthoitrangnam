@@ -63,7 +63,7 @@ public class lienhe extends HttpServlet {
                     List<CartItem> cartItems
                             = new CartItemDAO().getItemsByCartId(cart.getId());
                     for (CartItem item : cartItems) {
-                        cartCount += cartItems.size();
+                        cartCount = cartItems.size();
                     }
                 }
             }

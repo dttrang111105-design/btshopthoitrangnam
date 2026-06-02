@@ -297,9 +297,9 @@
                     <hr class="border-light">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="total-label">
-                            Tổng thanh toán
+                            Tổng thanh toán 
                         </div>
-                        <div class="total-price">
+                        <div class="total-price ms-3">
                             <%=String.format("%,.0f", finalTotal)%> VNĐ
                         </div>
                     </div>

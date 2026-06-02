@@ -21,71 +21,91 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
 
         <style>
-
             body{
-                background:#f5f5f5;
+                background:#f6f7fb;
+                font-family:'Segoe UI',sans-serif;
             }
 
             .order-box{
-                background:white;
-                border-radius:15px;
-                padding:25px;
-                margin-bottom:30px;
-                box-shadow:0 5px 15px rgba(0,0,0,0.1);
+                background:#fff;
+                border-radius:12px;
+                padding:22px;
+                margin-bottom:20px;
+                box-shadow:0 2px 10px rgba(0,0,0,.08);
             }
 
             .order-title{
-                font-size:22px;
-                font-weight:bold;
-                margin-bottom:20px;
-                color:#8b4513;
+                font-size:18px;
+                font-weight:700;
+                color:#8B4513;
+                margin-bottom:15px;
+                padding-bottom:10px;
+                border-bottom:1px solid #eee;
             }
 
             .product-item{
                 display:flex;
                 align-items:center;
-                border-bottom:1px solid #eee;
-                padding:15px 0;
+                padding:10px 0;
+                border-bottom:1px solid #f3f3f3;
             }
 
             .product-item:last-child{
-                border:none;
+                border-bottom:none;
             }
 
             .product-img{
-                width:100px;
-                height:100px;
+                width:70px;
+                height:70px;
                 object-fit:cover;
-                border-radius:10px;
-                margin-right:20px;
+                border-radius:8px;
+                margin-right:15px;
+                border:1px solid #eee;
             }
 
             .product-name{
                 font-size:18px;
-                font-weight:bold;
+                font-weight:600;
+                color:#333;
             }
 
             .product-price{
-                color:red;
-                font-weight:bold;
+                font-size:18px;
+                font-weight:700;
+                color:#dc3545;
             }
 
             .total-box{
+                margin-top:15px;
+                padding-top:15px;
+                border-top:1px dashed #ddd;
                 text-align:right;
-                margin-top:20px;
-                font-size:22px;
-                font-weight:bold;
-                color:red;
+            }
+
+            .total-box div{
+                font-size:16px !important;
+                margin-bottom:4px;
+            }
+
+            .total-box div:last-child{
+                font-size:20px !important;
+                font-weight:700 !important;
+                color:#dc3545 !important;
+            }
+
+            .total-box .btn{
+                padding:6px 15px;
+                font-size:13px;
+                border-radius:20px;
             }
 
             .empty-box{
                 background:white;
-                padding:50px;
-                border-radius:15px;
+                padding:40px;
+                border-radius:12px;
                 text-align:center;
-                box-shadow:0 5px 15px rgba(0,0,0,0.1);
+                box-shadow:0 2px 10px rgba(0,0,0,.08);
             }
-
         </style>
 
     </head>
@@ -212,9 +232,9 @@
         </nav>
 
         <!-- MAIN -->
-        <div class="container mt-5">
+        <div class="container mt-4" style="max-width: 1000px;">
 
-            <h2 class="mb-4 fw-bold">
+            <h3 class="mb-3 fw-bold">
                 <i class="fa fa-clock-rotate-left"></i>
                 Lịch sử mua hàng
             </h2>

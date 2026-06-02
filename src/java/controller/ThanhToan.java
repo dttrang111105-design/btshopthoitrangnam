@@ -84,7 +84,7 @@ public class ThanhToan extends HttpServlet {
                         if (c != null) {
                             List<CartItem> cartItems = new CartItemDAO().getItemsByCartId(c.getId());
                             for (CartItem item : cartItems) {
-                                cartCount += item.getQuantity();
+                                cartCount = cartItems.size();
                             }
                         }
                     }
@@ -114,7 +114,7 @@ public class ThanhToan extends HttpServlet {
                     if (c != null) {
                         List<CartItem> cartItems = new CartItemDAO().getItemsByCartId(c.getId());
                         for (CartItem item : cartItems) {
-                            cartCount += item.getQuantity();
+                            cartCount = cartItems.size();
                         }
                     }
                 }

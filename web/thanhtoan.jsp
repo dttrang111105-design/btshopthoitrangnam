@@ -187,7 +187,7 @@
                 align-items:center;
             }
             .payment-total-price{
-                font-size:28px;
+                font-size:25px;
                 font-weight:800;
             }
             .payment-icon{
@@ -397,9 +397,9 @@
                                     <hr class="border-light">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <h5 class="mb-0">
-                                            Tổng thanh toán
+                                            Tổng thanh toán 
                                         </h5>
-                                        <h2 class="payment-total-price mb-0">
+                                        <h2 class="payment-total-price mb-0 ms-3">
                                             <%=String.format("%,.0f", total)%> VNĐ
                                         </h2>
                                     </div>

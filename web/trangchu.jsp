@@ -93,6 +93,80 @@
             .left-menu-box{
                 z-index: 10 !important;
             }
+            .sidebar-card {
+                background: #fff;
+                border-radius: 15px;
+                overflow: hidden;
+                box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            }
+
+            .sidebar-title {
+                background: linear-gradient(135deg,#07142d,#0d2147);
+                color: white;
+                font-size: 20px;
+                font-weight: 700;
+                padding: 14px 18px;
+            }
+
+            .sidebar-title i {
+                margin-right: 8px;
+            }
+
+            .sidebar-link {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 13px 18px;
+                text-decoration: none;
+                color: #333;
+                font-size: 17px;
+                font-weight: 500;
+                border-bottom: 1px solid #eee;
+                transition: all .25s ease;
+            }
+
+            .sidebar-link:last-child {
+                border-bottom: none;
+            }
+
+            .sidebar-link:hover {
+                background: #f8f8f8;
+                color: #a0522d;
+                padding-left: 24px;
+            }
+
+            .sidebar-body form {
+                padding: 18px;
+            }
+
+            .form-label {
+                font-size: 16px;
+                font-weight: 600;
+                margin-bottom: 6px;
+            }
+
+            .custom-input {
+                height: 42px;
+                border-radius: 10px;
+                font-size: 14px;
+            }
+
+            .btn-filter {
+                width: 100%;
+                height: 44px;
+                border: none;
+                border-radius: 10px;
+                background: #a0522d;
+                color: white;
+                font-size: 16px;
+                font-weight: 600;
+                transition: all .25s ease;
+            }
+
+            .btn-filter:hover {
+                background: #8b4513;
+                transform: translateY(-2px);
+            }
         </style>
     </head>
 
@@ -232,36 +306,65 @@
 
                 <!-- 🟡 LEFT MENU -->
                 <div class="col-md-3">
-                    <div class="left-menu-box sticky-top" style="top: 70px;">
-                        <div class="list-group">
-                            <a href="#" class="list-group-item active">Danh mục</a>
-                            <a href="trangchu?type=new" class="list-group-item">Hàng mới</a>
-                            <a href="trangchu?type=hot" class="list-group-item">Hàng bán chạy</a>
-                            <a href="trangchu?type=sale" class="list-group-item">Hàng giảm giá</a>
+                    <div class="left-menu-box sticky-top" style="top: 90px;">
+
+                        <!-- Danh mục -->
+                        <div class="sidebar-card">
+                            <div class="sidebar-title">
+                                <i class="fas fa-list"></i> Danh mục
+                            </div>
+
+                            <div class="sidebar-body">
+                                <a href="trangchu?type=new" class="sidebar-link">
+                                    <i class="fas fa-star"></i>
+                                    Hàng mới
+                                </a>
+
+                                <a href="trangchu?type=hot" class="sidebar-link">
+                                    <i class="fas fa-fire"></i>
+                                    Hàng bán chạy
+                                </a>
+
+                                <a href="trangchu?type=sale" class="sidebar-link">
+                                    <i class="fas fa-tags"></i>
+                                    Hàng giảm giá
+                                </a>
+                            </div>
                         </div>
 
-                        <div class="card mt-3">
-                            <div class="card-header bg-dark text-white">
-                                Lọc theo giá
+                        <!-- Lọc giá -->
+                        <div class="sidebar-card mt-4">
+                            <div class="sidebar-title">
+                                <i class="fas fa-filter"></i> Lọc theo giá
                             </div>
-                            <div class="card-body">
+
+                            <div class="sidebar-body">
                                 <form action="trangchu" method="get">
-                                    <div class="mb-2">
-                                        <label>Từ</label>
-                                        <input type="number" name="minPrice" class="form-control">
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Giá từ</label>
+                                        <input type="number"
+                                               name="minPrice"
+                                               class="form-control custom-input"
+                                               placeholder="100000">
                                     </div>
 
-                                    <div class="mb-2">
-                                        <label>Đến</label>
-                                        <input type="number" name="maxPrice" class="form-control">
+                                    <div class="mb-3">
+                                        <label class="form-label">Giá đến</label>
+                                        <input type="number"
+                                               name="maxPrice"
+                                               class="form-control custom-input"
+                                               placeholder="500000">
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary w-100">
-                                        Lọc
+                                    <button type="submit" class="btn-filter">
+                                        <i class="fas fa-search me-2"></i>Lọc sản phẩm
                                     </button>
+
                                 </form>
                             </div>
                         </div>
+
                     </div>
                 </div>
 
